@@ -1,25 +1,37 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
-import './Home.css';
+import React, { useEffect } from 'react'
+import '@fontsource-variable/onest';
+import '..//theme/variables.css';
+import { useState } from 'react';
+import helper from '../service/Helper.js';
 
-const Home: React.FC = () => {
+
+
+function Home() {
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+        try {
+            const data = await helper.realData();
+            console.log(data);
+            
+        } catch (err) {
+            console.log(err + " error");
+        } 
+    };
+
+    fetchData();
+
+  }, []);
+
+
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Blank</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonHeader collapse="condense">
-          <IonToolbar>
-            <IonTitle size="large">Blank</IonTitle>
-          </IonToolbar>
-        </IonHeader>
-        <ExploreContainer />
-      </IonContent>
-    </IonPage>
-  );
-};
+    <>
+      <h1>Home</h1>
+      <p>Welcome to the Home page!</p>
+    </>
+  )
+}
 
-export default Home;
+export default Home
