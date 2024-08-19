@@ -1,0 +1,7 @@
+{
+  "name": "ArecoBusMovile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react-vite"
+}
