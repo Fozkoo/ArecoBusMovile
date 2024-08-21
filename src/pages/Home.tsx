@@ -6,7 +6,7 @@ import helper from '../service/Helper.js';
 import Card from '../components/Card';
 import Header from '../components/Header';
 import Menu from '../components/Menu';
-
+import logoHeader from '..//images/rutabus.jpg'
 
 
 function Home() {
@@ -16,7 +16,13 @@ function Home() {
   return (
     <>
       <Header/>
-      <Menu/>
+      <div className="container-content-home flex flex-col p-3 mt-10 h-full">
+        <Card/>
+        asd
+        
+      </div>
+
+      
     </>
   )
 }

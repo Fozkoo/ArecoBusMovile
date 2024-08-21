@@ -5,7 +5,7 @@ import Home from './pages/Home';
 import RutabusAP from './pages/RutabusAP';
 import MasterbusAG from './pages/MasterbusAG';
 import '@fontsource-variable/onest';
-
+import Menu from './components/Menu';
 
 setupIonicReact();
 
@@ -26,6 +26,8 @@ const App: React.FC = () => (
           <Redirect to="/home" />
         </Route>
       </IonRouterOutlet>
+
+      <Menu />
     </IonReactRouter>
   </IonApp>
 );
