@@ -3,33 +3,20 @@ import '@fontsource-variable/onest';
 import '..//theme/variables.css';
 import { useState } from 'react';
 import helper from '../service/Helper.js';
+import Card from '../components/Card';
+import Header from '../components/Header';
+import Menu from '../components/Menu';
 
 
 
 function Home() {
 
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-        try {
-            const data = await helper.realData();
-            console.log(data);
-            
-        } catch (err) {
-            console.log(err + " error");
-        } 
-    };
-
-    fetchData();
-
-  }, []);
 
 
   return (
     <>
-      <h1>Home</h1>
-      <p>Welcome to the Home page!</p>
+      <Header/>
+      <Menu/>
     </>
   )
 }
