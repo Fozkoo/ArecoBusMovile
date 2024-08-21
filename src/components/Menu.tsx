@@ -3,7 +3,7 @@ import { IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, IonRouterOutlet } 
 import { IonReactRouter } from '@ionic/react-router';
 import { Route, Redirect } from 'react-router-dom';
 import { search, radio, subwayOutline } from 'ionicons/icons'; // Importa los iconos necesarios
-
+import '../theme/variables.css';
 import Home from '../pages/Home';
 import RutabusAP from '../pages/RutabusAP';
 import logo from '../images/rutabus.jpg'; // Ruta corregida
@@ -32,26 +32,26 @@ const Menu: React.FC = () => {
       <IonTabs>
         <IonRouterOutlet>
           <Route exact path="/home" component={Home} />
-          <Route exact path="/rutabusAP" component={RutabusAP} />
           <Redirect exact path="/" to="/home" />
         </IonRouterOutlet>
 
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="search" href="/search">
-            <IonIcon icon={search} />
-            <IonLabel>Lineas</IonLabel>
+        <IonTabBar slot="bottom" className="custom-tab-bar">
+          <IonTabButton tab="search" className="custom-icon-color">
+            <IonIcon icon={search} className="custom-icon-size" />
+            <IonLabel className="custom-label-size">Lineas</IonLabel>
           </IonTabButton>
 
-          <IonTabButton tab="home" href="/home">
-            <IonIcon icon={subwayOutline} />  {/* Usa el icono importado */}
-            <IonLabel>Home</IonLabel>
+          <IonTabButton tab="home" href="/home" className="custom-icon-color">
+            <IonIcon icon={subwayOutline} className="custom-icon-size" />
+            <IonLabel className="custom-label-size">Home</IonLabel>
           </IonTabButton>
 
-          <IonTabButton tab="rutabusAP" href="/rutabusAP">
-            <IonIcon icon={radio} />
-            <IonLabel>Puntos Sube</IonLabel>
+          <IonTabButton tab="rutabusAP" className="custom-icon-color">
+            <IonIcon icon={radio} className="custom-icon-size" />
+            <IonLabel className="custom-label-size">Puntos Sube</IonLabel>
           </IonTabButton>
         </IonTabBar>
+
       </IonTabs>
     </IonReactRouter>
   );

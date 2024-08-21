@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-import logoHeader from '..//images/rutabus.jpg'
+import logoHeader from '..//images/Logo.png'
 
 function Header() {
   return (
