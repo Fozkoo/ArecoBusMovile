@@ -75,9 +75,11 @@ function Card2() {
 
   return (
     <div className="card-container flex gap-3 flex-wrap">
-      
       {data.map((bus) => (
-        <IonCard key={bus.id} className="fixed-card-size w-[300px] h-[400px] ">
+        <IonCard
+          key={bus.id}
+          className="fixed-card-size w-[300px] h-[400px] transition-transform duration-300 ease-in-out transform hover:scale-105"
+        >
           <img
             alt={bus.empresaNombre}
             src={bus.image}
@@ -96,7 +98,7 @@ function Card2() {
           <IonCardContent>
             <div className="flex gap-1">
               <p>Precio: </p> 
-              <p className="text-black font-semibold">$ {bus.precio}</p>
+              <p className="text-black font-bold">$ {bus.precio}</p>
             </div>
             <div className='flex gap-1'>
               <p>Próximo horario:</p>

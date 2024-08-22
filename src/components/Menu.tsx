@@ -28,32 +28,24 @@ const Menu: React.FC = () => {
   }
 
   return (
-    <IonReactRouter>
-      <IonTabs>
-        <IonRouterOutlet>
-          <Route exact path="/home" component={Home} />
-          <Redirect exact path="/" to="/home" />
-        </IonRouterOutlet>
+<>
+          <IonTabBar slot="bottom" className="custom-tab-bar">
+            <IonTabButton tab="search" className="custom-icon-color">
+              <IonIcon icon={search} className="custom-icon-size" />
+              <IonLabel className="custom-label-size">Lineas</IonLabel>
+            </IonTabButton>
 
-        <IonTabBar slot="bottom" className="custom-tab-bar">
-          <IonTabButton tab="search" className="custom-icon-color">
-            <IonIcon icon={search} className="custom-icon-size" />
-            <IonLabel className="custom-label-size">Lineas</IonLabel>
-          </IonTabButton>
+            <IonTabButton tab="home" href="/home" className="custom-icon-color">
+              <IonIcon icon={subwayOutline} className="custom-icon-size" />
+              <IonLabel className="custom-label-size">Home</IonLabel>
+            </IonTabButton>
 
-          <IonTabButton tab="home" href="/home" className="custom-icon-color">
-            <IonIcon icon={subwayOutline} className="custom-icon-size" />
-            <IonLabel className="custom-label-size">Home</IonLabel>
-          </IonTabButton>
-
-          <IonTabButton tab="rutabusAP" className="custom-icon-color">
-            <IonIcon icon={radio} className="custom-icon-size" />
-            <IonLabel className="custom-label-size">Puntos Sube</IonLabel>
-          </IonTabButton>
+            <IonTabButton tab="rutabusAP" className="custom-icon-color">
+              <IonIcon icon={radio} className="custom-icon-size" />
+              <IonLabel className="custom-label-size">Puntos Sube</IonLabel>
+            </IonTabButton>
         </IonTabBar>
-
-      </IonTabs>
-    </IonReactRouter>
+        </>
   );
 };
 

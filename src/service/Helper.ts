@@ -32,10 +32,24 @@ const rutabusInfo = async () => {
 }
 
 
+const masterbusInfo = async () => {
+
+    try {
+        const response = await api.get("/getBusInfoById/4")
+        return response.data;
+    }
+    catch (err) {
+        console.log(err + " error");
+        return [];
+    }
+}
+
+
 
 const methods = {
     realData,
-    rutabusInfo
+    rutabusInfo,
+    masterbusInfo
 }
 
 export default methods;

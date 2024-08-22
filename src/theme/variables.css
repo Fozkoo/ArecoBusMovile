@@ -5,21 +5,15 @@
 
 body {
     font-family: 'Onest Variable', sans-serif;
+    position: sticky;
   }
 
-  .custom-icon-color {
-    color: rgb(62, 95, 241); /* Cambia este valor al color que prefieras */
-  }
 
-  .custom-icon-color {
-    font-size: 14px; /* Ajusta el tamaño del icono */
-    --ionicon-stroke-width: 32px; /* Cambia el grosor de las líneas del icono si es necesario */
-  }
 
-  .custom-tab-bar {
-    height: 80px; /* Ajusta la altura a lo que necesites */
-    --ion-safe-area-bottom: 0px; /* Asegura que no haya un margen adicional en la parte inferior */
-  }
+
+
+
+
   
 
   
