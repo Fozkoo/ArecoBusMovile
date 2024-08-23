@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Helper from '../service/Helper';
 import { IonContent } from '@ionic/react';
+import Header from '../components/Header';
 
 interface RutabusData {
   image: string;
@@ -28,13 +29,21 @@ function RutabusAP() {
   }, []);
 
   if (!rutabusData) {
-    return <div>Loading...</div>; // Mostrar un mensaje de carga mientras se obtienen los datos
+    return <div>Loading...</div>; 
   }
 
   return (
     <>
     <IonContent>
-        <div className="container-title-and-info overflow-hidden flex flex-col justify-center items-center w-full h-[180px] mt-7">
+
+
+
+        <div className="container-header fixed top-0 left-0 w-full bg-white z-50 shadow-sm">
+            <Header/>
+        </div>
+
+           
+        <div className="container-title-and-info overflow-hidden flex flex-col justify-center items-center w-full h-[180px] mt-10">
           <img className="w-[100%] h-[600px] brightness-50" src={rutabusData.image} alt="Imagen de la empresa" />
           <section className="absolute">
             <div className="container-title flex justify-center w-full">
@@ -49,8 +58,9 @@ function RutabusAP() {
             </div>
           </section>
         </div>
+  
 
-        <div className="container-horarios flex flex-col items-center mb-5 p-5">
+        <div className="container-horarios flex flex-col items-center mt-5 mb-5 p-5">
           <h2 className="font-semibold text-4xl mt-5">HORARIOS</h2>
 
           <section className="lun-sab">
@@ -83,7 +93,6 @@ function RutabusAP() {
               </div>
 
               <div className="container-iframe flex  justify-center mt-5 h-[500px] rounded-xl overflow-hidden">
-                <iframe src="https://www.google.com/maps/embed?pb=!4v1715699694952!6m8!1m7!1sYzaETJ8CllqqCpoQONIi5w!2m2!1d-34.24560498788325!2d-59.46419976182082!3f85.07201270555024!4f-7.926432221881839!5f0.8068674999376183" className='w-[100%]' allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
               </div>
             </div>
           </div>

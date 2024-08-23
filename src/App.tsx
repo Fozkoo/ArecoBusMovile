@@ -8,7 +8,8 @@ import MasterbusAG from './pages/MasterbusAG';
 import '@fontsource-variable/onest';
 import PuntosSube from './pages/PuntosSube';
 
-import './theme/variables.css';
+
+import TestPage from './pages/TestPage';
 
 setupIonicReact();
 
@@ -21,22 +22,25 @@ const App: React.FC = () => (
         <Route exact path="/rutabusAP" component={RutabusAP} />
         <Route exact path="/masterbusAG" component={MasterbusAG} />
         <Route exact path="/PuntosSube" component={PuntosSube} />
+        <Route exact path="/TestPage" component={TestPage} />
         <Redirect exact path="/" to="/home" />
       </IonRouterOutlet>
 
       <IonTabBar
   slot="bottom"
-  className="h-[65px]  shadow-[0_-4px_6px_-3px_rgba(0,0,0,0.1)]"
+  className="h-[65px] shadow-[0_-4px_6px_-3px_rgba(0,0,0,0.2)] desktop-hidden"
 >
   <IonTabButton tab="home" href="/home">
-    <IonIcon icon={home} />
-    <IonLabel className="">Inicio</IonLabel>
+    <IonIcon icon={home} style={{ color: '#6464f2' }} />
+    <IonLabel style={{ color: '#6464f2' }} className="text-[14px] font-semibold">Inicio</IonLabel>
   </IonTabButton>
   <IonTabButton tab="PuntosSube" href="/PuntosSube">
-    <IonIcon icon={bus} />
-    <IonLabel>Puntos SUBE</IonLabel>
+    <IonIcon icon={bus} style={{ color: '#6464f2' }} />
+    <IonLabel style={{ color: '#6464f2' }} className="text-[14px] font-semibold">Puntos SUBE</IonLabel>
   </IonTabButton>
 </IonTabBar>
+
+
 
 
     </IonTabs>

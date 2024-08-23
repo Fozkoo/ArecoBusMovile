@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle } from '@ionic/react';
+import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonIcon } from '@ionic/react';
 import { Link } from 'react-router-dom';
 import helper from '../service/Helper';
+import { getNextSchedule } from '../service/FunctionsHelper';
+import { arrowRedoCircleOutline, notificationsCircleOutline } from 'ionicons/icons';
 
 interface Bus {
   id: number;
@@ -11,35 +13,6 @@ interface Bus {
   destino: string;
   precio: number;
   horarios: string[];
-}
-
-function getNextSchedule(horarios: string[]): string | null {
-  const now = new Date();
-  const nowTime = now.getHours() * 60 + now.getMinutes(); // Tiempo actual en minutos
-
-  let nextSchedule: string | null = null;
-  let nextTimeDifference = Number.MAX_VALUE;
-
-  for (const horario of horarios) {
-    const [hours, minutes] = horario.split(':').map(Number);
-    const scheduleTime = hours * 60 + minutes; // Horario en minutos desde medianoche
-    const timeDifference = scheduleTime - nowTime;
-
-    if (timeDifference > 0 && timeDifference < nextTimeDifference) {
-      nextTimeDifference = timeDifference;
-      nextSchedule = horario;
-    }
-  }
-
-  if (nextSchedule) {
-    // Convertir a formato "HH:mm" con ceros a la izquierda si es necesario
-    const [hours, minutes] = nextSchedule.split(':').map(Number);
-    const formattedHours = hours.toString().padStart(2, '0');
-    const formattedMinutes = minutes.toString().padStart(2, '0');
-    return `${formattedHours}:${formattedMinutes}`;
-  }
-
-  return null;
 }
 
 function Card2() {
@@ -60,12 +33,10 @@ function Card2() {
 
     fetchData();
 
-    // Set interval to refresh data every minute (60000 ms)
     const intervalId = setInterval(() => {
       fetchData();
     }, 60000);
 
-    // Clear interval on component unmount
     return () => clearInterval(intervalId);
   }, []);
 
@@ -74,23 +45,32 @@ function Card2() {
   }
 
   return (
-    <div className="card-container flex gap-3 flex-wrap">
+    <div className="card-container justify-center flex gap-3 flex-wrap">
       {data.map((bus) => (
         <IonCard
           key={bus.id}
-          className="fixed-card-size w-[300px] h-[400px] transition-transform duration-300 ease-in-out transform hover:scale-105"
+          className="fixed-card-size w-[300px] h-[400px]"
         >
+          <div className="container-notificacion  flex items-center absolute w-full h-[70px]">
+          <IonIcon
+            onClick={() => alert('Desea activar las notificaciones?')}
+            className='text-white text-[45px] ml-auto mr-4 transition-transform duration-300 ease-in-out transform hover:scale-125 cursor-pointer'
+            icon={notificationsCircleOutline}
+          />
+
+          </div>
           <img
             alt={bus.empresaNombre}
             src={bus.image}
             className="card-image w-[100%] h-[200px] object-cover"
           />
+          
           <IonCardHeader>
             <IonCardTitle>{bus.empresaNombre}</IonCardTitle>
             <IonCardSubtitle>
               <div className='flex gap-1'>
                 Destino: 
-                <p className='font-bold text-black'>{bus.destino}</p>
+                <p className='font-semibold text-black'>{bus.destino}</p>
               </div>
             </IonCardSubtitle>
           </IonCardHeader>
@@ -98,13 +78,16 @@ function Card2() {
           <IonCardContent>
             <div className="flex gap-1">
               <p>Precio: </p> 
-              <p className="text-black font-bold">$ {bus.precio}</p>
+              <p className="text-black font-bold !font-semibold">$ {bus.precio}</p>
             </div>
-            <div className='flex gap-1'>
+            <div className='flex gap-1 items-center'>
               <p>Próximo horario:</p>
-              <p className='text-black font-bold'>{getNextSchedule(bus.horarios)}</p>
+              <p className='text-black text-center !font-semibold'>{getNextSchedule(bus.horarios)}</p>
             </div>
-            <Link to={bus.path} className='text-black'>Ver más detalles</Link>
+            <Link to={bus.path} className='text-black flex items-center gap-1'>
+              Ver más detalles
+              <IonIcon icon={arrowRedoCircleOutline} />
+            </Link>
           </IonCardContent>
         </IonCard>
       ))}
