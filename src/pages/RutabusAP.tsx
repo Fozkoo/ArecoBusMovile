@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Helper from '../service/Helper';
 import { IonContent } from '@ionic/react';
 import Header from '../components/Header';
+import TestPage from './TestPage';
+import Loader from '../components/Loader'; // Asegúrate de importar tu componente Loader
 
 interface RutabusData {
   image: string;
@@ -13,6 +15,7 @@ interface RutabusData {
 
 function RutabusAP() {
   const [rutabusData, setRutabusData] = useState<RutabusData | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,26 +26,29 @@ function RutabusAP() {
         console.log(singleObject);
       } catch (err) {
         console.log(err + " error");
+      } finally {
+        
+        setTimeout(() => setLoading(false), 1000);
       }
     };
     fetchData();
   }, []);
 
+  if (loading) {
+    return <Loader />;
+  }
+
   if (!rutabusData) {
-    return <div>Loading...</div>; 
+    return <div className='h-full'><TestPage/></div>; 
   }
 
   return (
     <>
-    <IonContent>
-
-
-
+      <IonContent>
         <div className="container-header fixed top-0 left-0 w-full bg-white z-50 shadow-sm">
-            <Header/>
+          <Header/>
         </div>
 
-           
         <div className="container-title-and-info overflow-hidden flex flex-col justify-center items-center w-full h-[180px] mt-10">
           <img className="w-[100%] h-[600px] brightness-50" src={rutabusData.image} alt="Imagen de la empresa" />
           <section className="absolute">
@@ -58,17 +64,14 @@ function RutabusAP() {
             </div>
           </section>
         </div>
-  
 
         <div className="container-horarios flex flex-col items-center mt-5 mb-5 p-5">
           <h2 className="font-semibold text-4xl mt-5">HORARIOS</h2>
-
           <section className="lun-sab">
             <div className="container-lun-sab flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
               <div className="container-title">
                 <h2 className="font-semibold text-2xl">LUNES A SÁBADOS</h2>
               </div>
-
               <div className="container-options-lun-sab w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
                 {rutabusData.horarios?.map((hora, index) => (
                   <button
@@ -91,7 +94,6 @@ function RutabusAP() {
                 <h2 className="font-semibold text-2xl">PUNTO DE PARTIDA</h2>
                 <h2 className='font-semibold text-xl text-gray-600'>{rutabusData.puntoPartida}</h2>
               </div>
-
               <div className="container-iframe flex  justify-center mt-5 h-[500px] rounded-xl overflow-hidden">
               </div>
             </div>
@@ -103,7 +105,6 @@ function RutabusAP() {
             <div className="container-title-price mt-5 mb-5">
               <h2 className="font-semibold text-3xl">PRECIOS</h2>
             </div>
-
             <div className="container-table ">
               <table className="w-[1000px] h-[130px] bg-white shadow-lg rounded-xl max-lg:w-[80%]">
                 <thead>

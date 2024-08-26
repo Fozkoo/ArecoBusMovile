@@ -8,7 +8,7 @@ import { LatLngTuple } from 'leaflet';
 
 
 const MapView: React.FC = () => {
-  return (
+  return (  
     <MapContainer
       center={[-34.243774, -59.473800] as LatLngTuple}
       zoom={14}
