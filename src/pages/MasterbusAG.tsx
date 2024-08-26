@@ -83,7 +83,6 @@ function MasterbusAG() {
               </div>
 
               <div className="container-iframe flex  justify-center mt-5 h-[500px] rounded-xl overflow-hidden">
-                <iframe src="https://www.google.com/maps/embed?pb=!4v1715699694952!6m8!1m7!1sYzaETJ8CllqqCpoQONIi5w!2m2!1d-34.24560498788325!2d-59.46419976182082!3f85.07201270555024!4f-7.926432221881839!5f0.8068674999376183" className='w-[100%]' allowFullScreen loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
               </div>
             </div>
           </div>

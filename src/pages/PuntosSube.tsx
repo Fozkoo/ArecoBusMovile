@@ -21,7 +21,7 @@ function PuntosSube() {
             </div>
 
             <div className="container-map flex rounded-xl shadow-2xl overflow-hidden items-center justify-center w-[90%] h-[500px] mt-12 bg-blue-200">
-            <MapView/>
+              <MapView/>
             </div>
 
             <div className="other-text flex justify-center text-center w-[90%] mt-7 font-semibold">
