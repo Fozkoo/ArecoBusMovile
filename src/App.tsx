@@ -5,6 +5,8 @@ import { home, bus, settings } from 'ionicons/icons';
 import Home from './pages/Home';
 import RutabusAP from './pages/RutabusAP';
 import MasterbusAG from './pages/MasterbusAG';
+import RicarditoAD from './pages/RicarditoAD';
+import RicarditoAV from './pages/RicarditoAV';
 import '@fontsource-variable/onest';
 import PuntosSube from './pages/PuntosSube';
 
@@ -20,7 +22,9 @@ const App: React.FC = () => (
       <IonRouterOutlet id="main-content">
         <Route exact path="/home" component={Home} />
         <Route exact path="/rutabusAP" component={RutabusAP} />
-        <Route exact path="/masterbusAG" component={MasterbusAG} />
+        <Route exact path="/ricarditoAV" component={RicarditoAV} />
+        <Route exact path="/rutabusAD" component={RicarditoAD} />
+        <Route exact path="/rutabusAP" component={RutabusAP} />
         <Route exact path="/PuntosSube" component={PuntosSube} />
         <Route exact path="/TestPage" component={TestPage} />
         <Redirect exact path="/" to="/home" />

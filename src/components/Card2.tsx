@@ -23,6 +23,7 @@ function Card2() {
     const fetchData = async () => {
       try {
         const data = await helper.realData();
+        console.log(data);
         setData(data);
       } catch (err) {
         console.log(err + " error");

@@ -44,12 +44,25 @@ const masterbusInfo = async () => {
     }
 }
 
+const ricarditoDugganInfo = async () => {
+    try {
+        const response = await api.get("/getBusInfoById/5")
+        return response.data;
+    }
+    catch (err) {
+        console.log(err + " error");
+        return [];
+    }
+}
+
+
 
 
 const methods = {
     realData,
     rutabusInfo,
-    masterbusInfo
+    masterbusInfo,
+    ricarditoDugganInfo
 }
 
 export default methods;
