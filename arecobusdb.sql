@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-08-2024 a las 19:30:00
+-- Tiempo de generación: 28-08-2024 a las 21:31:56
 -- Versión del servidor: 9.0.0
 -- Versión de PHP: 8.0.30
 
@@ -44,8 +44,10 @@ CREATE TABLE `bus` (
 --
 
 INSERT INTO `bus` (`idbus`, `numero_linea`, `destino`, `empresa_idempresa`, `precio`, `origen`, `punto_partida`, `image`, `path`) VALUES
-(3, 350, 'Pilar', 3, 980, 'San Antonio de Areco', 'AV Smith 299', 'https://acortar.link/MZfRls', 'RutabusAP'),
-(4, 500, 'Giles', 4, 2400, 'San Antonio de Areco', 'AV Smith 233', 'https://pbs.twimg.com/media/FNIfphiXIAg-dEt?format=jpg&name=large', 'MasterbusAG');
+(3, 350, 'Pilar', 3, 980, 'San Antonio de Areco', 'AV Smith 299', 'https://i.ibb.co/Hnk6xcq/rutabus.jpg', 'RutabusAP'),
+(4, 500, 'Giles', 4, 2400, 'San Antonio de Areco', 'AV Smith 233', 'https://i.ibb.co/qMxsf0d/masterbus.jpg', 'MasterbusAG'),
+(5, 111, 'Duggan', 5, 1000, 'San Antonio de Areco', 'AV Smith 299', 'https://i.ibb.co/V9cbjXX/ricardito-dugan.jpg', 'RicarditoAD'),
+(6, 112, 'Villa Lia', 5, 1100, 'San Antonio de Areco', 'AV Smith 299', 'https://i.ibb.co/VJsLpNq/ricardito-villa-lia.jpg', 'RicarditoAV');
 
 -- --------------------------------------------------------
 
@@ -64,6 +66,7 @@ CREATE TABLE `bus_has_horarios` (
 
 INSERT INTO `bus_has_horarios` (`bus_idbus`, `horarios_idhorarios`) VALUES
 (3, 1),
+(5, 1),
 (3, 2),
 (3, 4),
 (3, 5),
@@ -78,6 +81,7 @@ INSERT INTO `bus_has_horarios` (`bus_idbus`, `horarios_idhorarios`) VALUES
 (3, 14),
 (3, 15),
 (3, 16),
+(6, 16),
 (3, 17),
 (4, 18),
 (4, 20);
@@ -268,7 +272,7 @@ ALTER TABLE `horarios`
 -- AUTO_INCREMENT de la tabla `bus`
 --
 ALTER TABLE `bus`
-  MODIFY `idbus` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idbus` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `dias_semana`
