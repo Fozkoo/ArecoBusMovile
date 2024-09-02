@@ -87,9 +87,9 @@ function RicarditoAV() {
 
 
 
-              <div className="container-iframe flex  justify-center mt-5 h-[100%] rounded-xl overflow-hidden">
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!4v1725291140712!6m8!1m7!1sVep0fKFlLubfdTr_li-IMQ!2m2!1d-34.24556233752934!2d-59.46422813436158!3f91.3146240670629!4f-12.334637154740648!5f0.7820865974627469"
+              <div className="container-iframe flex justify-center mt-5 h-[100%] rounded-xl overflow-hidden">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!4v1725306052333!6m8!1m7!1sDMW7GytFzbtBnLStuwNCmw!2m2!1d-34.2439990291675!2d-59.47317186053284!3f192.51214869134054!4f-1.8908378116309592!5f0.7820865974627469"
                   width="100%"
                   height="100%"
                   style={{ border: '0' }}
@@ -98,6 +98,7 @@ function RicarditoAV() {
                   referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
               </div>
+
             </div>
           </div>
           </section>
