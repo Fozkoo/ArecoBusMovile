@@ -56,7 +56,7 @@ function Card2() {
       {data.map((bus) => (
         <IonCard
           key={bus.id}
-          className="fixed-card-size w-[300px] h-[400px]"
+          className="fixed-card-size w-[300px] h-[1O0%]"
         >
           <div className="container-notificacion  hidden items-center absolute w-full h-[70px]">
           <IonIcon

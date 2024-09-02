@@ -74,7 +74,7 @@ function MasterbusAG() {
             </section>
           </div>
 
-          <section className="punto-partida bg-green-700">
+          <section className="punto-partida ">
           <div className="container-punto-de-partida flex justify-center  h-[700px]">
 
             <div className="title-punto-partida flex  flex-col w-[100%] p-11">
@@ -100,7 +100,7 @@ function MasterbusAG() {
               </div>
             </div>
           </div>
-        </section>
+          </section>
 
           <section className="precios hidden justify-center h-[500px]">
             <div className="container-price flex flex-col items-center  mt-5 mb-5 w-[60%]">

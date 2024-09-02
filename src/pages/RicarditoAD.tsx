@@ -75,27 +75,31 @@ function RicarditoAD() {
           </div>
 
           <section className="punto-partida ">
-            <div className="container-punto-de-partida flex justify-center  h-[600px]">
-              <div className="title-punto-partida flex flex-col w-[60%]">
-                <div className="container-title-punto-partida flex flex-col  justify-center items-center">
-                  <h2 className="font-semibold text-2xl">PUNTO DE PARTIDA</h2>
-                  <h2 className='font-semibold text-xl text-gray-600'>{ricarditoAdData.puntoPartida}</h2>
-                </div>
-                <div className="container-iframe flex  justify-center mt-5 h-[500px] rounded-xl overflow-hidden">
+          <div className="container-punto-de-partida flex justify-center  h-[700px]">
+
+            <div className="title-punto-partida flex  flex-col w-[100%] p-11">
+
+
+              <div className="container-title-punto-partida flex flex-col   justify-center items-center">
+                <h2 className="font-semibold text-2xl">PUNTO DE PARTIDA</h2>
+                <h2 className='font-semibold text-xl text-gray-600'>{ricarditoAdData.puntoPartida}</h2>
+              </div>
+
+
+
+              <div className="container-iframe flex  justify-center mt-5 h-[100%] rounded-xl overflow-hidden">
                 <iframe 
-                  src="https://www.google.com/maps/@-34.2440175,-59.4732766,3a,60y,146.2h,84.73t/data=!3m6!1e1!3m4!1syuBDWuNHrqjMlOZmnsHp-A!2e0!7i16384!8i8192?hl=es&coh=205409&entry=ttu&g_ep=EgoyMDI0MDgyOC4wIKXMDSoASAFQAw%3D%3D" 
-                  width="100%" 
-                  height="100%" 
-                  style={{ border: 0 }} 
-                  allowFullScreen 
-                  loading="lazy" 
+                  src="https://www.google.com/maps/embed?pb=!4v1725291140712!6m8!1m7!1sVep0fKFlLubfdTr_li-IMQ!2m2!1d-34.24556233752934!2d-59.46422813436158!3f91.3146240670629!4f-12.334637154740648!5f0.7820865974627469"
+                  width="100%"
+                  height="100%"
+                  style={{ border: '0' }}
+                  allowFullScreen
+                  loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
-
-
-                </div>
               </div>
             </div>
+          </div>
           </section>
 
           <section className="precios hidden justify-center h-[500px]">
