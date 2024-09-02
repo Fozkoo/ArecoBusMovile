@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const URL = 'https://api.arecobus.cfl401areco.edu.ar/api/buses';
+const URL = 'http://localhost:8080/api/buses';
+// http://localhost:8080/api/buses  o https://api.arecobus.cfl401areco.edu.ar/api/buses
 
 const api = axios.create({
     baseURL: URL

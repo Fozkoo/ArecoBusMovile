@@ -23,8 +23,8 @@ const App: React.FC = () => (
         <Route exact path="/home" component={Home} />
         <Route exact path="/rutabusAP" component={RutabusAP} />
         <Route exact path="/ricarditoAV" component={RicarditoAV} />
-        <Route exact path="/rutabusAD" component={RicarditoAD} />
-        <Route exact path="/rutabusAP" component={RutabusAP} />
+        <Route exact path="/ricarditoAD" component={RicarditoAD} />
+        <Route exact path="/masterbusAG" component={MasterbusAG} />
         <Route exact path="/PuntosSube" component={PuntosSube} />
         <Route exact path="/TestPage" component={TestPage} />
         <Redirect exact path="/" to="/home" />

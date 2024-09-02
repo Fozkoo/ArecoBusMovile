@@ -15,7 +15,7 @@ function Home() {
   useEffect(() => {
     
     const timer = setTimeout(() => {
-      setLoading(false);
+      setLoading(false);``
     }, 1000); 
 
     
@@ -32,7 +32,7 @@ function Home() {
             <div className="container-header fixed top-0 left-0 w-full bg-white z-50 shadow-sm">
               <Header />
             </div>
-            <div className="container-cards pt-[65px] flex items-center mt-5 p-7 flex-col h-full">
+            <div className="container-cards pt-[65px]   flex items-center mt-5 p-7 flex-wrap ">
               <Card2 />
             </div>
           </>

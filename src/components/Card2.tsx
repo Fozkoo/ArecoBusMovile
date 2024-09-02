@@ -5,6 +5,12 @@ import helper from '../service/Helper';
 import { getNextSchedule } from '../service/FunctionsHelper';
 import { arrowRedoCircleOutline, notificationsCircleOutline } from 'ionicons/icons';
 
+import { IonButton } from '@ionic/react';
+import { addOutline } from 'ionicons/icons';
+import { heart, logoApple, settingsSharp, star } from 'ionicons/icons';
+
+import { addCircleOutline } from 'ionicons/icons';
+
 interface Bus {
   id: number;
   path: string;
@@ -52,7 +58,7 @@ function Card2() {
           key={bus.id}
           className="fixed-card-size w-[300px] h-[400px]"
         >
-          <div className="container-notificacion  flex items-center absolute w-full h-[70px]">
+          <div className="container-notificacion  hidden items-center absolute w-full h-[70px]">
           <IonIcon
             onClick={() => alert('Desea activar las notificaciones?')}
             className='text-white text-[45px] ml-auto mr-4 transition-transform duration-300 ease-in-out transform hover:scale-125 cursor-pointer'
@@ -86,8 +92,10 @@ function Card2() {
               <p className='text-black text-center !font-semibold'>{getNextSchedule(bus.horarios)}</p>
             </div>
             <Link to={bus.path} className='text-black flex items-center gap-1'>
-              Ver más detalles
-              <IonIcon icon={arrowRedoCircleOutline} />
+              <IonButton className='w-full' style={{ '--background': '#6464f2' }}>
+                Ver más detalles
+                <IonIcon slot="end" icon={addCircleOutline}></IonIcon>
+              </IonButton>
             </Link>
           </IonCardContent>
         </IonCard>
