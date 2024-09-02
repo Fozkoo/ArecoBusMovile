@@ -74,12 +74,12 @@ function Card2() {
           
           <IonCardHeader>
             <IonCardTitle>{bus.empresaNombre}</IonCardTitle>
-            <IonCardSubtitle>
-              <div className='flex gap-1'>
-                Destino: 
-                <p className='font-semibold text-black'>{bus.destino}</p>
-              </div>
-            </IonCardSubtitle>
+              <IonCardSubtitle>
+                <div className='flex gap-1'>
+                  <p>Destino:</p>
+                  <p className='font-semibold text-black'>{bus.destino}</p>
+                </div>
+              </IonCardSubtitle>
           </IonCardHeader>
 
           <IonCardContent>
@@ -91,7 +91,7 @@ function Card2() {
               <p>Próximo horario:</p>
               <p className='text-black text-center !font-semibold'>{getNextSchedule(bus.horarios)}</p>
             </div>
-            <Link to={bus.path} className='text-black flex items-center gap-1'>
+            <Link to={bus.path} className='text-black flex items-center mt-3 gap-1'>
               <IonButton className='w-full' style={{ '--background': '#6464f2' }}>
                 Ver más detalles
                 <IonIcon slot="end" icon={addCircleOutline}></IonIcon>

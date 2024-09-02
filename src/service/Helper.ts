@@ -56,6 +56,17 @@ const ricarditoDugganInfo = async () => {
     }
 }
 
+const ricarditoVillaLiaInfo = async () => {
+    try {
+        const response = await api.get("/getBusInfoById/6")
+        return response.data;
+    }
+    catch (err) {
+        console.log(err + " error");
+        return [];
+    }
+}
+
 
 
 
@@ -63,7 +74,8 @@ const methods = {
     realData,
     rutabusInfo,
     masterbusInfo,
-    ricarditoDugganInfo
+    ricarditoDugganInfo,
+    ricarditoVillaLiaInfo
 }
 
 export default methods;

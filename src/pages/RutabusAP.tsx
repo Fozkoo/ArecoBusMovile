@@ -4,6 +4,7 @@ import { IonContent } from '@ionic/react';
 import Header from '../components/Header';
 import TestPage from './TestPage';
 import Loader from '../components/Loader'; // Asegúrate de importar tu componente Loader
+import rutabusPuntoPartida from '..//images/rutabusPuntoPartida.png';
 
 interface RutabusData {
   image: string;
@@ -65,7 +66,7 @@ function RutabusAP() {
           </section>
         </div>
 
-        <div className="container-horarios flex flex-col items-center mt-5 mb-5 p-5">
+        <div className="container-horarios flex flex-col items-center   p-5">
           <h2 className="font-semibold text-4xl mt-5">HORARIOS</h2>
           <section className="lun-sab">
             <div className="container-lun-sab flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
@@ -88,19 +89,34 @@ function RutabusAP() {
         </div>
 
         <section className="punto-partida ">
-          <div className="container-punto-de-partida flex justify-center  h-[600px]">
-            <div className="title-punto-partida flex flex-col w-[60%]">
-              <div className="container-title-punto-partida flex flex-col  justify-center items-center">
+          <div className="container-punto-de-partida flex justify-center  h-[700px]">
+
+            <div className="title-punto-partida flex  flex-col w-[100%] p-11 ">
+
+
+              <div className="container-title-punto-partida flex flex-col   justify-center items-center">
                 <h2 className="font-semibold text-2xl">PUNTO DE PARTIDA</h2>
                 <h2 className='font-semibold text-xl text-gray-600'>{rutabusData.puntoPartida}</h2>
               </div>
-              <div className="container-iframe flex  justify-center mt-5 h-[500px] rounded-xl overflow-hidden">
+
+
+
+              <div className="container-iframe flex  justify-center mt-5 h-[100%] rounded-xl overflow-hidden">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!4v1725291140712!6m8!1m7!1sVep0fKFlLubfdTr_li-IMQ!2m2!1d-34.24556233752934!2d-59.46422813436158!3f91.3146240670629!4f-12.334637154740648!5f0.7820865974627469"
+                width="100%"
+                height="100%"
+                style={{ border: '0' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="precios flex justify-center h-[500px]">
+        <section className="precios hidden justify-center h-[500px]">
           <div className="container-price flex flex-col items-center  mt-5 mb-5 w-[60%]">
             <div className="container-title-price mt-5 mb-5">
               <h2 className="font-semibold text-3xl">PRECIOS</h2>
