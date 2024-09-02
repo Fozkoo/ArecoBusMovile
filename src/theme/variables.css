@@ -12,9 +12,7 @@ body {
 /* Añade esto a tu archivo CSS global o componente */
 
 @media (min-width: 768px) {
-  .desktop-hidden {
-    display: none !important;
-  }
+
 
   .container-cards{
     justify-content: center;
