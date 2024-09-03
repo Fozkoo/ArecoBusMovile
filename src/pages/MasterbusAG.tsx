@@ -72,13 +72,33 @@ function MasterbusAG() {
           <div className="container-horarios flex flex-col items-center mb-5 p-5">
             <h2 className="font-semibold text-4xl mt-5">HORARIOS</h2>
 
-            <section className="lun-sab">
-              <div className="container-lun-sab flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
+            <section className="lun-ver">
+              <div className="container-lun-ver flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
                 <div className="container-title">
                   <h2 className="font-semibold text-2xl">LUNES A SÁBADOS</h2>
                 </div>
 
-                <div className="container-options-lun-sab w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
+                <div className="container-options-lun-ver w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
+                  {masterbusData.horarios?.map((hora, index) => (
+                    <button
+                      key={index}
+                      type="button"
+                      className="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-blue-600 rounded-md bg-blue-500 hover:bg-blue-400"
+                    >
+                      {hora.slice(0, 5)}  {/* Esto corta la cadena desde el primer carácter hasta el quinto */}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="sab-dom-fer">
+              <div className="container-sab-dom-fer flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
+                <div className="container-title">
+                  <h2 className="font-semibold text-2xl">SABADOS, DOMINGOS Y FERIADOS</h2>
+                </div>
+
+                <div className="container-options-sab-dom-fer w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
                   {masterbusData.horarios?.map((hora, index) => (
                     <button
                       key={index}
@@ -92,6 +112,10 @@ function MasterbusAG() {
               </div>
             </section>
           </div>
+
+
+
+
 
           <section className="punto-partida ">
             <div className="container-punto-de-partida flex justify-center  h-[700px]">
