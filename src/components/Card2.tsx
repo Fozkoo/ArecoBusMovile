@@ -3,13 +3,11 @@ import { IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, 
 import { Link } from 'react-router-dom';
 import helper from '../service/Helper';
 import { getNextSchedule } from '../service/FunctionsHelper';
-import { arrowRedoCircleOutline, notificationsCircleOutline } from 'ionicons/icons';
-
+import { notificationsCircleOutline } from 'ionicons/icons';
 import { IonButton } from '@ionic/react';
-import { addOutline } from 'ionicons/icons';
-import { heart, logoApple, settingsSharp, star } from 'ionicons/icons';
-
 import { addCircleOutline } from 'ionicons/icons';
+import Loader from '..//components/LoaderCard';
+import TestPage from '../pages/TestPage';
 
 interface Bus {
   id: number;
@@ -24,6 +22,8 @@ interface Bus {
 function Card2() {
   const [data, setData] = useState<Bus[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +32,7 @@ function Card2() {
         console.log(data);
         setData(data);
       } catch (err) {
-        console.log(err + " error");
+        setError("Error al cargar los datos.");
       } finally {
         setLoading(false);
       }
@@ -48,7 +48,15 @@ function Card2() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loader />;
+  }
+
+  if (error) {
+    return <div className='h-full'><TestPage /></div>;
+  }
+
+  if (!setData) {
+    return <div className='h-full'><TestPage /></div>;
   }
 
   return (

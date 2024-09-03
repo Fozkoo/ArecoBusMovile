@@ -71,16 +71,16 @@ function RutabusAP() {
           <section className="lun-sab">
             <div className="container-lun-sab flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
               <div className="container-title">
-                <h2 className="font-semibold text-2xl">LUNES A SÁBADOS</h2>
+                <h2 className="font-semibold text-2xl">LUNES A VIERNES</h2>
               </div>
               <div className="container-options-lun-sab w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
-                {rutabusData.horarios?.map((hora, index) => (
+              {rutabusData.horarios?.map((hora, index) => (
                   <button
                     key={index}
                     type="button"
                     className="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-blue-600 rounded-md bg-blue-500 hover:bg-blue-400"
                   >
-                    {hora}
+                    {hora.slice(0, 5)}  {/* Esto corta la cadena desde el primer carácter hasta el quinto */}
                   </button>
                 ))}
               </div>

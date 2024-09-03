@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Helper from '../service/Helper';
 import { IonApp, IonContent } from '@ionic/react';
+import Header from '../components/Header';
+import Loader from '../components/Loader'; // Asegúrate de tener este componente
+import TestPage from '..//pages/TestPage'; // Asegúrate de tener este componente
 
 interface MasterbusData {
   image: string;
@@ -12,6 +15,8 @@ interface MasterbusData {
 
 function MasterbusAG() {
   const [masterbusData, setMasterbusData] = useState<MasterbusData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,21 +25,35 @@ function MasterbusAG() {
         const singleObject = data.length === 1 ? data[0] : null;
         setMasterbusData(singleObject);
       } catch (err) {
-        console.log(err + " error");
+        console.error(err);
+        setError("Error al cargar los datos.");
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
   }, []);
 
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <div className='h-full'><TestPage /></div>;
+  }
+
   if (!masterbusData) {
-    return <div>Loading...</div>; // Mostrar un mensaje de carga mientras se obtienen los datos
+    return <div className='h-full'><TestPage /></div>;
   }
 
   return (
-    <> 
-    <IonApp>
-      <IonContent>
-      <div className="container-title-and-info overflow-hidden flex flex-col justify-center items-center w-full h-[180px] mt-7">
+    <>
+      <IonApp>
+        <IonContent>
+          <div className="container-header fixed top-0 left-0 w-full bg-white z-50 shadow-sm">
+            <Header />
+          </div>
+          <div className="container-title-and-info overflow-hidden flex flex-col justify-center items-center w-full h-[180px] mt-7">
             <img className="w-[100%] h-[600px] brightness-50" src={masterbusData.image} alt="Imagen de la empresa" />
             <section className="absolute">
               <div className="container-title flex justify-center w-full">
@@ -66,7 +85,7 @@ function MasterbusAG() {
                       type="button"
                       className="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-blue-600 rounded-md bg-blue-500 hover:bg-blue-400"
                     >
-                      {hora}
+                      {hora.slice(0, 5)}  {/* Esto corta la cadena desde el primer carácter hasta el quinto */}
                     </button>
                   ))}
                 </div>
@@ -75,31 +94,31 @@ function MasterbusAG() {
           </div>
 
           <section className="punto-partida ">
-          <div className="container-punto-de-partida flex justify-center  h-[700px]">
+            <div className="container-punto-de-partida flex justify-center  h-[700px]">
 
-            <div className="title-punto-partida flex  flex-col w-[100%] p-11">
-
-
-              <div className="container-title-punto-partida flex flex-col   justify-center items-center">
-                <h2 className="font-semibold text-2xl">PUNTO DE PARTIDA</h2>
-                <h2 className='font-semibold text-xl text-gray-600'>{masterbusData.puntoPartida}</h2>
-              </div>
+              <div className="title-punto-partida flex  flex-col w-[100%] p-11">
 
 
+                <div className="container-title-punto-partida flex flex-col   justify-center items-center">
+                  <h2 className="font-semibold text-2xl">PUNTO DE PARTIDA</h2>
+                  <h2 className='font-semibold text-xl text-gray-600'>{masterbusData.puntoPartida}</h2>
+                </div>
 
-              <div className="container-iframe flex  justify-center mt-5 h-[100%] rounded-xl overflow-hidden">
-                <iframe 
-                  src="https://www.google.com/maps/embed?pb=!4v1725291140712!6m8!1m7!1sVep0fKFlLubfdTr_li-IMQ!2m2!1d-34.24556233752934!2d-59.46422813436158!3f91.3146240670629!4f-12.334637154740648!5f0.7820865974627469"
-                  width="100%"
-                  height="100%"
-                  style={{ border: '0' }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
+
+
+                <div className="container-iframe flex  justify-center mt-5 h-[100%] rounded-xl overflow-hidden">
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!4v1725291140712!6m8!1m7!1sVep0fKFlLubfdTr_li-IMQ!2m2!1d-34.24556233752934!2d-59.46422813436158!3f91.3146240670629!4f-12.334637154740648!5f0.7820865974627469"
+                    width="100%"
+                    height="100%"
+                    style={{ border: '0' }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                </div>
               </div>
             </div>
-          </div>
           </section>
 
           <section className="precios hidden justify-center h-[500px]">
@@ -138,8 +157,8 @@ function MasterbusAG() {
             </div>
           </section>
 
-      </IonContent>
-    </IonApp>
+        </IonContent>
+      </IonApp>
     </>
   );
 }

@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Helper from '../service/Helper';
 import { IonApp, IonContent } from '@ionic/react';
+import Header from '../components/Header';
+import Loader from '../components/Loader';
+import TestPage from '..//pages/TestPage';
 
 interface RicarditoAdData {
   image: string;
@@ -12,6 +15,8 @@ interface RicarditoAdData {
 
 function RicarditoAD() {
   const [ricarditoAdData, setRicarditoAdData] = useState<RicarditoAdData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,21 +25,34 @@ function RicarditoAD() {
         const singleObject = data.length === 1 ? data[0] : null;
         setRicarditoAdData(singleObject);
       } catch (err) {
-        console.log(err + " error");
+        setError("Error al cargar los datos.");
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
   }, []);
 
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <div className='h-full'><TestPage /></div>;
+  }
+
   if (!ricarditoAdData) {
-    return <div>Loading...</div>; // Mostrar un mensaje de carga mientras se obtienen los datos
+    return <div className='h-full'><TestPage /></div>;
   }
 
   return (
     <> 
     <IonApp>
       <IonContent>
-      <div className="container-title-and-info overflow-hidden flex flex-col justify-center items-center w-full h-[180px] mt-7">
+      <div className="container-header fixed top-0 left-0 w-full bg-white z-50 shadow-sm">
+          <Header/>
+        </div>
+      <div className="container-title-and-info overflow-hidden flex flex-col justify-center items-center w-full h-[180px] mt-12">
             <img className="w-[100%] h-[600px] brightness-50" src={ricarditoAdData.image} alt="Imagen de la empresa" />
             <section className="absolute">
               <div className="container-title flex justify-center w-full">
@@ -61,14 +79,14 @@ function RicarditoAD() {
 
                 <div className="container-options-lun-sab w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
                   {ricarditoAdData.horarios?.map((hora, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      className="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-blue-600 rounded-md bg-blue-500 hover:bg-blue-400"
-                    >
-                      {hora}
-                    </button>
-                  ))}
+                  <button
+                  key={index}
+                  type="button"
+                  className="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-blue-600 rounded-md bg-blue-500 hover:bg-blue-400"
+                >
+                  {hora.slice(0, 5)}  
+                </button>
+              ))}
                 </div>
               </div>
             </section>

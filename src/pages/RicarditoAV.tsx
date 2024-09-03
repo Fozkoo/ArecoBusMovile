@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Helper from '../service/Helper';
 import { IonApp, IonContent } from '@ionic/react';
+import Header from '../components/Header';
+import Loader from '../components/Loader';
+import TestPage from '..//pages/TestPage';
 
 interface RicarditoAvData {
   image: string;
@@ -12,6 +15,8 @@ interface RicarditoAvData {
 
 function RicarditoAV() {
   const [ricarditoAvData, setRicarditoAvData] = useState<RicarditoAvData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,20 +25,33 @@ function RicarditoAV() {
         const singleObject = data.length === 1 ? data[0] : null;
         setRicarditoAvData(singleObject);
       } catch (err) {
-        console.log(err + " error");
+        setError("Error al cargar los datos.");
+      } finally {
+        setLoading(false);
       }
     };
     fetchData();
   }, []);
 
+  if (loading) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return <div className='h-full'><TestPage /></div>;
+  }
+
   if (!ricarditoAvData) {
-    return <div>Loading...</div>;
+    return <div className='h-full'><TestPage /></div>;
   }
 
   return (
     <> 
     <IonApp>
       <IonContent>
+      <div className="container-header fixed top-0 left-0 w-full bg-white z-50 shadow-sm">
+          <Header/>
+      </div>
       <div className="container-title-and-info overflow-hidden flex flex-col justify-center items-center w-full h-[180px] mt-7">
             <img className="w-[100%] h-[600px] brightness-50" src={ricarditoAvData.image} alt="Imagen de la empresa" />
             <section className="absolute">
@@ -61,12 +79,12 @@ function RicarditoAV() {
 
                 <div className="container-options-lun-sab w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
                   {ricarditoAvData.horarios?.map((hora, index) => (
-                    <button
+                      <button
                       key={index}
                       type="button"
                       className="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-blue-600 rounded-md bg-blue-500 hover:bg-blue-400"
                     >
-                      {hora}
+                      {hora.slice(0, 5)}  {/* Esto corta la cadena desde el primer carácter hasta el quinto */}
                     </button>
                   ))}
                 </div>
