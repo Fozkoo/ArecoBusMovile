@@ -24,6 +24,7 @@ const rutabusInfo = async () => {
 
     try {
         const response = await api.get("/getBusInfoById/3")
+        console.log(response.data);
         return response.data;
     }
     catch (err) {

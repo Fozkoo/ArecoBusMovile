@@ -106,17 +106,17 @@ function MasterbusAG() {
 
 
 
-                <div className="container-iframe flex  justify-center mt-5 h-[100%] rounded-xl overflow-hidden">
+                <div className="container-iframe flex justify-center mt-5 h-[100%] rounded-xl overflow-hidden">
                   <iframe 
-                    src="https://www.google.com/maps/embed?pb=!4v1725291140712!6m8!1m7!1sVep0fKFlLubfdTr_li-IMQ!2m2!1d-34.24556233752934!2d-59.46422813436158!3f91.3146240670629!4f-12.334637154740648!5f0.7820865974627469"
-                    width="100%"
-                    height="100%"
-                    style={{ border: '0' }}
-                    allowFullScreen
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
+                  src="https://www.google.com/maps/embed?pb=!4v1725376786379!6m8!1m7!1sAxKRuwweNHPP-NgY7syzew!2m2!1d-34.24819927770623!2d-59.46249540062999!3f103.18399150229762!4f0.47026201920324695!5f0.7820865974627469"
+                  width="100%"
+                  height="100%"
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
                   ></iframe>
                 </div>
+
               </div>
             </div>
           </section>
