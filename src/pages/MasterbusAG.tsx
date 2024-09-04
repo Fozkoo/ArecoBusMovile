@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import Helper from '../service/Helper';
 import { IonApp, IonContent } from '@ionic/react';
 import Header from '../components/Header';
-import Loader from '../components/Loader'; // Asegúrate de tener este componente
-import TestPage from '..//pages/TestPage'; // Asegúrate de tener este componente
+import Loader from '../components/Loader'; 
+import TestPage from '..//pages/TestPage'; 
 
 interface MasterbusData {
   image: string;
@@ -15,35 +15,41 @@ interface MasterbusData {
 
 function MasterbusAG() {
   const [masterbusData, setMasterbusData] = useState<MasterbusData | null>(null);
+  const [masterbusDataDomingo, setMasterbusDataDomingo] = useState<MasterbusData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data: MasterbusData[] = await Helper.masterbusInfo();
-        const singleObject = data.length === 1 ? data[0] : null;
-        setMasterbusData(singleObject);
+        const [data1, data2] = await Promise.all([
+          Helper.masterbusInfo(),
+          Helper.masterbusInfoDomingo(),
+        ]);
+        setMasterbusData(data1.length > 0 ? data1[0] : null);
+        setMasterbusDataDomingo(data2.length > 0 ? data2[0] : null);
       } catch (err) {
-        console.error(err);
-        setError("Error al cargar los datos.");
+        console.error('Error fetching data:', err);
+        setError('Error al cargar la información');
       } finally {
         setLoading(false);
       }
     };
     fetchData();
-  }, []);
+  },[])
+
+
 
   if (loading) {
     return <Loader />;
   }
 
-  if (error) {
-    return <div className='h-full'><TestPage /></div>;
-  }
-
   if (!masterbusData) {
-    return <div className='h-full'><TestPage /></div>;
+    return (
+      <div className="h-full">
+        <TestPage />
+      </div>
+    );
   }
 
   return (
@@ -85,7 +91,7 @@ function MasterbusAG() {
                       type="button"
                       className="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-blue-600 rounded-md bg-blue-500 hover:bg-blue-400"
                     >
-                      {hora.slice(0, 5)}  {/* Esto corta la cadena desde el primer carácter hasta el quinto */}
+                      {hora.slice(0, 5)}  
                     </button>
                   ))}
                 </div>
@@ -95,17 +101,17 @@ function MasterbusAG() {
             <section className="sab-dom-fer">
               <div className="container-sab-dom-fer flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
                 <div className="container-title">
-                  <h2 className="font-semibold text-2xl">SABADOS, DOMINGOS Y FERIADOS</h2>
+                  <h2 className="font-semibold text-2xl">DOMINGOS Y FERIADOS</h2>
                 </div>
 
                 <div className="container-options-sab-dom-fer w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
-                  {masterbusData.horarios?.map((hora, index) => (
+                  {masterbusDataDomingo?.horarios?.map((hora, index) => (
                     <button
                       key={index}
                       type="button"
                       className="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-blue-600 rounded-md bg-blue-500 hover:bg-blue-400"
                     >
-                      {hora.slice(0, 5)}  {/* Esto corta la cadena desde el primer carácter hasta el quinto */}
+                      {hora.slice(0, 5)}
                     </button>
                   ))}
                 </div>

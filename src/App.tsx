@@ -26,7 +26,7 @@ const App: React.FC = () => (
         <Route exact path="/ricarditoAD" component={RicarditoAD} />
         <Route exact path="/masterbusAG" component={MasterbusAG} />
         <Route exact path="/PuntosSube" component={PuntosSube} />
-        <Route exact path="/TestPage" component={TestPage} />
+        <Route exact path="/TestPage" component={Home} />
         <Redirect exact path="/" to="/home" />
       </IonRouterOutlet>
 

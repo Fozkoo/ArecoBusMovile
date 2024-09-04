@@ -4,7 +4,7 @@ import { IonContent } from '@ionic/react';
 import Header from '../components/Header';
 import TestPage from './TestPage';
 import Loader from '../components/Loader'; // Asegúrate de importar tu componente Loader
-import rutabusPuntoPartida from '..//images/rutabusPuntoPartida.png';
+
 
 interface RutabusData {
   image: string;
@@ -14,33 +14,42 @@ interface RutabusData {
   puntoPartida: string;
 }
 
+
 function RutabusAP() {
   const [rutabusData, setRutabusData] = useState<RutabusData | null>(null);
+  const [rutabusDataDomingo, setRutabusDataDomingo] = useState<RutabusData | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data: RutabusData[] = await Helper.rutabusInfo();
-        const singleObject = data.length === 1 ? data[0] : null;
-        setRutabusData(singleObject);
-        console.log(singleObject);
+        const [data1, data2] = await Promise.all([
+          Helper.rutabusInfo(),
+          Helper.rutabusInfoHorariosDomingo(),
+        ]);
+
+        setRutabusData(data1.length > 0 ? data1[0] : null);
+        setRutabusDataDomingo(data2.length > 0 ? data2[0] : null);
       } catch (err) {
-        console.log(err + " error");
+        console.error('Error fetching data:', err);
       } finally {
-        
-        setTimeout(() => setLoading(false), 1000);
+        setLoading(false);
       }
     };
     fetchData();
   }, []);
+  
 
   if (loading) {
     return <Loader />;
   }
 
   if (!rutabusData) {
-    return <div className='h-full'><TestPage/></div>; 
+    return (
+      <div className="h-full">
+        <TestPage />
+      </div>
+    );
   }
 
   return (
@@ -94,13 +103,13 @@ function RutabusAP() {
                 </div>
 
                 <div className="container-options-sab-dom-fer w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
-                  {rutabusData.horarios?.map((hora, index) => (
+                  {rutabusDataDomingo?.horarios?.map((hora, index) => (
                     <button
                       key={index}
                       type="button"
                       className="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-blue-600 rounded-md bg-blue-500 hover:bg-blue-400"
                     >
-                      {hora.slice(0, 5)}  {/* Esto corta la cadena desde el primer carácter hasta el quinto */}
+                      {hora.slice(0, 5)}
                     </button>
                   ))}
                 </div>

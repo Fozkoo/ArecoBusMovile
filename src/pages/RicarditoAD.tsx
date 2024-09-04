@@ -15,23 +15,29 @@ interface RicarditoAdData {
 
 function RicarditoAD() {
   const [ricarditoAdData, setRicarditoAdData] = useState<RicarditoAdData | null>(null);
+  const [ricarditoAdDataDomingo, setRicarditoAdDataDomingo] = useState<RicarditoAdData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fecthData = async () => {
       try {
-        const data: RicarditoAdData[] = await Helper.ricarditoDugganInfo();
-        const singleObject = data.length === 1 ? data[0] : null;
-        setRicarditoAdData(singleObject);
+        const [data1, data2] = await Promise.all([
+          Helper.ricarditoDugganInfo(),
+          Helper.ricarditoDugganInfoDomingo(),
+        ]);
+        setRicarditoAdData(data1.length > 0 ? data1[0] : null);
+        setRicarditoAdDataDomingo(data2.length > 0 ? data2[0] : null);
       } catch (err) {
-        setError("Error al cargar los datos.");
+        console.error('Error fetching data:', err);
+        setError('Error al cargar la información');
       } finally {
         setLoading(false);
       }
     };
-    fetchData();
-  }, []);
+    
+    fecthData();
+  },[])
 
   if (loading) {
     return <Loader />;
@@ -71,13 +77,13 @@ function RicarditoAD() {
           <div className="container-horarios flex flex-col items-center mb-5 p-5">
             <h2 className="font-semibold text-4xl mt-5">HORARIOS</h2>
 
-            <section className="lun-sab">
-              <div className="container-lun-sab flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
+            <section className="lun-vier">
+              <div className="container-lun-vier flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
                 <div className="container-title">
                   <h2 className="font-semibold text-2xl">LUNES A VIERNES</h2>
                 </div>
 
-                <div className="container-options-lun-sab w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
+                <div className="container-options-lun-vier w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
                   {ricarditoAdData.horarios?.map((hora, index) => (
                   <button
                   key={index}
@@ -90,7 +96,82 @@ function RicarditoAD() {
                 </div>
               </div>
             </section>
+
+            <section className="sabados">
+              <div className="container-sab flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
+                <div className="container-title">
+                  <h2 className="font-semibold text-2xl">SABADOS</h2>
+                </div>
+
+                <div className="container-options-sab w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
+                  {ricarditoAdData.horarios?.map((hora, index) => (
+                  <button
+                  key={index}
+                  type="button"
+                  className="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-blue-600 rounded-md bg-blue-500 hover:bg-blue-400"
+                >
+                  {hora.slice(0, 5)}  
+                </button>
+              ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="dom-fer">
+              <div className="container-dom-fer flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
+                <div className="container-title">
+                  <h2 className="font-semibold text-2xl">DOMINGOS Y FERIADOS</h2>
+                </div>
+
+                <div className="container-options-dom-fer w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
+                  {ricarditoAdDataDomingo?.horarios?.map((hora, index) => (
+                  <button
+                  key={index}
+                  type="button"
+                  className="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-blue-600 rounded-md bg-blue-500 hover:bg-blue-400"
+                >
+                  {hora.slice(0, 5)}  
+                </button>
+              ))}
+                </div>
+              </div>
+            </section>
+
+
+
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
 
           <section className="punto-partida ">
           <div className="container-punto-de-partida flex justify-center  h-[700px]">
@@ -121,6 +202,24 @@ function RicarditoAD() {
             </div>
           </div>
           </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           <section className="precios hidden justify-center h-[500px]">
             <div className="container-price flex flex-col items-center  mt-5 mb-5 w-[60%]">
