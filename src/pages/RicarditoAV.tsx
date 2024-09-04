@@ -15,23 +15,41 @@ interface RicarditoAvData {
 
 function RicarditoAV() {
   const [ricarditoAvData, setRicarditoAvData] = useState<RicarditoAvData | null>(null);
+  const [ricarditoAvDataLunes, setRicarditoAvDataLunes] = useState<RicarditoAvData | null>(null);
+  const [ricarditoAvDataDomingo , setRicarditoAvDataDomingo] = useState<RicarditoAvData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data: RicarditoAvData[] = await Helper.ricarditoVillaLiaInfo();
-        const singleObject = data.length === 1 ? data[0] : null;
-        setRicarditoAvData(singleObject);
+        const [data1, data2, data3] = await Promise.all([
+        
+          Helper.ricarditoVillaLiaInfo(),
+          Helper.ricarditoVillaLiaInfoHorariosLunes(),
+          Helper.ricarditoVillaLiaInfoDomingo(),
+        ]);
+
+        if (data2.length > 0) {
+          data2[0].horarios.sort();  // Ordenar horarios de lunes a viernes
+        }
+
+        if (data3.length > 0) {
+          data3[0].horarios.sort();  // Ordenar horarios de domingos y feriados
+        }
+
+        setRicarditoAvData(data1.length > 0 ? data1[0] : null);
+        setRicarditoAvDataLunes(data2.length > 0 ? data2[0] : null);
+        setRicarditoAvDataDomingo(data3.length > 0 ? data3[0] : null);
       } catch (err) {
-        setError("Error al cargar los datos.");
+        console.error('Error fetching data:', err);
+        setError('Error al cargar la información');
       } finally {
         setLoading(false);
       }
     };
     fetchData();
-  }, []);
+  },[])
 
   if (loading) {
     return <Loader />;
@@ -52,6 +70,7 @@ function RicarditoAV() {
       <div className="container-header fixed top-0 left-0 w-full bg-white z-50 shadow-sm">
           <Header/>
       </div>
+
       <div className="container-title-and-info overflow-hidden flex flex-col justify-center items-center w-full h-[180px] mt-7">
             <img className="w-[100%] h-[600px] brightness-50" src={ricarditoAvData.image} alt="Imagen de la empresa" />
             <section className="absolute">
@@ -71,14 +90,34 @@ function RicarditoAV() {
           <div className="container-horarios flex flex-col items-center mb-5 p-5">
             <h2 className="font-semibold text-4xl mt-5">HORARIOS</h2>
 
-            <section className="lun-sab">
+            <section className="lun-vier">
               <div className="container-lun-sab flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
                 <div className="container-title">
-                  <h2 className="font-semibold text-2xl">LUNES A VIERNES</h2>
+                  <h2 className="font-semibold text-2xl">LUNES A SABADOS</h2>
                 </div>
 
                 <div className="container-options-lun-sab w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
-                  {ricarditoAvData.horarios?.map((hora, index) => (
+                  {ricarditoAvDataLunes?.horarios?.map((hora, index) => (
+                      <button
+                      key={index}
+                      type="button"
+                      className="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-blue-600 rounded-md bg-blue-500 hover:bg-blue-400"
+                    >
+                      {hora.slice(0, 5)}  
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <section className="sab-dom-fer">
+              <div className="container-sab-dom-fer flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
+                <div className="container-title">
+                  <h2 className="font-semibold text-2xl">DOMINGOS Y FERIADOS</h2>
+                </div>
+
+                <div className="container-options-dom-fer w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
+                  {ricarditoAvDataDomingo?.horarios?.map((hora, index) => (
                       <button
                       key={index}
                       type="button"
@@ -90,7 +129,28 @@ function RicarditoAV() {
                 </div>
               </div>
             </section>
+
+
+
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
           <section className="punto-partida ">
           <div className="container-punto-de-partida flex justify-center  h-[700px]">

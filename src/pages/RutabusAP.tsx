@@ -16,6 +16,7 @@ interface RutabusData {
 
 
 function RutabusAP() {
+  const [rutabusInformacion, setRutabusInformacion] = useState<RutabusData | null>(null);
   const [rutabusData, setRutabusData] = useState<RutabusData | null>(null);
   const [rutabusDataDomingo, setRutabusDataDomingo] = useState<RutabusData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -23,13 +24,23 @@ function RutabusAP() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [data1, data2] = await Promise.all([
+        const [data1, data2, data3] = await Promise.all([
           Helper.rutabusInfo(),
+          Helper.rutabusInfoHorariosLunes(),
           Helper.rutabusInfoHorariosDomingo(),
         ]);
 
-        setRutabusData(data1.length > 0 ? data1[0] : null);
-        setRutabusDataDomingo(data2.length > 0 ? data2[0] : null);
+        if (data2.length > 0) {
+          data2[0].horarios.sort();  // Ordenar horarios de lunes a viernes
+        }
+
+        if (data3.length > 0) {
+          data3[0].horarios.sort();  // Ordenar horarios de domingos y feriados
+        }
+
+        setRutabusInformacion(data1.length > 0 ? data1[0] : null);
+        setRutabusData(data2.length > 0 ? data2[0] : null);
+        setRutabusDataDomingo(data3.length > 0 ? data3[0] : null);
       } catch (err) {
         console.error('Error fetching data:', err);
       } finally {
@@ -60,16 +71,16 @@ function RutabusAP() {
         </div>
 
         <div className="container-title-and-info overflow-hidden flex flex-col justify-center items-center w-full h-[180px] mt-10">
-          <img className="w-[100%] h-[600px] brightness-50" src={rutabusData.image} alt="Imagen de la empresa" />
+          {rutabusInformacion && <img className="w-[100%] h-[600px] brightness-50" src={rutabusInformacion.image} alt="Imagen de la empresa" />}
           <section className="absolute">
             <div className="container-title flex justify-center w-full">
               <h1 className="font-bold text-6xl max-lg:text-4xl text-white">
-                {rutabusData.empresaNombre}
+                {rutabusInformacion?.empresaNombre}
               </h1>
             </div>
             <div className="destination w-full flex justify-center">
               <p className="font-semibold text-2xl max-lg:text-xl text-white">
-                Areco - {rutabusData.destino}
+                Areco - {rutabusInformacion?.destino}
               </p>
             </div>
           </section>
@@ -134,7 +145,7 @@ function RutabusAP() {
 
               <div className="container-title-punto-partida flex flex-col   justify-center items-center">
                 <h2 className="font-semibold text-2xl">PUNTO DE PARTIDA</h2>
-                <h2 className='font-semibold text-xl text-gray-600'>{rutabusData.puntoPartida}</h2>
+                <h2 className='font-semibold text-xl text-gray-600'>{rutabusInformacion?.puntoPartida}</h2>
               </div>
 
 

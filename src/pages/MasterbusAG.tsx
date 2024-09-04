@@ -15,6 +15,7 @@ interface MasterbusData {
 
 function MasterbusAG() {
   const [masterbusData, setMasterbusData] = useState<MasterbusData | null>(null);
+  const [masterbusDataLunes, setMasterbusDataLunes] = useState<MasterbusData | null>(null);
   const [masterbusDataDomingo, setMasterbusDataDomingo] = useState<MasterbusData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -22,12 +23,24 @@ function MasterbusAG() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [data1, data2] = await Promise.all([
+        const [data1, data2, data3] = await Promise.all([
+        
           Helper.masterbusInfo(),
+          Helper.masterbusInfoHorariosLunes(),
           Helper.masterbusInfoDomingo(),
         ]);
+
+        if (data2.length > 0) {
+          data2[0].horarios.sort();  // Ordenar horarios de lunes a viernes
+        }
+
+        if (data3.length > 0) {
+          data3[0].horarios.sort();  // Ordenar horarios de domingos y feriados
+        }
+
         setMasterbusData(data1.length > 0 ? data1[0] : null);
-        setMasterbusDataDomingo(data2.length > 0 ? data2[0] : null);
+        setMasterbusDataLunes(data2.length > 0 ? data2[0] : null);
+        setMasterbusDataDomingo(data3.length > 0 ? data3[0] : null);
       } catch (err) {
         console.error('Error fetching data:', err);
         setError('Error al cargar la información');
@@ -85,7 +98,7 @@ function MasterbusAG() {
                 </div>
 
                 <div className="container-options-lun-ver w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
-                  {masterbusData.horarios?.map((hora, index) => (
+                  {masterbusDataLunes?.horarios?.map((hora, index) => (
                     <button
                       key={index}
                       type="button"

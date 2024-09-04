@@ -36,6 +36,16 @@ const rutabusInfo = async () => {
     }
 }
 
+
+const rutabusInfoHorariosLunes = async () => {
+    try {
+        const response = await apiHorarios.get("/bus/3/1");
+        return response.data;
+    } catch (err) {
+        return [];
+    }
+}
+
 const rutabusInfoHorariosDomingo = async () => {
     try {
         const response = await apiHorarios.get("/bus/3/7");
@@ -58,6 +68,15 @@ const masterbusInfo = async () => {
     }
 }
 
+const masterbusInfoHorariosLunes = async () => {
+    try {
+        const response = await apiHorarios.get("/bus/4/1");
+        return response.data;
+    } catch (err) {
+        return [];
+    }
+}
+
 const masterbusInfoDomingo = async () => {
     try {
         const response = await apiHorarios.get("/bus/4/7");
@@ -67,6 +86,8 @@ const masterbusInfoDomingo = async () => {
     }
 }
 
+
+
 const ricarditoDugganInfo = async () => {
     try {
         const response = await api.get("/getBusInfoById/5")
@@ -74,6 +95,24 @@ const ricarditoDugganInfo = async () => {
     }
     catch (err) {
         console.log(err + " error");
+        return [];
+    }
+}
+
+const ricarditoDugganInfoHorariosLunes = async () => {
+    try {
+        const response = await apiHorarios.get("/bus/5/1");
+        return response.data;
+    } catch (err) {
+        return [];
+    }
+}
+
+const ricarditoDugganInfoSabado = async () => {
+    try {
+        const response = await apiHorarios.get("/bus/5/6");
+        return response.data;
+    } catch (err) {
         return [];
     }
 }
@@ -99,6 +138,15 @@ const ricarditoVillaLiaInfo = async () => {
     }
 }
 
+const ricarditoVillaLiaInfoHorariosLunes = async () => {
+    try {
+        const response = await apiHorarios.get("/bus/6/1");
+        return response.data;
+    } catch (err) {
+        return [];
+    }
+}
+
 const ricarditoVillaLiaInfoDomingo = async () => {
     try {
         const response = await apiHorarios.get("/bus/6/7");
@@ -120,7 +168,13 @@ const methods = {
     rutabusInfoHorariosDomingo,
     masterbusInfoDomingo,
     ricarditoDugganInfoDomingo,
-    ricarditoVillaLiaInfoDomingo
+    ricarditoVillaLiaInfoDomingo,
+    rutabusInfoHorariosLunes,
+    masterbusInfoHorariosLunes,
+    ricarditoDugganInfoHorariosLunes,
+    ricarditoVillaLiaInfoHorariosLunes,
+    ricarditoDugganInfoSabado
+    
 }
 
 export default methods;

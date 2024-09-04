@@ -15,19 +15,37 @@ interface RicarditoAdData {
 
 function RicarditoAD() {
   const [ricarditoAdData, setRicarditoAdData] = useState<RicarditoAdData | null>(null);
+  const [ricarditoAdDataLunes, setRicarditoAdDataLunes] = useState<RicarditoAdData | null>(null);
   const [ricarditoAdDataDomingo, setRicarditoAdDataDomingo] = useState<RicarditoAdData | null>(null);
+  const [ricarditoAdDataSabado, setRicarditoAdDataSabado] = useState<RicarditoAdData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fecthData = async () => {
       try {
-        const [data1, data2] = await Promise.all([
+        const [data1, data2, data3, data4] = await Promise.all([
           Helper.ricarditoDugganInfo(),
+          Helper.ricarditoDugganInfoHorariosLunes(),
           Helper.ricarditoDugganInfoDomingo(),
+          Helper.ricarditoDugganInfoSabado(),
         ]);
+
+        if (data2.length > 0) {
+          data2[0].horarios.sort();  // Ordenar horarios de lunes a viernes
+        }
+
+        if (data3.length > 0) {
+          data3[0].horarios.sort();  // Ordenar horarios de domingos y feriados
+        }
+
+        if (data4.length > 0) {
+          data3[0].horarios.sort();  // Ordenar horarios de domingos y feriados
+        }
         setRicarditoAdData(data1.length > 0 ? data1[0] : null);
-        setRicarditoAdDataDomingo(data2.length > 0 ? data2[0] : null);
+        setRicarditoAdDataLunes(data2.length > 0 ? data2[0] : null);
+        setRicarditoAdDataDomingo(data3.length > 0 ? data3[0] : null);
+        setRicarditoAdDataSabado(data4.length > 0 ? data4[0] : null);
       } catch (err) {
         console.error('Error fetching data:', err);
         setError('Error al cargar la información');
@@ -84,7 +102,7 @@ function RicarditoAD() {
                 </div>
 
                 <div className="container-options-lun-vier w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
-                  {ricarditoAdData.horarios?.map((hora, index) => (
+                  {ricarditoAdDataLunes?.horarios?.map((hora, index) => (
                   <button
                   key={index}
                   type="button"
@@ -97,6 +115,7 @@ function RicarditoAD() {
               </div>
             </section>
 
+
             <section className="sabados">
               <div className="container-sab flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
                 <div className="container-title">
@@ -104,7 +123,7 @@ function RicarditoAD() {
                 </div>
 
                 <div className="container-options-sab w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
-                  {ricarditoAdData.horarios?.map((hora, index) => (
+                  {ricarditoAdDataSabado?.horarios?.map((hora, index) => (
                   <button
                   key={index}
                   type="button"
