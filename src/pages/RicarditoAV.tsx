@@ -31,11 +31,11 @@ function RicarditoAV() {
         ]);
 
         if (data2.length > 0) {
-          data2[0].horarios.sort();  // Ordenar horarios de lunes a viernes
+          data2[0].horarios.sort();  
         }
 
         if (data3.length > 0) {
-          data3[0].horarios.sort();  // Ordenar horarios de domingos y feriados
+          data3[0].horarios.sort();
         }
 
         setRicarditoAvData(data1.length > 0 ? data1[0] : null);
@@ -96,7 +96,7 @@ function RicarditoAV() {
                   <h2 className="font-semibold text-2xl">LUNES A SABADOS</h2>
                 </div>
 
-                <div className="container-options-lun-sab w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
+                <div className="container-options-lun-sab w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[90%]">
                   {ricarditoAvDataLunes?.horarios?.map((hora, index) => (
                       <button
                       key={index}
@@ -116,7 +116,7 @@ function RicarditoAV() {
                   <h2 className="font-semibold text-2xl">DOMINGOS Y FERIADOS</h2>
                 </div>
 
-                <div className="container-options-dom-fer w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
+                <div className="container-options-dom-fer w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[90%]">
                   {ricarditoAvDataDomingo?.horarios?.map((hora, index) => (
                       <button
                       key={index}

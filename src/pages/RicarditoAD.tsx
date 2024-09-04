@@ -122,7 +122,7 @@ function RicarditoAD() {
                   <h2 className="font-semibold text-2xl">SABADOS</h2>
                 </div>
 
-                <div className="container-options-sab w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
+                <div className="container-options-sab  w-[100%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[100%]">
                   {ricarditoAdDataSabado?.horarios?.map((hora, index) => (
                   <button
                   key={index}
@@ -142,7 +142,7 @@ function RicarditoAD() {
                   <h2 className="font-semibold text-2xl">DOMINGOS Y FERIADOS</h2>
                 </div>
 
-                <div className="container-options-dom-fer w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
+                <div className="container-options-dom-fer w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[90%]">
                   {ricarditoAdDataDomingo?.horarios?.map((hora, index) => (
                   <button
                   key={index}

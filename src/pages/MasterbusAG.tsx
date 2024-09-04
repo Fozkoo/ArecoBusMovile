@@ -97,7 +97,7 @@ function MasterbusAG() {
                   <h2 className="font-semibold text-2xl">LUNES A SÁBADOS</h2>
                 </div>
 
-                <div className="container-options-lun-ver w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
+                <div className="container-options-lun-ver w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[90%]">
                   {masterbusDataLunes?.horarios?.map((hora, index) => (
                     <button
                       key={index}
@@ -117,7 +117,7 @@ function MasterbusAG() {
                   <h2 className="font-semibold text-2xl">DOMINGOS Y FERIADOS</h2>
                 </div>
 
-                <div className="container-options-sab-dom-fer w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[80%]">
+                <div className="container-options-sab-dom-fer w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[90%]">
                   {masterbusDataDomingo?.horarios?.map((hora, index) => (
                     <button
                       key={index}
