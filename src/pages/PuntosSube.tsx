@@ -30,13 +30,13 @@ function PuntosSube() {
               <Header/>
             </div>
 
-            <div className="container-page pt-[65px] flex items-center mt-7 p-5 flex-col h-full">
+            <div className="container-page bg-violet-400 pt-[65px] flex items-center mt-7 p-7 flex-col h-[100%]">
               <div className="container-title-punto-sube flex justify-center items-center flex-col w-full">
                 <h1 className="text-2xl font-bold text-black">Puntos SUBE </h1>
                 <p className="text-base text-black font-semibold">Encontrá tu punto SUBE más cercano </p>
               </div>
 
-              <div className="container-map flex rounded-xl shadow-2xl overflow-hidden items-center justify-center w-[90%] h-[500px] mt-12 bg-blue-200">
+              <div className="container-map  flex rounded-xl shadow-2xl overflow-hidden items-center justify-center w-[90%] h-[500px] mt-12 bg-blue-200">
                 <MapView/>
               </div>
 
