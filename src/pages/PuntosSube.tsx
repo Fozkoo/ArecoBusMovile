@@ -36,7 +36,7 @@ function PuntosSube() {
                 <p className="text-base text-black font-semibold">Encontrá tu punto SUBE más cercano </p>
               </div>
 
-              <div className="container-map  flex rounded-xl shadow-2xl overflow-hidden items-center justify-center w-[90%] h-[500px] mt-12 bg-blue-200">
+              <div className="container-map  flex rounded-xl shadow-2xl overflow-hidden items-center justify-center w-[90%] h-[500px] mt-12">
                 <MapView/>
               </div>
 
