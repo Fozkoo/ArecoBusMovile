@@ -30,7 +30,7 @@ function PuntosSube() {
               <Header/>
             </div>
 
-            <div className="container-page bg-violet-400 pt-[65px] flex items-center mt-7 p-7 flex-col h-[100%]">
+            <div className="container-page  pt-[65px] flex items-center mt-7 p-7 flex-col h-[100%]">
               <div className="container-title-punto-sube flex justify-center items-center flex-col w-full">
                 <h1 className="text-2xl font-bold text-black">Puntos SUBE </h1>
                 <p className="text-base text-black font-semibold">Encontrá tu punto SUBE más cercano </p>
