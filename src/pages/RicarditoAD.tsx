@@ -20,7 +20,7 @@ function RicarditoAD() {
   const [ricarditoAdDataSabado, setRicarditoAdDataSabado] = useState<RicarditoAdData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
+  // 6 - 4242
   useEffect(() => {
     const fecthData = async () => {
       try {
@@ -40,7 +40,7 @@ function RicarditoAD() {
         }
 
         if (data4.length > 0) {
-          data3[0].horarios.sort();  // Ordenar horarios de domingos y feriados
+          data4[0].horarios.sort();  // Ordenar horarios de domingos y feriados
         }
         setRicarditoAdData(data1.length > 0 ? data1[0] : null);
         setRicarditoAdDataLunes(data2.length > 0 ? data2[0] : null);
@@ -72,7 +72,7 @@ function RicarditoAD() {
   return (
     <> 
     <IonApp>
-      <IonContent>
+      <IonContent> 
       <div className="container-header fixed top-0 left-0 w-full bg-white z-50 shadow-sm">
           <Header/>
         </div>
