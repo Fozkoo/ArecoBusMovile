@@ -160,38 +160,6 @@ function RicarditoAD() {
 
           </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
-
           <section className="punto-partida ">
           <div className="container-punto-de-partida flex justify-center  h-[700px]">
 
