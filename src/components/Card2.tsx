@@ -9,13 +9,15 @@ import {
 } from "@ionic/react";
 import { Link } from "react-router-dom";
 import helper from "../service/Helper";
-import { getNextSchedule } from "../service/FunctionsHelper";
+import helperExport from "..//service/FunctionsHelper";
 import { notificationsCircleOutline } from "ionicons/icons";
 import { IonButton } from "@ionic/react";
 import { addCircleOutline } from "ionicons/icons";
 import Loader from "..//components/LoaderCard";
 import TestPage from "../pages/TestPage";
 import moment from "moment";
+
+
 interface Bus {
   id: number;
   path: string;
@@ -31,28 +33,19 @@ function Card2() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const horaActual = moment().format("HH:mm:ss");
-  const diaHoy = moment().isoWeekday();
-  console.log(horaActual);
-  const proximoColectivo = (horarios: any[]) => {
-    let proximo=horarios.find(horario => moment(horario, 'HH:mm:ss').isAfter(moment(horaActual, 'HH:mm:ss')));
-    if (proximo) {
-      
-      const proximoHorario = moment(proximo, 'HH:mm:ss').format('HH:mm');
-      return proximoHorario
-    } else {
-      return "No hay más viajes por hoy";
-    }
-    
-  
-  };
-
   useEffect(() => {
     const fetchData = async () => {
-
+      let data;
+      
       try {
-        let dia=diaHoy!==7?1:7
-        const data = await helper.getBusInfoConIdDia(dia);
+        if (helperExport.diaHoy >= 1 && helperExport.diaHoy <= 5) {  
+          data = await helper.infoBusesIdLunes();
+        } else if (helperExport.diaHoy === 6) { 
+          data = await helper.infoBusesIdSabados();
+        } else if (helperExport.diaHoy === 7) {  
+          data = await helper.infoBusesIdDomingo();
+        }
+  
         console.log(data);
         setData(data);
       } catch (err) {
@@ -61,15 +54,15 @@ function Card2() {
         setLoading(false);
       }
     };
-
+  
     fetchData();
-
+  
     const intervalId = setInterval(() => {
       fetchData();
-    }, 60000);
-
+    }, 60000); 
+  
     return () => clearInterval(intervalId);
-  }, []);
+  }, [helperExport.diaHoy]);  
 
   if (loading) {
     return <Loader />;
@@ -128,7 +121,7 @@ function Card2() {
             <div className="flex gap-1 items-center">
               <p>Próximo horario:</p>
               <p className="text-black text-center !font-semibold">
-                {proximoColectivo(bus.horarios)}
+                {helperExport.proximoColectivo(bus.horarios)}
               </p>
             </div>
             <Link

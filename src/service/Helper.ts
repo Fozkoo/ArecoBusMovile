@@ -23,6 +23,45 @@ const getBusInfoConIdDia=async(iddia:any)=>{
         return [];
     }
 }
+
+
+const infoBusesIdLunes = async () => {
+    try {
+        const response = await api.get("/getBusInfoConIdDia/1");
+        return response.data;
+    }
+    catch (err){
+        console.log(err + " error");
+        return [];
+    }
+}
+
+
+const infoBusesIdSabados= async () => {
+    try {
+        const response = await api.get("/getBusInfoConIdDia/6");
+        return response.data;
+    }
+    catch (err){
+        console.log(err + " error");
+        return [];
+    }
+}
+
+
+const infoBusesIdDomingo = async () => {
+    try {
+        const response = await api.get("/getBusInfoConIdDia/7");
+        return response.data;
+    }
+    catch (err){
+        console.log(err + " error");
+        return [];
+    }
+}
+
+
+
 const realData = async () => {
     try {
         const response = await api.get("/getAllBusesInfo")
@@ -193,8 +232,10 @@ const methods = {
     ricarditoVillaLiaInfoHorariosLunes,
     ricarditoDugganInfoSabado,
     rutabusInfoHorariosXDia,
-    getBusInfoConIdDia
-    
+    getBusInfoConIdDia,
+    infoBusesIdLunes,
+    infoBusesIdSabados,
+    infoBusesIdDomingo
 }
 
 export default methods;
