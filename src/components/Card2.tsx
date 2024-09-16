@@ -32,6 +32,7 @@ function Card2() {
   const [error, setError] = useState<string | null>(null);
 
   const horaActual = moment().format("HH:mm:ss");
+  const diaHoy = moment().isoWeekday();
   console.log(horaActual);
   const proximoColectivo = (horarios: any[]) => {
     let proximo=horarios.find(horario => moment(horario, 'HH:mm:ss').isAfter(moment(horaActual, 'HH:mm:ss')));
@@ -48,8 +49,10 @@ function Card2() {
 
   useEffect(() => {
     const fetchData = async () => {
+
       try {
-        const data = await helper.realData();
+        let dia=diaHoy!==7?1:7
+        const data = await helper.getBusInfoConIdDia(dia);
         console.log(data);
         setData(data);
       } catch (err) {

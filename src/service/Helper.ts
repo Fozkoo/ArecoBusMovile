@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = 'https://api.arecobus.cfl401areco.edu.ar/api/buses';
+const URL = 'http://localhost:8080/api/buses';//https://api.arecobus.cfl401areco.edu.ar
 const URLHORARIOS = 'https://api.arecobus.cfl401areco.edu.ar/api/horario'
 // http://localhost:8080/api/buses  o https://api.arecobus.cfl401areco.edu.ar/api/buses
 
@@ -13,7 +13,16 @@ const apiHorarios = axios.create({
 });
 
 
-
+const getBusInfoConIdDia=async(iddia:any)=>{
+    try{
+        const response = await api.get("/getBusInfoConIdDia/"+iddia);
+        return response.data;
+    }
+    catch (err) {
+        console.log(err + " error");
+        return [];
+    }
+}
 const realData = async () => {
     try {
         const response = await api.get("/getAllBusesInfo")
@@ -49,6 +58,15 @@ const rutabusInfoHorariosLunes = async () => {
 const rutabusInfoHorariosDomingo = async () => {
     try {
         const response = await apiHorarios.get("/bus/3/7");
+        return response.data;
+    } catch (err) {
+        return [];
+    }
+}
+
+const rutabusInfoHorariosXDia= async (dia:any) => {
+    try {
+        const response = await apiHorarios.get("/bus/3/"+1);
         return response.data;
     } catch (err) {
         return [];
@@ -173,7 +191,9 @@ const methods = {
     masterbusInfoHorariosLunes,
     ricarditoDugganInfoHorariosLunes,
     ricarditoVillaLiaInfoHorariosLunes,
-    ricarditoDugganInfoSabado
+    ricarditoDugganInfoSabado,
+    rutabusInfoHorariosXDia,
+    getBusInfoConIdDia
     
 }
 
