@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  IonCard,
-  IonCardContent,
-  IonCardHeader,
-  IonCardSubtitle,
-  IonCardTitle,
-  IonIcon,
-} from "@ionic/react";
+import {IonCard,IonCardContent,IonCardHeader,IonCardSubtitle,IonCardTitle,IonIcon,} from "@ionic/react";
 import { Link } from "react-router-dom";
 import helper from "../service/Helper";
 import helperExport from "..//service/FunctionsHelper";
