@@ -28,7 +28,7 @@ function PuntosSube() {
               <Header />
             </div>
 
-            <div className="container-page  pt-[65px] flex items-center  mt-7 p-7 flex-col min-h-[100vh]">
+            <div className="container-page bg-red-800  pt-[65px] flex items-center  mt-7 p-7 flex-col min-h-[100vh]">
               <div className="container-title-punto-sube flex justify-center items-center text-center flex-col w-full">
                 <h1 className="text-2xl font-bold text-black">Puntos SUBE </h1>
                 <p className="text-base text-black font-semibold">

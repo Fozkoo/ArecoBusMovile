@@ -8,7 +8,7 @@ import { IonButton } from "@ionic/react";
 import { addCircleOutline } from "ionicons/icons";
 import Loader from "..//components/LoaderCard";
 import TestPage from "../pages/TestPage";
-import moment from "moment";
+
 
 
 interface Bus {
