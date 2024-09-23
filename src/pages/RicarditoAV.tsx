@@ -17,17 +17,19 @@ function RicarditoAV() {
   const [ricarditoAvData, setRicarditoAvData] = useState<RicarditoAvData | null>(null);
   const [ricarditoAvDataLunes, setRicarditoAvDataLunes] = useState<RicarditoAvData | null>(null);
   const [ricarditoAvDataDomingo , setRicarditoAvDataDomingo] = useState<RicarditoAvData | null>(null);
+  const [ricarditoAvDataSabados , setRicarditoAvDataSabados] = useState<RicarditoAvData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [data1, data2, data3] = await Promise.all([
+        const [data1, data2, data3, data4] = await Promise.all([
         
           Helper.ricarditoVillaLiaInfo(),
           Helper.ricarditoVillaLiaInfoHorariosLunes(),
           Helper.ricarditoVillaLiaInfoDomingo(),
+          Helper.ricarditoVillaLiaInfoSabados(),
         ]);
 
         if (data2.length > 0) {
@@ -38,9 +40,14 @@ function RicarditoAV() {
           data3[0].horarios.sort();
         }
 
+        if (data4.length > 0) {
+          data4[0].horarios.sort();
+        }
+
         setRicarditoAvData(data1.length > 0 ? data1[0] : null);
         setRicarditoAvDataLunes(data2.length > 0 ? data2[0] : null);
         setRicarditoAvDataDomingo(data3.length > 0 ? data3[0] : null);
+        setRicarditoAvDataSabados(data4.length > 0 ? data4[0] : null);
       } catch (err) {
         console.error('Error fetching data:', err);
         setError('Error al cargar la información');
@@ -91,12 +98,12 @@ function RicarditoAV() {
             <h2 className="font-semibold text-4xl mt-5">HORARIOS</h2>
 
             <section className="lun-vier">
-              <div className="container-lun-sab flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
+              <div className="container-lun-vier flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
                 <div className="container-title">
-                  <h2 className="font-semibold text-2xl">LUNES A SABADOS</h2>
+                  <h2 className="font-semibold text-2xl">LUNES A VIERNES</h2>
                 </div>
 
-                <div className="container-options-lun-sab w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[90%]">
+                <div className="container-options-lun-vier w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[90%]">
                   {ricarditoAvDataLunes?.horarios?.map((hora, index) => (
                       <button
                       key={index}
@@ -110,8 +117,34 @@ function RicarditoAV() {
               </div>
             </section>
 
-            <section className="sab-dom-fer">
-              <div className="container-sab-dom-fer flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
+            <section className="sab">
+              <div className="container-sab flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
+                <div className="container-title">
+                  <h2 className="font-semibold text-2xl">SABADOS</h2>
+                </div>
+
+                <div className="container-options-sab w-[60%] flex justify-center flex-wrap gap-5 mt-5 max-lg:w-[90%]">
+                  {ricarditoAvDataSabados?.horarios?.map((hora, index) => (
+                      <button
+                      key={index}
+                      type="button"
+                      className="focus:outline-none text-white text-sm py-2.5 px-5 border-b-4 border-blue-600 rounded-md bg-blue-500 hover:bg-blue-400"
+                    >
+                      {hora.slice(0, 5)}  
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+
+
+
+
+
+
+            <section className="dom-fer">
+              <div className="container-dom-fer flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full">
                 <div className="container-title">
                   <h2 className="font-semibold text-2xl">DOMINGOS Y FERIADOS</h2>
                 </div>
@@ -133,6 +166,20 @@ function RicarditoAV() {
 
 
           </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
           <section className="punto-partida ">

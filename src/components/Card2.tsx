@@ -28,9 +28,8 @@ function Card2() {
 
   useEffect(() => {
     const fetchData = async () => {
-      let data;
-      
       try {
+        let data;
         if (helperExport.diaHoy >= 1 && helperExport.diaHoy <= 5) {  
           data = await helper.infoBusesIdLunes();
         } else if (helperExport.diaHoy === 6) { 
@@ -38,8 +37,7 @@ function Card2() {
         } else if (helperExport.diaHoy === 7) {  
           data = await helper.infoBusesIdDomingo();
         }
-  
-        console.log(data);
+    
         setData(data);
       } catch (err) {
         setError("Error al cargar los datos.");
@@ -48,14 +46,27 @@ function Card2() {
       }
     };
   
-    fetchData();
+    fetchData(); 
   
-    const intervalId = setInterval(() => {
-      fetchData();
-    }, 60000); 
+    
+    const intervalId = setInterval(fetchData, 60000); 
   
-    return () => clearInterval(intervalId);
-  }, [helperExport.diaHoy]);  
+    
+    const updateNextBusInterval = setInterval(() => {
+      setData((prevData) =>
+        prevData.map((bus) => ({
+          ...bus,
+          proximoHorario: helperExport.proximoColectivo(bus.horarios)
+        }))
+      );
+    }, 10000); 
+  
+    return () => {
+      clearInterval(intervalId);
+      clearInterval(updateNextBusInterval);
+    };
+  }, [helperExport.diaHoy]);
+  
 
   if (loading) {
     return <Loader />;

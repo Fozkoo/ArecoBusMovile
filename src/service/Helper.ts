@@ -213,6 +213,15 @@ const ricarditoVillaLiaInfoDomingo = async () => {
     }
 }
 
+const ricarditoVillaLiaInfoSabados = async () => {
+    try {
+        const response = await apiHorarios.get("/bus/6/6");
+        return response.data;
+    } catch (err) {
+        return [];
+    }
+}
+
 
 
 
@@ -235,7 +244,8 @@ const methods = {
     getBusInfoConIdDia,
     infoBusesIdLunes,
     infoBusesIdSabados,
-    infoBusesIdDomingo
+    infoBusesIdDomingo,
+    ricarditoVillaLiaInfoSabados
 }
 
 export default methods;
