@@ -3,17 +3,14 @@ import LogoSube from '../images/pin_punto_sube.svg';
 
 const Markers = [
 
-    {
-        geocode: [-34.245703, -59.472414],
-    },
-    {
-        geocode: [-34.245890, -59.473668],
-    },
      {
         geocode: [-34.254199, -59.480504],
      },
      {
         geocode: [-34.255680, -59.466153],
+     },
+     {
+        geocode: [-34.246493193558955, -59.47333860012311],
      }
 
 ]
@@ -29,3 +26,5 @@ const customIcon = new L.Icon({
 export { Markers, customIcon };
 
 
+
+// -34.246493193558955, -59.47333860012311
