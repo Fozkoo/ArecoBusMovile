@@ -1,11 +1,12 @@
   import React, { useEffect, useState } from 'react';
   import Helper from '../service/Helper';
-  import { IonContent } from '@ionic/react';
+  import { IonContent, IonHeader } from '@ionic/react';
   import Header from '../components/Header';
   import TestPage from './TestPage';
   import Loader from '../components/Loader'; // Asegúrate de importar tu componente Loader
   import ContainerTitleAndInfo from '..//components/ContainterTittleAndInfo'
   import ContainerHorarios from '..//components/ContainerHorarios'
+  import PuntoDePartida from '..//components/PuntoDePartida'
 
 
   interface RutabusData {
@@ -65,12 +66,28 @@
       );
     }
 
+
+    // empece a mover todas las boludeces a componentes para poder manejarlos de menjor manera
+    // falta mucho por arreglar pero la idea va encaminada, Cree tres componentes que son los uqe principalmente
+    // se van a repetir en casi todas las pages, PuntoDePartida, ContainterTittleAndInfo
+    // (tengo que arreglarle el nombre) y ContainerHorarios.
+    //el manejo de los datos viaja a traves de props la cual me falta incuir el ORIGEN y
+    // el url del iframe (tengo que a;adir a la bdd eso),
+    // Impremente el IonHeader para probar, supuestamente tiene mejor optimizacion y 
+    // la idea es ir mentiendo componentes directamente de ionic para mejorar rendimientos.
+    // tengo que gestionar el tema de verificar si el usuario tiene internet apenas abre la pagina
+    // en el home digamos, si no tiene, tirarlo directamente al TestPage 
+    //
+
     return (
       <>
+        
+
+        <IonHeader>
+          <Header/>
+        </IonHeader>
+
         <IonContent className='flex justify-center items-center'>
-          <div className="container-header fixed top-0 left-0 w-full bg-white z-50 shadow-sm">
-            <Header/>
-          </div>
 
         <div className="container-global flex flex-col ">  {/*aca basicamente empece a pasar todo el codigo a limpio creando componente y pasandole la data por props asi es mas sencillo de manipular */}
 
@@ -87,9 +104,10 @@
             <ContainerHorarios title="LUNES A VIERNES" horarios={rutabusData.horarios} />
             {rutabusDataDomingo && <ContainerHorarios title="SÁBADOS, DOMINGOS Y FERIADOS" horarios={rutabusDataDomingo.horarios} />}
             
-
+            {rutabusData && <PuntoDePartida puntoPartida={rutabusData.puntoPartida}/>}
             
-          </div>
+            
+        </div>
 
             
 
