@@ -11,7 +11,7 @@ const PuntoPartida: React.FC<PuntoPartidaProps> = ({ puntoPartida }) => {  // ac
       <div className="title-punto-partida flex flex-col w-[100%] p-11">
         <div className="container-title-punto-partida flex flex-col justify-center items-center">
           <h2 className="font-semibold text-2xl">PUNTO DE PARTIDA</h2>
-          <h2 className="font-semibold text-xl text-gray-600">{puntoPartida}</h2>
+          <h2 className="font-semibold text-xl text-gray-600"></h2>
         </div>
         <div className="container-iframe flex justify-center mt-5 h-[100%] rounded-xl overflow-hidden">
           <iframe
