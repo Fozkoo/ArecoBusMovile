@@ -7,12 +7,9 @@ interface ContainerHorariosProps {
 
 const ContainerHorarios: React.FC<ContainerHorariosProps> = ({ title, horarios }) => {
   return (
-    <div className="container-horarios flex-col items-center p-5">
+    <div className="container-horarios  flex-col items-center p-4">
       <section>
-        <div className="container-horarios-section flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full max-xl:mt-4">
-
-          
-
+        <div className="container-horarios-section flex flex-col flex-wrap items-center justify-center mt-8 mb-8 w-full max-xl:mt-2">
           <div className="container-title text-center">
             <h2 className="font-semibold text-center text-2xl">{title}</h2>
           </div>
