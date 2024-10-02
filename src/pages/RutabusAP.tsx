@@ -34,11 +34,11 @@
           ]);
 
           if (data2.length > 0) {
-            data2[0].horarios.sort();  // Ordenar horarios de lunes a viernes
+            data2[0].horarios.sort();  
           }
 
           if (data3.length > 0) {
-            data3[0].horarios.sort();  // Ordenar horarios de domingos y feriados
+            data3[0].horarios.sort(); 
           }
 
           setRutabusInformacion(data1.length > 0 ? data1[0] : null);
@@ -89,7 +89,8 @@
 
         <IonContent className='flex justify-center items-center'>
 
-        <div className="container-global flex flex-col ">  {/*aca basicamente empece a pasar todo el codigo a limpio creando componente y pasandole la data por props asi es mas sencillo de manipular */}
+
+        <div className="container-global flex flex-col">  {/*aca basicamente empece a pasar todo el codigo a limpio creando componente y pasandole la data por props asi es mas sencillo de manipular */}
 
             {rutabusInformacion && (
 
@@ -101,10 +102,15 @@
               />
             )}
 
+          <div className="container-horarios flex flex-col pl-[10%] pr-[10%] max-xl:pl-[0%] max-xl:pr-[0%]">
+
+          <h2 className='font-semibold text-center text-3xl'>HORARIOS</h2>
             <ContainerHorarios title="LUNES A VIERNES" horarios={rutabusData.horarios} />
-            {rutabusDataDomingo && <ContainerHorarios title="SÁBADOS, DOMINGOS Y FERIADOS" horarios={rutabusDataDomingo.horarios} />}
-            
-            {rutabusData && <PuntoDePartida puntoPartida={rutabusData.puntoPartida}/>}
+              {rutabusDataDomingo && <ContainerHorarios title="SÁBADOS, DOMINGOS Y FERIADOS" horarios={rutabusDataDomingo.horarios} />}
+              
+              {rutabusData && <PuntoDePartida puntoPartida={rutabusData.puntoPartida}/>}
+          </div>
+
             
             
         </div>

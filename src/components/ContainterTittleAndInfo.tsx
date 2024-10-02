@@ -8,8 +8,8 @@ interface ContainerTitleAndInfoProps {
 
 const ContainerTitleAndInfo: React.FC<ContainerTitleAndInfoProps> = ({ image, empresaNombre, destino }) => {
   return (
-    <div className="container-title-and-info mt-[60px] bg-violet-500 overflow-hidden flex flex-col justify-center items-center w-full h-[180px]">
-      <img className="w-[100%] h-[600px] brightness-50" src={image} alt="Imagen de la empresa" />
+    <div className="container-title-and-info mt-[60px] bg-violet-500 overflow-hidden flex flex-col justify-center items-center w-full h-[180px] max-xl:h-[135px] max-xl:mt-[65px]">
+      <img className="w-[100%] h-[600px] brightness-50 max-xl:h-[200px]" src={image} alt="Imagen de la empresa" />
       <section className="absolute">
         <div className="container-title flex justify-center w-full">
           <h1 className="font-bold text-6xl max-lg:text-4xl text-white">{empresaNombre}</h1>
