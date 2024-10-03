@@ -70,14 +70,11 @@ function MasterbusAG() {
 
   return (
     <>
-        
-
     <IonHeader>
       <Header/>
     </IonHeader>
 
     <IonContent className='flex justify-center items-center'>
-
 
     <div className="container-global flex flex-col ">  {/*aca basicamente empece a pasar todo el codigo a limpio creando componente y pasandole la data por props asi es mas sencillo de manipular */}
 
@@ -104,10 +101,6 @@ function MasterbusAG() {
         
         
     </div>
-
-        
-
-
     </IonContent>
   </>
   );

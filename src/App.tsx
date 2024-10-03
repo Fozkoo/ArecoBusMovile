@@ -31,18 +31,18 @@ const App: React.FC = () => (
       </IonRouterOutlet>
 
       <IonTabBar
-  slot="bottom"
-  className="h-[65px] shadow-[0_-4px_6px_-3px_rgba(0,0,0,0.2)] desktop-hidden"
->
-  <IonTabButton tab="home" href="/home">
-    <IonIcon icon={home} style={{ color: '#6464f2' }} />
-    <IonLabel style={{ color: '#6464f2' }} className="text-[14px] font-semibold">Inicio</IonLabel>
-  </IonTabButton>
-  <IonTabButton tab="PuntosSube" href="/PuntosSube">
-    <IonIcon icon={bus} style={{ color: '#6464f2' }} />
-    <IonLabel style={{ color: '#6464f2' }} className="text-[14px] font-semibold">Puntos SUBE</IonLabel>
-  </IonTabButton>
-</IonTabBar>
+        slot="bottom"
+        className="h-[65px] shadow-[0_-4px_6px_-3px_rgba(0,0,0,0.2)] desktop-hidden"
+      >
+        <IonTabButton tab="home" href="/home">
+          <IonIcon icon={home} style={{ color: '#6464f2' }} />
+          <IonLabel style={{ color: '#6464f2' }} className="text-[14px] font-semibold">Inicio</IonLabel>
+        </IonTabButton>
+        <IonTabButton tab="PuntosSube" href="/PuntosSube">
+          <IonIcon icon={bus} style={{ color: '#6464f2' }} />
+          <IonLabel style={{ color: '#6464f2' }} className="text-[14px] font-semibold">Puntos SUBE</IonLabel>
+        </IonTabButton>
+      </IonTabBar>
 
 
 
