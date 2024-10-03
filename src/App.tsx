@@ -9,6 +9,7 @@ import RicarditoAD from './pages/RicarditoAD';
 import RicarditoAV from './pages/RicarditoAV';
 import '@fontsource-variable/onest';
 import PuntosSube from './pages/PuntosSube';
+import PageTesting from './pages/PageTesting';
 
 
 import TestPage from './pages/TestPage';
@@ -27,6 +28,7 @@ const App: React.FC = () => (
         <Route exact path="/masterbusAG" component={MasterbusAG} />
         <Route exact path="/PuntosSube" component={PuntosSube} />
         <Route exact path="/TestPage" component={Home} />
+        <Route exact path="/PageTesting" component={PageTesting} />
         <Redirect exact path="/" to="/home" />
       </IonRouterOutlet>
 

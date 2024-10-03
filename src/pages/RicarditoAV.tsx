@@ -19,8 +19,8 @@ interface RicarditoAvData {
 function RicarditoAV() {
   const [ricarditoAvData, setRicarditoAvData] = useState<RicarditoAvData | null>(null);
   const [ricarditoAvDataLunes, setRicarditoAvDataLunes] = useState<RicarditoAvData | null>(null);
-  const [ricarditoAvDataDomingo , setRicarditoAvDataDomingo] = useState<RicarditoAvData | null>(null);
-  const [ricarditoAvDataSabados , setRicarditoAvDataSabados] = useState<RicarditoAvData | null>(null);
+  const [ricarditoAvDataDomingo, setRicarditoAvDataDomingo] = useState<RicarditoAvData | null>(null);
+  const [ricarditoAvDataSabados, setRicarditoAvDataSabados] = useState<RicarditoAvData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -28,7 +28,7 @@ function RicarditoAV() {
     const fetchData = async () => {
       try {
         const [data1, data2, data3, data4] = await Promise.all([
-        
+
           Helper.ricarditoVillaLiaInfo(),
           Helper.ricarditoVillaLiaInfoHorariosLunes(),
           Helper.ricarditoVillaLiaInfoDomingo(),
@@ -36,7 +36,7 @@ function RicarditoAV() {
         ]);
 
         if (data2.length > 0) {
-          data2[0].horarios.sort();  
+          data2[0].horarios.sort();
         }
 
         if (data3.length > 0) {
@@ -59,7 +59,7 @@ function RicarditoAV() {
       }
     };
     fetchData();
-  },[])
+  }, [])
 
   if (loading) {
     return <Loader />;
@@ -75,12 +75,12 @@ function RicarditoAV() {
 
   return (
     <>
-    <IonHeader>
-      <Header/>
-    </IonHeader>
+      <IonHeader>
+        <Header />
+      </IonHeader>
 
-    <IonContent className='flex justify-center items-center'>
-      <div className="container-global flex flex-col ">
+      <IonContent className='flex justify-center items-center'>
+        <div className="container-global flex flex-col ">
           {ricarditoAvData && (
             <ContainerTitleAndInfo
               image={ricarditoAvData.image}
@@ -88,17 +88,17 @@ function RicarditoAV() {
               destino={ricarditoAvData.destino}
             />
           )}
-        <h2 className='font-semibold mt-8 text-center text-3xl '>HORARIOS</h2>
+          <h2 className='font-semibold mt-8 text-center text-3xl '>HORARIOS</h2>
 
-        <div className="container-horarios  flex flex-col pl-[10%] pr-[10%] max-xl:pl-[0%] max-xl:pr-[0%]">
-          <ContainerHorarios title="LUNES A VIERNES" horarios={ricarditoAvData.horarios} />
+          <div className="container-horarios  flex flex-col pl-[10%] pr-[10%] max-xl:pl-[0%] max-xl:pr-[0%]">
+            <ContainerHorarios title="LUNES A VIERNES" horarios={ricarditoAvData.horarios} />
             {ricarditoAvDataDomingo && <ContainerHorarios title="SÁBADOS, DOMINGOS Y FERIADOS" horarios={ricarditoAvDataDomingo.horarios} />}
-            
-            {ricarditoAvData && <PuntoDePartida puntoPartida={ricarditoAvData.puntoPartida}/>}
+
+            {ricarditoAvData && <PuntoDePartida puntoPartida={ricarditoAvData.puntoPartida} />}
+          </div>
         </div>
-      </div>
-    </IonContent>
-  </>
+      </IonContent>
+    </>
   );
 }
 
