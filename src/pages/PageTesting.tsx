@@ -39,7 +39,7 @@ function PageTesting() {
                 </div>
             </div>
 
-            <div className="horarios flex flex-col m-[10%] justify-center rounded-xl bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 h-[500px] focus:ring-gray-500 p-4 shadow-md">
+            <div className="horarios flex flex-col m-[3%] justify-center rounded-xl bg-white border border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 h-[500px] focus:ring-gray-500 p-4 shadow-md">
 
             </div>
         </>
