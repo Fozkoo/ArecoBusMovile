@@ -24,7 +24,7 @@ function PageTesting() {
 
             <IonContent>
                 <div className="container-page flex flex-col m-[3%]">
-                    <div className="bg-red-500 mt-[80px] bg-cover bg-center h-[177px] rounded-xl shadow-lg relative" style={{ backgroundImage: "url('https://i.ibb.co/NjKqjg2/masterbus-bus.jpg')" }}>
+                    <div className=" mt-[80px] bg-cover bg-center h-[177px] rounded-xl shadow-lg relative" style={{ backgroundImage: "url('http://www.rutabus.com.ar/images/hero-bg.jpeg')" }}>
                         <div className="absolute inset-0 rounded-xl bg-gray-700 bg-opacity-60 flex flex-col justify-center items-center p-4">
                             <h1 className="text-white text-4xl font-bold mb-2">Rutabus</h1>
                             <nav className="text-white">
@@ -35,23 +35,39 @@ function PageTesting() {
                         </div>
                     </div>
 
-                    <section className="horarios mt-10">
-                        <div className="container-title mx-5 rounded-lg p-1">
-                            <h2 className="font-bold text-center text-black text-2xl tracking-wide">
+                    <section className="horarios flex justify-center items-center flex-col  mt-6">
+                        <div className="container-title items-center justify-center text-center flex flex-wrap shadow-lg  bg-[#6464f2] rounded-lg p-2">
+                            <h2 className="font-bold  text-white text-xl tracking-wide ">
                                 ¡Conoce los horarios disponibles!
                             </h2>
                         </div>
 
-                        <div className="container-lun-vier bg-white  border-gray-200 mx-2 rounded-xl shadow-lg text-black text-center flex flex-col p-6 ">
-                            <h2 className="mt-2 text-2xl bg-[#6464f2] rounded-lg text-white font-semibold py-2">
+                        <div className="container-lun-vier mt-3   bg-white justify-center items-center   rounded-xl  text-black text-center flex flex-col ">
+                            <h2 className="mt-2 w-[70%]  text-2xl  rounded-lg text-black font-semibold py-2">
                                 Lunes a Viernes
                             </h2>
 
-                            <div className="container-buttons bg-gray-100 rounded-xl p-2 mt-4 gap-2 flex flex-wrap justify-center items-center shadow-inner">
+                            <div className="container-buttons shadow-lg  rounded-xl pt-5  mt-0  flex flex-wrap justify-center items-center ">
                                 {data.length > 0 && data[0].horarios.map((horario, index) => (
                                     <button
                                         key={index}
-                                        className="bg-[#6464f2] text-white font-semibold py-2 px-6 rounded-lg shadow-md transition-transform transform hover:scale-105 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 m-2"
+                                        className="bg-[#6464f2] m-2 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition-transform transform hover:scale-105  focus:outline-none focus:ring-2 "
+                                    >
+                                        {horario.slice(0, 5)}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="container-lun-vier mt-3   bg-white justify-center items-center    rounded-xl  text-black text-center flex flex-col ">
+                            <h2 className="mt-2 w-[70%]  text-2xl   rounded-lg text-black font-semibold py-2">
+                                Sabados, Domingos y Feriados
+                            </h2>
+
+                            <div className="container-buttons shadow-lg  rounded-xl pt-5  mt-0  flex flex-wrap justify-center items-center ">
+                                {data.length > 0 && data[0].horarios.map((horario, index) => (
+                                    <button
+                                        key={index}
+                                        className="bg-[#6464f2] m-2 text-white font-semibold py-2 px-6 rounded-lg shadow-md transition-transform transform hover:scale-105  focus:outline-none focus:ring-2 "
                                     >
                                         {horario.slice(0, 5)}
                                     </button>
