@@ -1,0 +1,26 @@
+{
+    "links" : [
+        {
+            "name": "rutabus",
+            "route": "areco-pilar",
+            "url": "/"
+        },
+        {
+            "name": "marterbus",
+            "route": "areco-giles",
+            "url": "/about"
+        },
+        {
+            "name": "ricardito",
+            "route": "areco-villalia",
+            "url": "/contact"
+        },
+        {
+            "name": "ricardito",
+            "route": "areco-duggan",
+            "url": "/contact"
+        }
+
+    ]
+
+}

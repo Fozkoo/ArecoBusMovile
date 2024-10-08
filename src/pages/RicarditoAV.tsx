@@ -12,6 +12,7 @@ interface RicarditoAvData {
   image: string;
   empresaNombre: string;
   destino: string;
+  origen: string;
   horarios: string[];
   puntoPartida: string;
 }
@@ -85,6 +86,7 @@ function RicarditoAV() {
             <ContainerTitleAndInfo
               image={ricarditoAvData.image}
               empresaNombre={ricarditoAvData.empresaNombre}
+              origen={ricarditoAvData.origen}
               destino={ricarditoAvData.destino}
             />
           )}

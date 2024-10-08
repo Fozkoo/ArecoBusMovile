@@ -12,6 +12,7 @@ interface RicarditoAdData {
   image: string;
   empresaNombre: string;
   destino: string;
+  origen: string;
   horarios: string[];
   puntoPartida: string;
 }
@@ -88,6 +89,7 @@ function RicarditoAD() {
           <ContainerTitleAndInfo
             image={ricarditoAdData.image}
             empresaNombre={ricarditoAdData.empresaNombre}
+            origen={ricarditoAdData.origen}
             destino={ricarditoAdData.destino}
           />
         )}

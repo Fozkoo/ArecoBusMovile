@@ -12,6 +12,7 @@ interface MasterbusData {
   image: string;
   empresaNombre: string;
   destino: string;
+  origen: string;
   horarios: string[];
   puntoPartida: string;
 }
@@ -79,27 +80,23 @@ function MasterbusAG() {
     <div className="container-global flex flex-col ">  {/*aca basicamente empece a pasar todo el codigo a limpio creando componente y pasandole la data por props asi es mas sencillo de manipular */}
 
         {masterbusData && (
-
-
           <ContainerTitleAndInfo
             image={masterbusData.image}
             empresaNombre={masterbusData.empresaNombre}
+            origen={masterbusData.origen}
             destino={masterbusData.destino}
           />
         )}
 
-      <h2 className='font-semibold mt-8 text-center text-3xl '>HORARIOS</h2>
+      <h2 className='font-semibold  mr-10 ml-10 rounded-lg mt-8 text-center text-2xl '>¡Conoce los horarios!</h2>
 
 
-      <div className="container-horarios  flex flex-col pl-[10%] pr-[10%] max-xl:pl-[0%] max-xl:pr-[0%]">
-        <ContainerHorarios title="LUNES A VIERNES" horarios={masterbusData.horarios} />
-          {masterbusDataDomingo && <ContainerHorarios title="SÁBADOS, DOMINGOS Y FERIADOS" horarios={masterbusDataDomingo.horarios} />}
+      <div className="container-horarios flex flex-col pl-[10%] pr-[10%] max-xl:pl-[0%] max-xl:pr-[0%]">
+        <ContainerHorarios title="Lunes a Viernes" horarios={masterbusData.horarios} />
+          {masterbusDataDomingo && <ContainerHorarios title="Sabados,Domingos y Feriados" horarios={masterbusDataDomingo.horarios} />}
           
           {masterbusData && <PuntoDePartida puntoPartida={masterbusData.puntoPartida}/>}
       </div>
-
-        
-        
     </div>
     </IonContent>
   </>

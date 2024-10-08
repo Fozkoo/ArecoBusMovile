@@ -15,11 +15,13 @@ interface Bus {
   id: number;
   path: string;
   image: string;
+  origen: string;
   empresaNombre: string;
   destino: string;
   precio: number;
   horarios: string[];
 }
+
 
 function Card2() {
   const [data, setData] = useState<Bus[]>([]);

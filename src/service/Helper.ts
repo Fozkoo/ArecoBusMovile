@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = 'https://api.arecobus.cfl401areco.edu.ar/api/buses';//https://api.arecobus.cfl401areco.edu.ar
+const URL = 'http://localhost:8080/api/buses';//https://api.arecobus.cfl401areco.edu.ar
 const URLHORARIOS = 'https://api.arecobus.cfl401areco.edu.ar/api/horario'
 // http://localhost:8080/api/buses  o https://api.arecobus.cfl401areco.edu.ar/api/buses
 

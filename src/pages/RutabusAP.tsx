@@ -13,6 +13,7 @@
     image: string;
     empresaNombre: string;
     destino: string;
+    origen: string;
     horarios: string[];
     puntoPartida: string;
   }
@@ -98,6 +99,7 @@
               <ContainerTitleAndInfo
                 image={rutabusInformacion.image}
                 empresaNombre={rutabusInformacion.empresaNombre}
+                origen={rutabusInformacion.origen}
                 destino={rutabusInformacion.destino}
               />
             )}
