@@ -23,7 +23,7 @@ function MasterbusAG() {
   const [masterbusDataDomingo, setMasterbusDataDomingo] = useState<MasterbusData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const ionContentRef = useRef<HTMLIonContentElement>(null);  // Crear referencia
+  const ionContentRef = useRef<HTMLIonContentElement>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +34,7 @@ function MasterbusAG() {
         ]);
 
         if (data3.length > 0) {
-          data3[0].horarios.sort();  // Ordenar horarios de domingos y feriados
+          data3[0].horarios.sort();  
         }
 
         setMasterbusData(data1.length > 0 ? data1[0] : null);
@@ -87,7 +87,6 @@ function MasterbusAG() {
             {masterbusData && <PuntoDePartida puntoPartida={masterbusData.puntoPartida}/>}
           </div>
 
-          {/* Pasa la referencia ionContentRef al componente Up */}
           <Up ionContentRef={ionContentRef} />
         </div>
       </IonContent>

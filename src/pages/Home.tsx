@@ -1,5 +1,5 @@
 // pages/Home.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { IonApp, IonContent } from '@ionic/react';
 import Header from '../components/Header';
 import '../theme/variables.css';
@@ -11,6 +11,7 @@ import TestPage from './TestPage';
 function Home() {
 
   const [loading, setLoading] = useState(true);
+  const ionContentRef = useRef<HTMLIonContentElement>(null);
 
   useEffect(() => {
     
