@@ -88,7 +88,7 @@ function MasterbusAG() {
           />
         )}
 
-      <h2 className='font-semibold  mr-10 ml-10 rounded-lg mt-8 text-center text-2xl '>¡Conoce los horarios!</h2>
+      <h2 className='font-semibold bg-black text-white  mr-10 ml-10 rounded-lg mt-8 text-center text-2xl '>¡Conoce los horarios!</h2>
 
 
       <div className="container-horarios flex flex-col pl-[10%] pr-[10%] max-xl:pl-[0%] max-xl:pr-[0%]">
