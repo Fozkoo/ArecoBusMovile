@@ -13,6 +13,7 @@ import PageTesting from './pages/PageTesting';
 
 
 import TestPage from './pages/TestPage';
+import PruebaRapida from './pages/PruebaRapida';
 
 setupIonicReact();
 
@@ -29,6 +30,7 @@ const App: React.FC = () => (
         <Route exact path="/PuntosSube" component={PuntosSube} />
         <Route exact path="/TestPage" component={Home} />
         <Route exact path="/PageTesting" component={PageTesting} />
+        <Route exact path="/PruebaRapida" component={PruebaRapida} />
         <Redirect exact path="/" to="/home" />
       </IonRouterOutlet>
 

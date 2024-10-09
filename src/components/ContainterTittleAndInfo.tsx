@@ -9,7 +9,7 @@ interface ContainerTitleAndInfoProps {
 
 const ContainerTitleAndInfo: React.FC<ContainerTitleAndInfoProps> = ({ image, empresaNombre, destino, origen }) => {
   return (
-    <div className=" mt-[70px] bg-cover bg-center h-[177px] rounded-xl shadow-lg relative" style={{ backgroundImage: `url(${image})` }} >
+    <div className=" mt-[60px] bg-cover bg-center h-[177px]  shadow-xl relative" style={{ backgroundImage: `url(${image})` }} >
       <div className="absolute inset-0 rounded-xl bg-gray-700 bg-opacity-60 flex flex-col justify-center items-center p-4">
         <h1 className="text-white text-4xl font-bold mb-2">{empresaNombre}</h1>
         <nav className="text-white">
