@@ -23,10 +23,6 @@ const App: React.FC = () => (
     <IonTabs>
       <IonRouterOutlet id="main-content">
         <Route exact path="/home" component={Home} />
-        <Route exact path="/rutabusAP" component={RutabusAP} />
-        <Route exact path="/ricarditoAV" component={RicarditoAV} />
-        <Route exact path="/ricarditoAD" component={RicarditoAD} />
-        <Route exact path="/masterbusAG" component={MasterbusAG} />
         <Route exact path="/PuntosSube" component={PuntosSube} />
         <Route exact path="/TestPage" component={Home} />
         <Route exact path="/PageTesting" component={PageTesting} />
@@ -39,12 +35,12 @@ const App: React.FC = () => (
         className="h-[65px] shadow-[0_-4px_6px_-3px_rgba(0,0,0,0.2)] desktop-hidden"
       >
         <IonTabButton tab="home" href="/home">
-          <IonIcon icon={home} style={{ color: '#6464f2' }} />
-          <IonLabel style={{ color: '#6464f2' }} className="text-[14px] font-semibold">Inicio</IonLabel>
+          <IonIcon icon={home} style={{ color: '#3B82F6' }} />
+          <IonLabel style={{ color: '#3B82F6' }} className="text-[14px] font-semibold">Inicio</IonLabel>
         </IonTabButton>
         <IonTabButton tab="PuntosSube" href="/PuntosSube">
-          <IonIcon icon={bus} style={{ color: '#6464f2' }} />
-          <IonLabel style={{ color: '#6464f2' }} className="text-[14px] font-semibold">Puntos SUBE</IonLabel>
+          <IonIcon icon={bus} style={{ color: '#3B82F6' }} />
+          <IonLabel style={{ color: '#3B82F6' }} className="text-[14px] font-semibold">Puntos SUBE</IonLabel>
         </IonTabButton>
       </IonTabBar>
 

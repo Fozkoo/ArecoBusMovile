@@ -8,6 +8,7 @@ import ContainerTitleAndInfo from '../components/ContainterTittleAndInfo';
 import ContainerHorarios from '../components/ContainerHorarios';
 import PuntoDePartida from '../components/PuntoDePartida';
 import Up from '..//components/Up';
+import '../theme/variables.css';
 
 interface MasterbusData {
   image: string;

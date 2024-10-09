@@ -10,6 +10,27 @@ body {
 
 
 
+
+@keyframes breathing {
+  0%, 100% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.05);
+  }
+}
+
+.breathing {
+  animation: breathing 2s ease-in-out infinite;
+}
+
+
+.breathing {
+    animation: breathing 2s ease-in-out infinite;
+}
+
+
+
 /* Añade esto a tu archivo CSS global o componente */
 
 @media (min-width: 768px) {
