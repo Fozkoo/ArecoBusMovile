@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { arrowUp } from 'ionicons/icons';
 import { IonIcon } from '@ionic/react';
 
@@ -16,7 +16,7 @@ const Up: React.FC<UpProps> = ({ ionContentRef }) => {
 
   return (
     <button
-    className="globo fixed top-[90%] left-[75%] w-[45px] h-[45px] bg-blue-500 rounded-full cursor-pointer flex justify-center items-center"
+    className="globo fixed top-[90%] left-[75%]  w-[45px] h-[45px] bg-blue-500 rounded-full cursor-pointer flex justify-center items-center"
     onClick={scrollToTop}
 >
     <IonIcon icon={arrowUp} className="w-[30px] h-[30px] text-white" />

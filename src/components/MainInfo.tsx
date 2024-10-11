@@ -1,12 +1,9 @@
 import React from "react";
-import { FaBus, FaClock } from "react-icons/fa";
 
 interface MainInfoProps {
-    horarios: string[];
-    destino: string;
-    formatHoraAmPm: (horario: string) => string;
-    showAll: boolean;
-    setShowAll: React.Dispatch<React.SetStateAction<boolean>>;
+    proximo: string;
+    metodo: string;
+    precio: string;
 }
 
 const MainInfo: React.FC<MainInfoProps> = () => {

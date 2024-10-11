@@ -8,6 +8,9 @@ import SchedulesTable from "../components/SchedulesTable";
 import StartPoint from "../components/StartPoint";
 import Loader from "../components/Loader";
 import MainInfo from "../components/MainInfo";
+import Change from "../components/Change";
+import Tour from "../components/Tour";
+import MapWithBusRoute from "../components/Prueba";
 
 interface MasterbusData {
     image: string;
@@ -90,11 +93,9 @@ const PruebaRapida: React.FC = () => {
                         />
 
                         <MainInfo
-                            horarios={masterbusData.horarios}
-                            destino={masterbusData.destino}
-                            formatHoraAmPm={formatHoraAmPm}
-                            showAll={showAll}
-                            setShowAll={setShowAll}
+                            proximo={masterbusData.horarios[0]}
+                            metodo="EFECTIVO"
+                            precio="$1250"
                         />
 
                         <SchedulesTable
@@ -109,12 +110,21 @@ const PruebaRapida: React.FC = () => {
                             puntoPartida={masterbusData.puntoPartida}
                             src={iframeSrc}
                         />
+
+                        <Tour
+                            src={iframeSrc}
+                        />
                     </>
                 ) : (
                     <Loader />
                 )}
 
+<MapWithBusRoute />
+
+                <Change />
                 <Up ionContentRef={ionContentRefDo} />
+
+
 
             </IonContent>
         </>
