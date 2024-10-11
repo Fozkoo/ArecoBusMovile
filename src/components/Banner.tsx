@@ -11,7 +11,7 @@ interface BannerProps {
 const Banner: React.FC<BannerProps> = ({ image, empresaNombre, origen, destino, isActive }) => {
     return (
         <>
-            <div className="container-card-principal flex flex-col mx-5 mt-20   rounded-lg shadow-xl overflow-hidden">
+            <div className="container-card-principal flex flex-col mx-8 mt-20   rounded-lg shadow-xl overflow-hidden">
                 <div className="h-20 relative">
                     <img src={image} className="absolute inset-0 w-full h-full object-cover z-0" alt="Background" />
                     <div className="absolute inset-0 bg-gray-700 bg-opacity-70 z-10"></div>
