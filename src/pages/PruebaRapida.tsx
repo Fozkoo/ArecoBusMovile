@@ -11,6 +11,7 @@ import MainInfo from "../components/MainInfo";
 import Change from "../components/Change";
 import Tour from "../components/Tour";
 import MapWithBusRoute from "../components/Prueba";
+import MapViewDos from "../components/Prueba";
 
 interface MasterbusData {
     image: string;
@@ -119,7 +120,7 @@ const PruebaRapida: React.FC = () => {
                     <Loader />
                 )}
 
-<MapWithBusRoute />
+<MapViewDos />
 
                 <Change />
                 <Up ionContentRef={ionContentRefDo} />
