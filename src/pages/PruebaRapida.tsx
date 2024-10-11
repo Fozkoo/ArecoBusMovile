@@ -7,6 +7,7 @@ import Banner from "../components/Banner";
 import SchedulesTable from "../components/SchedulesTable";
 import StartPoint from "../components/StartPoint";
 import Loader from "../components/Loader";
+import MainInfo from "../components/MainInfo";
 
 interface MasterbusData {
     image: string;
@@ -85,9 +86,16 @@ const PruebaRapida: React.FC = () => {
                             empresaNombre={masterbusData.empresaNombre}
                             origen={masterbusData.origen}
                             destino={masterbusData.destino}
-                            isActive={isActive}  // Esto determinará si el círculo es verde o rojo
+                            isActive={isActive} // esto capaz lo saco !! era el circulo verde y rojo
                         />
 
+                        <MainInfo
+                            horarios={masterbusData.horarios}
+                            destino={masterbusData.destino}
+                            formatHoraAmPm={formatHoraAmPm}
+                            showAll={showAll}
+                            setShowAll={setShowAll}
+                        />
 
                         <SchedulesTable
                             horarios={masterbusData.horarios}
