@@ -10,6 +10,17 @@ interface SchedulesProps {
 }
 
 const SchedulesTable: React.FC<SchedulesProps> = ({ horarios, destino, formatHoraAmPm, showAll, setShowAll }) => {
+    // Función para determinar si un horario ha pasado
+    const isHorarioPasado = (horario: string): boolean => {
+        const [horas, minutos] = horario.split(':').map(Number);
+        const now = new Date();
+        const currentHours = now.getHours();
+        const currentMinutes = now.getMinutes();
+
+        // Compara la hora y los minutos
+        return (horas < currentHours) || (horas === currentHours && minutos < currentMinutes);
+    };
+
     return (
         <div className="container-table-horarios p-8">
             <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
@@ -38,7 +49,7 @@ const SchedulesTable: React.FC<SchedulesProps> = ({ horarios, destino, formatHor
                                             </td>
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className="flex items-center">
-                                                    <FaClock className="text-green-500 mr-2" />
+                                                    <FaClock className={isHorarioPasado(horario) ? "text-red-500 mr-2" : "text-green-500 mr-2"} />
                                                     <span>{formatHoraAmPm(horario)}</span>
                                                 </div>
                                             </td>

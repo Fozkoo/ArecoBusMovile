@@ -10,7 +10,7 @@ import Loader from "../components/Loader";
 import MainInfo from "../components/MainInfo";
 import Change from "../components/Change";
 import MapViewDos from "../components/Prueba";
-import helperExport from "../service/FunctionsHelper"; 
+import helperExport from "../service/FunctionsHelper";
 
 interface MasterbusData {
   image: string;
@@ -36,10 +36,10 @@ const PruebaRapida: React.FC = () => {
           data1[0].horarios.sort(); // Ordena los horarios
           setMasterbusData({
             ...data1[0],
-            proximoHorario: helperExport.proximoColectivo(data1[0].horarios), 
+            proximoHorario: helperExport.proximoColectivo(data1[0].horarios),
           });
 
-          
+
           setIsActive(isActiveFunction());
         } else {
           console.error("Unexpected data format:", data1);
@@ -56,9 +56,9 @@ const PruebaRapida: React.FC = () => {
       setMasterbusData((prevData) =>
         prevData
           ? {
-              ...prevData,
-              proximoHorario: helperExport.proximoColectivo(prevData.horarios),
-            }
+            ...prevData,
+            proximoHorario: helperExport.proximoColectivo(prevData.horarios),
+          }
           : prevData
       );
     }, 10000);
@@ -105,7 +105,7 @@ const PruebaRapida: React.FC = () => {
             />
 
             <MainInfo
-              proximo={masterbusData.proximoHorario || masterbusData.horarios[0]} 
+              proximo={masterbusData.proximoHorario || masterbusData.horarios[0]}
               formatHoraAmPm={helperExport.formatHoraAmPm}
               metodo="EFECTIVO"
               precio="$1250"
@@ -119,9 +119,10 @@ const PruebaRapida: React.FC = () => {
               setShowAll={setShowAll}
             />
 
+            <MapViewDos />
+
             <StartPoint puntoPartida={masterbusData.puntoPartida} src={iframeSrc} />
 
-            <MapViewDos />
 
             <Change />
             <Up ionContentRef={ionContentRefDo} />
