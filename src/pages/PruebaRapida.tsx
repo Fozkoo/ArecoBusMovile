@@ -15,7 +15,7 @@ import helperExport from "../service/FunctionsHelper";
 interface MasterbusData {
   image: string;
   empresaNombre: string;
-  origen: string;
+  origen: "AReco";
   destino: string;
   horarios: string[];
   puntoPartida: string;
@@ -99,7 +99,7 @@ const PruebaRapida: React.FC = () => {
             <Banner
               image={masterbusData.image}
               empresaNombre={masterbusData.empresaNombre}
-              origen={masterbusData.origen}
+              origen="Areco"
               destino={masterbusData.destino}
               isActive={isActive}
             />

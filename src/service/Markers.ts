@@ -1,6 +1,6 @@
 import L from "leaflet";
 import LogoSube from '../images/pin_punto_sube.svg';
-import logo from '..//..//public/busStopImageWhite.png';
+import logo from '..//..//public/posibleIconoEnAzul (1).svg';
 
 const Markers = [
 
@@ -35,8 +35,8 @@ const customIcon = new L.Icon({
 
   const IconBusStop = new L.Icon({
       iconUrl: logo,
-      iconSize: [40, 45],
-      iconAnchor: [25, 46]
+      iconSize: [30, 30],
+      iconAnchor: [25, 16]
   });
 
 

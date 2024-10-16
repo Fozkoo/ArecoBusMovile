@@ -24,7 +24,31 @@ const MapViewDos: React.FC = () => {
     [-34.246049, -59.462277],
     [-34.245948, -59.461727],
     [-34.246015, -59.461260],
-    [-34.246690, -59.459917]
+    [-34.246690, -59.459917],
+    [-34.247202, -59.459183],
+    [-34.249283, -59.457265],
+    [-34.251492, -59.456445],
+    [-34.256519, -59.455842],
+    [-34.259746, -59.453443],
+    [-34.261897, -59.449539],
+    [-34.262714, -59.448940],
+    [-34.262938, -59.448424],
+    [-34.263001, -59.447664],
+    [-34.263752, -59.445859],
+    [-34.271200, -59.431127],
+    [-34.273236, -59.416353],
+    [-34.273542, -59.415581],
+    [-34.273328, -59.415131],
+    [-34.273289, -59.414649],
+    [-34.273537, -59.413932],
+    [-34.274318, -59.409350],
+    [-34.276265, -59.395262],
+    [-34.290790, -59.340389],
+    [-34.291588, -59.338611],
+    [-34.293391, -59.335941],
+    [-34.300598, -59.326879],
+    [-34.302551, -59.320198]
+
   ];
 
   const Markers: LatLngTuple[] = [
@@ -45,8 +69,13 @@ const MapViewDos: React.FC = () => {
     [-34.255502, -59.465443],
     [-34.255181, -59.464169],
     [-34.254510, -59.461468],
-    [-34.253854, -59.458890]
-
+    [-34.253854, -59.458890],
+    [-34.247228, -59.459179],
+    [-34.249620, -59.457120],
+    [-34.254971, -59.456076],
+    [-34.263344, -59.446969],
+    [-34.298760, -59.329279],
+  
   ]
 
 
@@ -61,7 +90,7 @@ const MapViewDos: React.FC = () => {
             const { latitude, longitude } = position.coords;
             const newPosition: LatLngExpression = [latitude, longitude];
             setUserPosition(newPosition);
-            map.flyTo(newPosition, 13);
+            map.flyTo(newPosition, 15);
           },
           () => {
             alert("No se pudo obtener la ubicación.");
@@ -75,20 +104,11 @@ const MapViewDos: React.FC = () => {
     return (
       <>
         <button
-          onClick={handleLocation}
-          style={{
-            position: 'absolute',
-            top: '10px',
-            right: '10px',
-            zIndex: 1000,
-            padding: '10px',
-            backgroundColor: 'white',
-            border: '1px solid gray',
-            cursor: 'pointer',
-          }}
-        >
-          Ubicarme
-        </button>
+            onClick={handleLocation}
+            className="bg-blue-500 left-[30%] z-[1000] text-white px-4 py-2 mt-4 rounded-lg relative"
+          >
+            Ubicarme
+          </button>
         {userPosition && (
           <Marker position={userPosition}>
             <Popup>¡Estás aquí!</Popup>
@@ -96,7 +116,11 @@ const MapViewDos: React.FC = () => {
         )}
       </>
     );
+
+
+    
   };
+
 
   const UpdateMapSize: React.FC = () => {
     const map = useMap();
@@ -119,7 +143,6 @@ const MapViewDos: React.FC = () => {
             <MapContainer className='rounded-lg' center={position} zoom={14} style={{ height: '100%', width: '100%' }}>
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution=''
               />
               {Markers.map((marker, index) => (
                 <Marker
@@ -128,7 +151,7 @@ const MapViewDos: React.FC = () => {
                   icon={IconBusStop}
                 />
               ))}
-              <Polyline positions={ruta} color="blue" />
+              <Polyline positions={ruta} color="#1f2937" />
               <LocationMarker />
               <UpdateMapSize />
             </MapContainer>
