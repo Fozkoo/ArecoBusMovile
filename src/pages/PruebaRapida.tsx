@@ -86,7 +86,7 @@ const PruebaRapida: React.FC = () => {
     return currentTime >= startTime && currentTime <= endTime;
   }
 
-  const iframeSrc = "https://maps.google.com/?q=Punto+de+Partida&output=embed";
+  const iframeSrc = "https://www.google.com/maps/embed?pb=!4v1729101268639!6m8!1m7!1sVep0fKFlLubfdTr_li-IMQ!2m2!1d-34.24556233752934!2d-59.46422813436158!3f127.12797742291491!4f-0.6850647082959824!5f0.7820865974627469"
 
   return (
     <>
