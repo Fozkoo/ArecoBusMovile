@@ -93,9 +93,10 @@ const PruebaRapida: React.FC = () => {
       <IonContent ref={ionContentRefDo}>
         {masterbusData ? (
           <>
-            <IonHeader>
+            <IonHeader  className="header-z-index">
               <Header />
             </IonHeader>
+            
             <Banner
               image={masterbusData.image}
               empresaNombre={masterbusData.empresaNombre}

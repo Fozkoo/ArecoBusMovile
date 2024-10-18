@@ -4,11 +4,11 @@ import { LatLng, LatLngExpression, LatLngTuple } from 'leaflet';
 import { IconBusStop, Markers, customIcon } from '../service/Markers';
 
 const MapViewDos: React.FC = () => {
-  const [showMap, setShowMap] = useState(false); // Estado para controlar la visibilidad completa del mapa
+  const [showMap, setShowMap] = useState(false); 
 
-  const position: LatLngExpression = [-34.247935, -59.471792]; // Buenos Aires
+  const position: LatLngExpression = [-34.247935, -59.471792]; // cordenadas iniciales de areco
   const ruta: LatLngExpression[] = [
-    [-34.245536, -59.464199],  // Buenos Aires
+    [-34.245536, -59.464199],  
     [-34.240252, -59.468327],
     [-34.241481, -59.477664],
     [-34.243561, -59.477024],
@@ -132,7 +132,7 @@ const MapViewDos: React.FC = () => {
   };
 
   return (
-    <div className="container-punto-partida bg-gray-100 p-8">
+    <div className="container-punto-partida bg-gray-100  p-8">
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
         <div className="p-6 bg-blue-600 text-white">
           <h1 className="text-3xl font-bold mb-2">Recorrido y paradas</h1>
@@ -140,7 +140,7 @@ const MapViewDos: React.FC = () => {
         </div>
         <div className="p-3 text-center">
           <div className={`transition-all duration-500 overflow-hidden ${showMap ? 'h-[350px]' : 'h-[150px]'}`}>
-            <MapContainer className='rounded-lg' center={position} zoom={14} style={{ height: '100%', width: '100%' }}>
+          <MapContainer className="rounded-lg" center={position} zoom={14} style={{ height: '100%', width: '100%', zIndex: '1' }}>
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
