@@ -3,10 +3,10 @@ import { IonApp, IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonIcon, Ion
 import { IonReactRouter } from '@ionic/react-router';
 import { home, bus, settings } from 'ionicons/icons';
 import Home from './pages/Home';
-import RutabusAP from './pages/RutabusAP';
-import MasterbusAG from './pages/MasterbusAG';
-import RicarditoAD from './pages/RicarditoAD';
-import RicarditoAV from './pages/RicarditoAV';
+// import RutabusAP from './pages/RutabusAP';
+//import MasterbusAG from './pages/MasterbusAG';
+//import RicarditoAD from './pages/RicarditoAD';
+//import RicarditoAV from './pages/RicarditoAV';
 import '@fontsource-variable/onest';
 import PuntosSube from './pages/PuntosSube';
 import PageTesting from './pages/PageTesting';
