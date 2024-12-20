@@ -21,7 +21,7 @@ function PageTesting() {
     return (
         <>
             <Header />
-
+            {/* 
             <IonContent>
                 <div className="container-page flex flex-col m-[3%]">
                     <div className=" mt-[80px] bg-cover bg-center h-[177px] rounded-xl shadow-lg relative" style={{ backgroundImage: "url('http://www.rutabus.com.ar/images/hero-bg.jpeg')" }}>
@@ -80,6 +80,8 @@ function PageTesting() {
 
                 </div>
             </IonContent>
+
+            */}
         </>
     );
 }

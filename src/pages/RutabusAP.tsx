@@ -4,9 +4,9 @@
   import Header from '../components/Header';
   import TestPage from './TestPage';
   import Loader from '../components/Loader'; // Asegúrate de importar tu componente Loader
-  import ContainerTitleAndInfo from '..//components/ContainterTittleAndInfo'
-  import ContainerHorarios from '..//components/ContainerHorarios'
-  import PuntoDePartida from '..//components/PuntoDePartida'
+ // import ContainerTitleAndInfo from '..//components/ContainterTittleAndInfo'
+  //import ContainerHorarios from '..//components/ContainerHorarios'
+  //import PuntoDePartida from '..//components/PuntoDePartida'
 
 
   interface RutabusData {
@@ -79,20 +79,27 @@
     // tengo que gestionar el tema de verificar si el usuario tiene internet apenas abre la pagina
     // en el home digamos, si no tiene, tirarlo directamente al TestPage 
     //
+    
+    
+   return (
 
-    return (
+   
       <>
-        
+
 
         <IonHeader>
           <Header/>
         </IonHeader>
 
+
+      
         <IonContent className='flex justify-center items-center'>
 
-
+      
+          
         <div className="container-global flex flex-col ">  {/*aca basicamente empece a pasar todo el codigo a limpio creando componente y pasandole la data por props asi es mas sencillo de manipular */}
 
+          {/* 
             {rutabusInformacion && (
 
 
@@ -114,16 +121,23 @@
               {rutabusData && <PuntoDePartida puntoPartida={rutabusData.puntoPartida}/>}
           </div>
 
-            
+            */}
             
         </div>
+        
+        
 
-            
+      
 
 
         </IonContent>
+
+     
       </>
+      
+      
     );
   }
+  
 
   export default RutabusAP;

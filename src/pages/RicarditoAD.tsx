@@ -4,9 +4,9 @@ import { IonApp, IonContent, IonHeader } from '@ionic/react';
 import Header from '../components/Header';
 import Loader from '../components/Loader';
 import TestPage from '..//pages/TestPage';
-import ContainerTitleAndInfo from '../components/ContainterTittleAndInfo';
-import PuntoDePartida from '../components/PuntoDePartida';
-import ContainerHorarios from '../components/ContainerHorarios';
+//import ContainerTitleAndInfo from '../components/ContainterTittleAndInfo';
+//import PuntoDePartida from '../components/PuntoDePartida';
+//import ContainerHorarios from '../components/ContainerHorarios';
 
 interface RicarditoAdData {
   image: string;
@@ -78,7 +78,7 @@ function RicarditoAD() {
     <IonHeader>
       <Header/>
     </IonHeader>
-
+      {/* 
     <IonContent className='flex justify-center items-center'>
 
     <div className="container-global flex flex-col ">
@@ -108,6 +108,7 @@ function RicarditoAD() {
         
     </div>
     </IonContent>
+    */}
   </>
   );
 }

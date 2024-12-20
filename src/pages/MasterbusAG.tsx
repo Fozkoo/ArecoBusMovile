@@ -4,9 +4,9 @@ import { IonApp, IonContent, IonHeader } from '@ionic/react';
 import Header from '../components/Header';
 import Loader from '../components/Loader'; 
 import TestPage from '..//pages/TestPage'; 
-import ContainerTitleAndInfo from '../components/ContainterTittleAndInfo';
-import ContainerHorarios from '../components/ContainerHorarios';
-import PuntoDePartida from '../components/PuntoDePartida';
+//import ContainerTitleAndInfo from '../components/ContainterTittleAndInfo';
+//import ContainerHorarios from '../components/ContainerHorarios';
+////import PuntoDePartida from '../components/PuntoDePartida';
 import Up from '..//components/Up';
 import '../theme/variables.css';
 
@@ -68,7 +68,7 @@ function MasterbusAG() {
         <Header/>
       </IonHeader>
 
-      {/* Asigna la referencia ionContentRef al IonContent */}
+      {/* Asigna la referencia ionContentRef al IonContent 
       <IonContent ref={ionContentRef} className='flex justify-center items-center'>
         <div className="container-global flex flex-col ">
           {masterbusData && (
@@ -91,6 +91,8 @@ function MasterbusAG() {
           <Up ionContentRef={ionContentRef} />
         </div>
       </IonContent>
+
+      */}
     </>
   );
 }
