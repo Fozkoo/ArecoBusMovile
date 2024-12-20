@@ -17,40 +17,45 @@ import PruebaRapida from './pages/PruebaRapida';
 
 setupIonicReact();
 
+
+
 const App: React.FC = () => (
+
+  
+
   <IonApp>
-  <IonReactRouter>
-    <IonTabs>
-      <IonRouterOutlet id="main-content">
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/PuntosSube" component={PuntosSube} />
-        <Route exact path="/TestPage" component={Home} />
-        <Route exact path="/PageTesting" component={PageTesting} />
-        <Route exact path="/PruebaRapida" component={PruebaRapida} />
-        <Redirect exact path="/" to="/home" />
-      </IonRouterOutlet>
+    <IonReactRouter>
+      <IonTabs>
+        <IonRouterOutlet id="main-content">
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/PuntosSube" component={PuntosSube} />
+          <Route exact path="/TestPage" component={TestPage} />
+          <Route exact path="/PageTesting" component={PageTesting} />
+          <Route exact path="/PruebaRapida" component={PruebaRapida} />
+          <Redirect exact path="/" to="/home" />
+        </IonRouterOutlet>
 
-      <IonTabBar
-        slot="bottom"
-        className="h-[65px] shadow-[0_-4px_6px_-3px_rgba(0,0,0,0.2)] desktop-hidden"
-      >
-        <IonTabButton tab="home" href="/home">
-          <IonIcon icon={home} style={{ color: '#3B82F6' }} />
-          <IonLabel style={{ color: '#3B82F6' }} className="text-[14px] font-semibold">Inicio</IonLabel>
-        </IonTabButton>
-        <IonTabButton tab="PuntosSube" href="/PuntosSube">
-          <IonIcon icon={bus} style={{ color: '#3B82F6' }} />
-          <IonLabel style={{ color: '#3B82F6' }} className="text-[14px] font-semibold">Puntos SUBE</IonLabel>
-        </IonTabButton>
-      </IonTabBar>
-
-
+        <IonTabBar
+          slot="bottom"
+          className="h-[65px] hidden shadow-[0_-4px_6px_-3px_rgba(0,0,0,0.2)] desktop-hidden"
+        >
+          <IonTabButton tab="home" href="/home">
+            <IonIcon icon={home} style={{ color: '#3B82F6' }} />
+            <IonLabel style={{ color: '#3B82F6' }} className="text-[14px] font-semibold">Inicio</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="PuntosSube" href="/PuntosSube">
+            <IonIcon icon={bus} style={{ color: '#3B82F6' }} />
+            <IonLabel style={{ color: '#3B82F6' }} className="text-[14px] font-semibold">Puntos SUBE</IonLabel>
+          </IonTabButton>
+        </IonTabBar>
 
 
-    </IonTabs>
-    
-  </IonReactRouter>
-</IonApp>
+
+
+      </IonTabs>
+
+    </IonReactRouter>
+  </IonApp>
 );
 
 export default App;

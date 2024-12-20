@@ -1,43 +1,163 @@
 // pages/Home.tsx
-import React, { useEffect, useRef, useState } from 'react';
-import { IonApp, IonContent } from '@ionic/react';
+import { useEffect, useState } from 'react';
+import { IonApp, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonIcon } from '@ionic/react';
 import Header from '../components/Header';
 import '../theme/variables.css';
-import Card2 from '../components/Card2';
 import Loader from '../components/Loader';
-import methods from '../service/Helper'; 
 import TestPage from './TestPage';
 
-function Home() {
+import helper from "../service/Helper";
+import helperExport from "..//service/FunctionsHelper";
+import { Link } from 'react-router-dom';
 
+import "..//theme/variables.css";
+
+import { addCircleOutline } from "ionicons/icons";
+import { notificationsCircleOutline } from "ionicons/icons";
+
+interface Bus {
+  id: number;
+  path: string;
+  image: string;
+  origen: string;
+  empresaNombre: string;
+  destino: string;
+  precio: number;
+  horarios: string[];
+}
+
+
+function Home() {
   const [loading, setLoading] = useState(true);
-  const ionContentRef = useRef<HTMLIonContentElement>(null);
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [data, setData] = useState<Bus[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    
-    const timer = setTimeout(() => {
-      setLoading(false);``
-    }, 1000); 
+    const fetchData = async () => {
+      try {
+        let data;
+        if (helperExport.diaHoy >= 1 && helperExport.diaHoy <= 5) {
+          data = await helper.infoBusesIdLunes();
+        } else if (helperExport.diaHoy === 6) {
+          data = await helper.infoBusesIdSabados();
+        } else if (helperExport.diaHoy === 7) {
+          data = await helper.infoBusesIdDomingo();
+        }
 
-    
-    return () => clearTimeout(timer);
-  }, []);
+        setData(data);
+      } catch (err) {
+        setError("Error al cargar los datos.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+
+    const intervalId = setInterval(fetchData, 60000);
+    const updateNextBusInterval = setInterval(() => {
+      setData((prevData) =>
+        prevData.map((bus) => ({
+          ...bus,
+          proximoHorario: helperExport.proximoColectivo(bus.horarios)
+        }))
+      );
+    }, 10000);
+
+    return () => {
+      clearInterval(intervalId);
+      clearInterval(updateNextBusInterval);
+    };
+  }, [helperExport.diaHoy]);
+
+
+  useEffect(() => {
+    if (!loading && data.length > 0) {
+      const totalImages = data.length;
+      let loadedImages = 0;
+
+      data.forEach((bus) => {
+        const img = new Image();
+        img.src = bus.image;
+        img.onload = () => {
+          loadedImages += 1;
+          if (loadedImages === totalImages) {
+            setImagesLoaded(true);
+            
+          }
+        };
+        img.onerror = () => {
+          console.error(`Error al cargar la imagen: ${bus.image}`);
+          loadedImages += 1;
+          if (loadedImages === totalImages) {
+            setImagesLoaded(true);
+          }
+        };
+      });
+
+
+      
+    }
+  }, [loading, data]);
+
+
+
+  if (loading || !imagesLoaded) {
+    return <Loader />;
+  }
+
+  if (error) {
+    return (
+      <div className="h-full">
+        <TestPage />
+      </div>
+    );
+  }
 
   return (
     <IonApp>
       <IonContent>
-        {loading ? (
-          <Loader /> 
-        ) : (
-          <>
-            <div className="container-header fixed top-0 left-0 w-full bg-white z-50 shadow-sm">
-              <Header />
-            </div>
-            <div className="container-cards pt-[65px]   flex items-center mt-5 p-7 flex-wrap ">
-              <Card2 />
-            </div>
-          </>
-        )}
+        <div className="container-header fixed top-0 left-0 w-full bg-white z-50 shadow-sm">
+          <Header />
+        </div>
+        <div className="card-container mt-20 justify-center flex gap-3 flex-wrap">
+          {data.map((bus) => (
+            <IonCard key={bus.id} className="fixed-card-size bg-gray-50 shadow-xl rounded-3xl w-[300px] h-[100%]">
+              <img
+                alt={bus.empresaNombre}
+                src={bus.image}
+                className="card-image p-2 !rounded-3xl w-[100%] h-[200px] object-cover"
+              />
+              <IonCardHeader>
+                <IonCardTitle className="font-semibold">{bus.empresaNombre}</IonCardTitle>
+                <IonCardSubtitle>
+                  <div className="flex gap-1">
+                    <p className="font-normal text-gray-500">Destino:</p>
+                    <p className="font-semibold text-black">{bus.destino}</p>
+                  </div>
+                </IonCardSubtitle>
+              </IonCardHeader>
+              <IonCardContent>
+                <div className="flex gap-1">
+                  <p className="font-medium text-gray-500">Precio: </p>
+                  <p className="text-black !font-semibold">${bus.precio}</p>
+                </div>
+                <div className="flex gap-1 items-center">
+                  <p className="font-medium text-gray-500">Próximo Viaje:</p>
+                  <p className="text-black text-center !font-semibold">
+                    {helperExport.proximoColectivo(bus.horarios)}
+                  </p>
+                </div>
+                <Link to={bus.path} className="flex justify-center items-center mt-3 gap-1">
+                  <IonButton className="w-[75%] h-6 text-center hover:scale-105 transition-transform duration-200">
+                    Ver más detalles
+                  </IonButton>
+                </Link>
+              </IonCardContent>
+            </IonCard>
+          ))}
+        </div>
       </IonContent>
     </IonApp>
   );

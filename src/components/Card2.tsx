@@ -91,7 +91,7 @@ function Card2() {
   }
 
   return (
-    <div className="card-container justify-center flex gap-3 flex-wrap">
+    <div className="card-container  bg-green-400 justify-center flex gap-3 flex-wrap">
       {data.map((bus) => (
         <IonCard key={bus.id} className="fixed-card-size w-[300px] h-[1O0%]">
           <div className="container-notificacion  hidden items-center absolute w-full h-[70px]">
