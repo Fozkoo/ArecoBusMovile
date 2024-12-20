@@ -157,7 +157,7 @@ function Home() {
                     {helperExport.proximoColectivo(bus.horarios)}
                   </p>
                 </div>
-                <Link to="/prueba-rapida" className="flex justify-center items-center mt-3 gap-1">
+                <Link to="/PruebaRapida" className="flex justify-center items-center mt-3 gap-1">
                   <IonButton className="w-[75%] h-6 text-center hover:scale-105 transition-transform duration-200">
                     Ver más detalles
                   </IonButton>
