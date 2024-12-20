@@ -28,16 +28,19 @@ const App: React.FC = () => (
       <IonTabs>
         <IonRouterOutlet id="main-content">
           <Route exact path="/home" component={Home} />
+
+          {/*}
           <Route exact path="/PuntosSube" component={PuntosSube} />
           <Route exact path="/TestPage" component={TestPage} />
           <Route exact path="/PageTesting" component={PageTesting} />
+          */}
           <Route exact path="/PruebaRapida" component={PruebaRapida} />
           <Redirect exact path="/" to="/home" />
         </IonRouterOutlet>
 
         <IonTabBar
           slot="bottom"
-          className="h-[65px] hidden shadow-[0_-4px_6px_-3px_rgba(0,0,0,0.2)] desktop-hidden"
+          className="h-[65px]  shadow-sm desktop-hidden"
         >
           <IonTabButton tab="home" href="/home">
             <IonIcon icon={home} style={{ color: '#3B82F6' }} />
@@ -59,3 +62,5 @@ const App: React.FC = () => (
 );
 
 export default App;
+
+// [0_-4px_6px_-3px_rgba(0,0,0,0.2)]

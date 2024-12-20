@@ -35,7 +35,7 @@ const customIcon = new L.Icon({
 
   const IconBusStop = new L.Icon({
       iconUrl: logo,
-      iconSize: [30, 30],
+      iconSize: [20, 20],
       iconAnchor: [25, 16]
   });
 

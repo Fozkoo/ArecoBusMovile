@@ -1,4 +1,3 @@
-// pages/Home.tsx
 import { useEffect, useState } from 'react';
 import { IonApp, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonIcon } from '@ionic/react';
 import Header from '../components/Header';
@@ -26,12 +25,12 @@ interface Bus {
   horarios: string[];
 }
 
-
 function Home() {
   const [loading, setLoading] = useState(true);
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [data, setData] = useState<Bus[]>([]);
   const [error, setError] = useState<string | null>(null);
+  const [loadedImages, setLoadedImages] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,37 +70,43 @@ function Home() {
     };
   }, [helperExport.diaHoy]);
 
-
   useEffect(() => {
     if (!loading && data.length > 0) {
       const totalImages = data.length;
-      let loadedImages = 0;
+      let loadedImagesCount = 0;
 
       data.forEach((bus) => {
-        const img = new Image();
-        img.src = bus.image;
-        img.onload = () => {
-          loadedImages += 1;
-          if (loadedImages === totalImages) {
-            setImagesLoaded(true);
-            
-          }
-        };
-        img.onerror = () => {
-          console.error(`Error al cargar la imagen: ${bus.image}`);
-          loadedImages += 1;
-          if (loadedImages === totalImages) {
+        const cachedImage = localStorage.getItem(bus.image);
+        if (cachedImage) {
+          console.log(`Imagen cargada desde la caché: ${bus.image}`);
+          loadedImagesCount += 1;
+          setLoadedImages((prev) => [...prev, bus.image]);
+          if (loadedImagesCount === totalImages) {
             setImagesLoaded(true);
           }
-        };
+        } else {
+          const img = new Image();
+          img.src = bus.image;
+          img.onload = () => {
+            console.log(`Imagen cargada desde la URL: ${bus.image}`);
+            loadedImagesCount += 1;
+            setLoadedImages((prev) => [...prev, bus.image]);
+            localStorage.setItem(bus.image, bus.image);
+            if (loadedImagesCount === totalImages) {
+              setImagesLoaded(true);
+            }
+          };
+          img.onerror = () => {
+            console.error(`Error al cargar la imagen: ${bus.image}`);
+            loadedImagesCount += 1;
+            if (loadedImagesCount === totalImages) {
+              setImagesLoaded(true);
+            }
+          };
+        }
       });
-
-
-      
     }
   }, [loading, data]);
-
-
 
   if (loading || !imagesLoaded) {
     return <Loader />;
@@ -124,11 +129,13 @@ function Home() {
         <div className="card-container mt-20 justify-center flex gap-3 flex-wrap">
           {data.map((bus) => (
             <IonCard key={bus.id} className="fixed-card-size bg-gray-50 shadow-xl rounded-3xl w-[300px] h-[100%]">
-              <img
-                alt={bus.empresaNombre}
-                src={bus.image}
-                className="card-image p-2 !rounded-3xl w-[100%] h-[200px] object-cover"
-              />
+              {loadedImages.includes(bus.image) && (
+                <img
+                  alt={bus.empresaNombre}
+                  src={bus.image}
+                  className="card-image p-2 !rounded-3xl w-[100%] h-[200px] object-cover"
+                />
+              )}
               <IonCardHeader>
                 <IonCardTitle className="font-semibold">{bus.empresaNombre}</IonCardTitle>
                 <IonCardSubtitle>

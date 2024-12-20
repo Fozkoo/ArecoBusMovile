@@ -69,7 +69,7 @@ const SchedulesTable: React.FC<SchedulesProps> = ({ horarios, destino, formatHor
                         <div className="text-center mt-4">
                             <button
                                 onClick={() => setShowAll(!showAll)}
-                                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+                                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition  "
                             >
                                 {showAll ? "Ver menos" : "Ver más"}
                             </button>
