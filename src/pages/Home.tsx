@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import '../theme/variables.css';
 import Loader from '../components/Loader';
 import TestPage from './TestPage';
+import PruebaRapida from './PruebaRapida';
 
 import helper from "../service/Helper";
 import helperExport from "..//service/FunctionsHelper";
@@ -156,7 +157,7 @@ function Home() {
                     {helperExport.proximoColectivo(bus.horarios)}
                   </p>
                 </div>
-                <Link to={bus.path} className="flex justify-center items-center mt-3 gap-1">
+                <Link to="/prueba-rapida" className="flex justify-center items-center mt-3 gap-1">
                   <IonButton className="w-[75%] h-6 text-center hover:scale-105 transition-transform duration-200">
                     Ver más detalles
                   </IonButton>
