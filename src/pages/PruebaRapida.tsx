@@ -33,7 +33,7 @@ const PruebaRapida: React.FC = () => {
       try {
         const data1 = await Helper.masterbusInfo();
         if (Array.isArray(data1) && data1.length > 0) {
-          data1[0].horarios.sort(); 
+          data1[0].horarios.sort();
           setMasterbusData({
             ...data1[0],
             proximoHorario: helperExport.proximoColectivo(data1[0].horarios),
@@ -93,10 +93,10 @@ const PruebaRapida: React.FC = () => {
       <IonContent ref={ionContentRefDo}>
         {masterbusData ? (
           <>
-            <IonHeader  className="header-z-index">
+            <IonHeader className="header-z-index">
               <Header />
             </IonHeader>
-            
+
             <Banner
               image={masterbusData.image}
               empresaNombre={masterbusData.empresaNombre}
@@ -122,10 +122,10 @@ const PruebaRapida: React.FC = () => {
 
             <MapViewDos />
 
-            {/*
+            {/* 
             <StartPoint puntoPartida={masterbusData.puntoPartida} src={iframeSrc} />
-
             */}
+
             <Change />
             <Up ionContentRef={ionContentRefDo} />
           </>

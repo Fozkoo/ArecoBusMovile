@@ -124,10 +124,10 @@ function Home() {
   return (
     <IonApp>
       <IonContent>
-        <div className="container-header fixed top-0 left-0 w-full bg-white z-50 shadow-sm">
+        <div className="container-header fixed top-0 left-0 w-full bg-white  z-50 shadow-sm">
           <Header />
         </div>
-        <div className="card-container mt-20 justify-center flex gap-3 flex-wrap">
+        <div className="card-container mt-20 justify-center bg-red flex gap-3  flex-wrap">
           {data.map((bus) => (
             <IonCard key={bus.id} className="fixed-card-size bg-gray-50 shadow-xl rounded-3xl w-[300px] h-[100%]">
               {loadedImages.includes(bus.image) && (

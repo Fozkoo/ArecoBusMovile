@@ -4,11 +4,11 @@ import { LatLng, LatLngExpression, LatLngTuple } from 'leaflet';
 import { IconBusStop, Markers, customIcon } from '../service/Markers';
 
 const MapViewDos: React.FC = () => {
-  const [showMap, setShowMap] = useState(false); 
+  const [showMap, setShowMap] = useState(false);
 
   const position: LatLngExpression = [-34.247935, -59.471792]; // cordenadas iniciales de areco
   const ruta: LatLngExpression[] = [
-    [-34.245536, -59.464199],  
+    [-34.245536, -59.464199],
     [-34.240252, -59.468327],
     [-34.241481, -59.477664],
     [-34.243561, -59.477024],
@@ -75,7 +75,7 @@ const MapViewDos: React.FC = () => {
     [-34.254971, -59.456076],
     [-34.263344, -59.446969],
     [-34.298760, -59.329279],
-  
+
   ]
 
 
@@ -104,11 +104,11 @@ const MapViewDos: React.FC = () => {
     return (
       <>
         <button
-            onClick={handleLocation}
-            className="bg-blue-500 left-[30%] z-[1000] text-white px-4 py-2 mt-4 rounded-lg relative"
-          >
-            Ubicarme
-          </button>
+          onClick={handleLocation}
+          className="bg-blue-500 left-[30%] z-[1000] text-white px-4 py-2 mt-4 rounded-lg relative"
+        >
+          Ubicarme
+        </button>
         {userPosition && (
           <Marker position={userPosition}>
             <Popup>¡Estás aquí!</Popup>
@@ -118,7 +118,7 @@ const MapViewDos: React.FC = () => {
     );
 
 
-    
+
   };
 
 
@@ -140,7 +140,9 @@ const MapViewDos: React.FC = () => {
         </div>
         <div className="p-3 text-center">
           <div className={`transition-all duration-500 overflow-hidden ${showMap ? 'h-[350px]' : 'h-[150px]'}`}>
-          <MapContainer className="rounded-lg" center={position} zoom={14} style={{ height: '100%', width: '100%', zIndex: '1' }}>
+
+
+            <MapContainer className="rounded-lg" center={position} zoom={14} style={{ height: '100%', width: '100%', zIndex: '1' }}>
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
@@ -155,7 +157,13 @@ const MapViewDos: React.FC = () => {
               <LocationMarker />
               <UpdateMapSize />
             </MapContainer>
+
+
+
+
           </div>
+
+
 
           <button
             onClick={() => setShowMap(!showMap)}
