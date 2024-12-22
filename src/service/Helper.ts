@@ -4,6 +4,14 @@ const URL = 'https://api.arecobus.cfl401areco.edu.ar/api/buses';//https://api.ar
 const URLHORARIOS = 'https://api.arecobus.cfl401areco.edu.ar/api/horario'
 // http://localhost:8080/api/buses  o https://api.arecobus.cfl401areco.edu.ar/api/buses
 
+
+const urlPrueba = "http://localhost:8080/api/recorrido"
+
+
+const test = axios.create({
+    baseURL: urlPrueba
+})
+
 const api = axios.create({
     baseURL: URL
 });
@@ -11,6 +19,18 @@ const api = axios.create({
 const apiHorarios = axios.create({
     baseURL: URLHORARIOS
 });
+
+
+const getCordenadasById = async () => {
+    try {
+        const response = await test.get("/getRecorridoById/1");
+        return response.data;
+    } catch (err) {
+        console.log(err + " error");
+        return [];
+    }
+}
+
 
 
 const getBusInfoConIdDia=async(iddia:any)=>{
@@ -245,7 +265,8 @@ const methods = {
     infoBusesIdLunes,
     infoBusesIdSabados,
     infoBusesIdDomingo,
-    ricarditoVillaLiaInfoSabados
+    ricarditoVillaLiaInfoSabados,
+    getCordenadasById
 }
 
 export default methods;

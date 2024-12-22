@@ -11,11 +11,12 @@ import MainInfo from "../components/MainInfo";
 import Change from "../components/Change";
 import MapViewDos from "../components/Prueba";
 import helperExport from "../service/FunctionsHelper";
+import methods from "../service/Helper";
 
 interface MasterbusData {
   image: string;
   empresaNombre: string;
-  origen: "AReco";
+  origen: "Areco";
   destino: string;
   horarios: string[];
   puntoPartida: string;
@@ -27,6 +28,7 @@ const PruebaRapida: React.FC = () => {
   const [showAll, setShowAll] = useState<boolean>(false);
   const ionContentRefDo = useRef<HTMLIonContentElement>(null);
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [data, setData] = useState<any>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -68,6 +70,7 @@ const PruebaRapida: React.FC = () => {
     };
   }, []);
 
+  
 
 
   function isActiveFunction() {

@@ -2,9 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap, Polyline } from 'react-leaflet';
 import { LatLng, LatLngExpression, LatLngTuple } from 'leaflet';
 import { IconBusStop, Markers, customIcon } from '../service/Markers';
+import methods from '../service/Helper';
+
 
 const MapViewDos: React.FC = () => {
   const [showMap, setShowMap] = useState(false);
+  const [data, setData] = useState<any[]>([]);
+
+
+  useEffect(() => {
+    console.log('useEffect ejecutado');
+    const fetchData = async () => {
+      try {
+        const data = await methods.getCordenadasById();
+        console.log(data); // Asegúrate de que aquí también se vea el resultado.
+        setData(data);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+      }
+    };
+  
+    fetchData();
+  }, []);
+
+
 
   const position: LatLngExpression = [-34.247935, -59.471792]; // cordenadas iniciales de areco
   const ruta: LatLngExpression[] = [
@@ -50,6 +71,11 @@ const MapViewDos: React.FC = () => {
     [-34.302551, -59.320198]
 
   ];
+
+
+  
+
+
 
   const Markers: LatLngTuple[] = [
     [-34.245477, -59.464183],
