@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import '../theme/variables.css';
 import MapView from '../components/MapView';
 import Loader from '../components/Loader';
+import methods from '../service/Helper';
 
 function PuntosSube() {
   const [loading, setLoading] = useState(true);
@@ -16,6 +17,11 @@ function PuntosSube() {
 
     return () => clearTimeout(timer);
   }, []);
+
+
+  
+
+
 
   return (
     <IonApp>

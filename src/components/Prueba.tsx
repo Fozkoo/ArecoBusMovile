@@ -6,30 +6,13 @@ import methods from '../service/Helper';
 
 
 const MapViewDos: React.FC = () => {
-  const [showMap, setShowMap] = useState(false);
-  const [data, setData] = useState<any[]>([]);
+  const [showMap, setShowMap] = useState(false); 
 
-
-  useEffect(() => {
-    console.log('useEffect ejecutado');
-    const fetchData = async () => {
-      try {
-        const data = await methods.getCordenadasById();
-        console.log(data); // Asegúrate de que aquí también se vea el resultado.
-        setData(data);
-      } catch (err) {
-        console.error('Error fetching data:', err);
-      }
-    };
-  
-    fetchData();
-  }, []);
-
-
-
+// Buenos Aires
   const position: LatLngExpression = [-34.247935, -59.471792]; // cordenadas iniciales de areco
   const ruta: LatLngExpression[] = [
-    [-34.245536, -59.464199],
+    [-34.245536, -59.464199],  // Buenos Aires
+    [-34.245536, -59.464199],  
     [-34.240252, -59.468327],
     [-34.241481, -59.477664],
     [-34.243561, -59.477024],
@@ -71,11 +54,6 @@ const MapViewDos: React.FC = () => {
     [-34.302551, -59.320198]
 
   ];
-
-
-  
-
-
 
   const Markers: LatLngTuple[] = [
     [-34.245477, -59.464183],
@@ -130,11 +108,11 @@ const MapViewDos: React.FC = () => {
     return (
       <>
         <button
-          onClick={handleLocation}
-          className="bg-blue-500 left-[30%] z-[1000] text-white px-4 py-2 mt-4 rounded-lg relative"
-        >
-          Ubicarme
-        </button>
+            onClick={handleLocation}
+            className="bg-blue-500 left-[30%] z-[1000] text-white px-4 py-2 mt-4 rounded-lg relative"
+          >
+            Ubicarme
+          </button>
         {userPosition && (
           <Marker position={userPosition}>
             <Popup>¡Estás aquí!</Popup>
@@ -157,6 +135,7 @@ const MapViewDos: React.FC = () => {
     return null;
   };
 
+
   return (
     <div className="container-punto-partida bg-gray-100  p-8">
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
@@ -166,9 +145,7 @@ const MapViewDos: React.FC = () => {
         </div>
         <div className="p-3 text-center">
           <div className={`transition-all duration-500 overflow-hidden ${showMap ? 'h-[350px]' : 'h-[150px]'}`}>
-
-
-            <MapContainer className="rounded-lg" center={position} zoom={14} style={{ height: '100%', width: '100%', zIndex: '1' }}>
+          <MapContainer className="rounded-lg" center={position} zoom={14} style={{ height: '100%', width: '100%', zIndex: '1' }}>
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
@@ -183,20 +160,7 @@ const MapViewDos: React.FC = () => {
               <LocationMarker />
               <UpdateMapSize />
             </MapContainer>
-
-
-
-
           </div>
-
-
-
-          <button
-            onClick={() => setShowMap(!showMap)}
-            className="bg-blue-500 text-white px-4 py-2 mt-4 rounded-lg"
-          >
-            {showMap ? 'Mostrar menos' : 'Ver mapa completo'}
-          </button>
         </div>
       </div>
     </div>

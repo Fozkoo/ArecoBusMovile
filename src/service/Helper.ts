@@ -7,6 +7,12 @@ const URLHORARIOS = 'https://api.arecobus.cfl401areco.edu.ar/api/horario'
 
 const urlPrueba = "http://localhost:8080/api/recorrido"
 
+const dataPuntoSube = "http://localhost:8080/api/puntosSube"
+
+
+const puntoSube = axios.create({
+    baseURL: dataPuntoSube
+})
 
 const test = axios.create({
     baseURL: urlPrueba
@@ -21,9 +27,22 @@ const apiHorarios = axios.create({
 });
 
 
-const getCordenadasById = async () => {
+const getAllPuntosSube = async () => {
     try {
-        const response = await test.get("/getRecorridoById/1");
+        const response = await puntoSube.get("/getAllPuntosSube");
+        return response.data;
+    } catch (err) {
+        console.log(err + " error");
+        return [];
+    }
+}
+
+
+
+
+const getCordenadasById = async (idcoordenada:any) => {
+    try {
+        const response = await test.get("/getRecorridoById/"+idcoordenada);
         return response.data;
     } catch (err) {
         console.log(err + " error");
@@ -266,7 +285,8 @@ const methods = {
     infoBusesIdSabados,
     infoBusesIdDomingo,
     ricarditoVillaLiaInfoSabados,
-    getCordenadasById
+    getCordenadasById,
+    getAllPuntosSube
 }
 
 export default methods;

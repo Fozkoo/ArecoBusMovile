@@ -12,6 +12,9 @@ import Change from "../components/Change";
 import MapViewDos from "../components/Prueba";
 import helperExport from "../service/FunctionsHelper";
 import methods from "../service/Helper";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
+
+import "..//theme/variables.css"
 
 interface MasterbusData {
   image: string;
@@ -20,7 +23,7 @@ interface MasterbusData {
   destino: string;
   horarios: string[];
   puntoPartida: string;
-  proximoHorario?: string; // Añadir campo para el próximo horario
+  proximoHorario?: string;
 }
 
 const PruebaRapida: React.FC = () => {
@@ -30,6 +33,7 @@ const PruebaRapida: React.FC = () => {
   const [isActive, setIsActive] = useState<boolean>(false);
   const [data, setData] = useState<any>(null);
 
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -70,7 +74,20 @@ const PruebaRapida: React.FC = () => {
     };
   }, []);
 
-  
+  useEffect(() => {
+    console.log('useEffect ejecutado');
+    const fetchData = async () => {
+      try {
+        const data = await methods.getCordenadasById("1");
+        console.log(data); 
+        setData(data);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+      }
+    };
+    fetchData();
+  }, []);
+
 
 
   function isActiveFunction() {
@@ -89,7 +106,12 @@ const PruebaRapida: React.FC = () => {
     return currentTime >= startTime && currentTime <= endTime;
   }
 
-  const iframeSrc = "https://www.google.com/maps/embed?pb=!4v1729101268639!6m8!1m7!1sVep0fKFlLubfdTr_li-IMQ!2m2!1d-34.24556233752934!2d-59.46422813436158!3f127.12797742291491!4f-0.6850647082959824!5f0.7820865974627469"
+
+
+
+
+
+
 
   return (
     <>
@@ -123,7 +145,7 @@ const PruebaRapida: React.FC = () => {
               setShowAll={setShowAll}
             />
 
-            <MapViewDos />
+
 
             {/* 
             <StartPoint puntoPartida={masterbusData.puntoPartida} src={iframeSrc} />

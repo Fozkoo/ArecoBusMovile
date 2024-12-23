@@ -1,6 +1,35 @@
 import L from "leaflet";
 import LogoSube from '../images/pin_punto_sube.svg';
 import logo from '..//..//public/posibleIconoEnAzul (1).svg';
+import { useEffect, useState } from "react";
+import methods from "./Helper";
+
+  const [data, setData] = useState([]);
+  const [PuntosSube, setPuntosSube] = useState([]); // Estado para guardar las coordenadas
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await methods.getAllPuntosSube();
+        setData(response);
+        
+        // Extraemos las coordenadas y las guardamos en PuntosSube
+        const coordenadas = response.map((punto: { geocode: [number, number] }) => ({
+          lat: punto.geocode[0], // Latitud
+          lng: punto.geocode[1]  // Longitud
+        }));
+        setPuntosSube(coordenadas); // Actualizamos el estado de PuntosSube
+  
+        console.log(response);
+        console.log(coordenadas); // Verifica las coordenadas en consola
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+  
+    fetchData();
+  }, []);
+ 
 
 const Markers = [
 
