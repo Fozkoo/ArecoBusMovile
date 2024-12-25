@@ -66,6 +66,8 @@ const MapView: React.FC = () => {
             position={marker.geocode as LatLngTuple}
             icon={customIcon}
           >
+
+            
             <Popup>
               <IonCard>
               
