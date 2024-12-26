@@ -4,12 +4,13 @@ import { FaBus, FaClock } from "react-icons/fa";
 interface SchedulesProps {
     horarios: string[];
     destino: string;
+    dias: string;
     formatHoraAmPm: (horario: string) => string;
     showAll: boolean;
     setShowAll: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SchedulesTable: React.FC<SchedulesProps> = ({ horarios, destino, formatHoraAmPm, showAll, setShowAll }) => {
+const SchedulesTable: React.FC<SchedulesProps> = ({dias, horarios, destino, formatHoraAmPm, showAll, setShowAll }) => {
     // Función para determinar si un horario ha pasado
     const isHorarioPasado = (horario: string): boolean => {
         const [horas, minutos] = horario.split(':').map(Number);
@@ -26,7 +27,7 @@ const SchedulesTable: React.FC<SchedulesProps> = ({ horarios, destino, formatHor
             <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
                 <div className="p-6 bg-blue-600 text-white">
                     <h1 className="text-3xl font-bold mb-2">Horarios Disponibles</h1>
-                    <p className="text-white font-medium">Lunes a Viernes</p>
+                    <p className="text-white font-medium">{dias}</p>
                 </div>
                 <div className="p-6">
                     <div className="overflow-x-auto">

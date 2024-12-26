@@ -15,6 +15,7 @@ import methods from "../service/Helper";
 import { MapContainer, TileLayer, useMap } from "react-leaflet";
 
 import "..//theme/variables.css"
+import RecorridosParadas from "../components/RecorridosParadas";
 
 interface MasterbusData {
   image: string;
@@ -32,8 +33,10 @@ const PruebaRapida: React.FC = () => {
   const ionContentRefDo = useRef<HTMLIonContentElement>(null);
   const [isActive, setIsActive] = useState<boolean>(false);
   const [data, setData] = useState<any>(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
+ const [masterbusDataDomingo, setMasterbusDataDomingo] = useState<MasterbusData | null>(null);
 
-  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -79,7 +82,7 @@ const PruebaRapida: React.FC = () => {
     const fetchData = async () => {
       try {
         const data = await methods.getCordenadasById("1");
-        console.log(data); 
+        console.log(data);
         setData(data);
       } catch (err) {
         console.error('Error fetching data:', err);
@@ -107,6 +110,29 @@ const PruebaRapida: React.FC = () => {
   }
 
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [data1, data3] = await Promise.all([
+          Helper.masterbusInfo(),
+          Helper.masterbusInfoDomingo(),
+        ]);
+
+        if (data3.length > 0) {
+          data3[0].horarios.sort();  
+        }
+
+        setMasterbusData(data1.length > 0 ? data1[0] : null);
+        setMasterbusDataDomingo(data3.length > 0 ? data3[0] : null);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+        setError('Error al cargar la información');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  },[])
 
 
 
@@ -138,6 +164,7 @@ const PruebaRapida: React.FC = () => {
             />
 
             <SchedulesTable
+              dias="Lunes a Viernes"
               horarios={masterbusData.horarios}
               destino={masterbusData.destino}
               formatHoraAmPm={helperExport.formatHoraAmPm}
@@ -145,11 +172,19 @@ const PruebaRapida: React.FC = () => {
               setShowAll={setShowAll}
             />
 
+            {masterbusDataDomingo && (
+              <SchedulesTable
+                dias="Sabados, Domingos y Feriados"
+                horarios={masterbusDataDomingo.horarios}
+                destino={masterbusData.destino}
+                formatHoraAmPm={helperExport.formatHoraAmPm}
+                showAll={showAll}
+                setShowAll={setShowAll}
+              />
+            )}
 
-
-            {/* 
-            <StartPoint puntoPartida={masterbusData.puntoPartida} src={iframeSrc} />
-            */}
+            <RecorridosParadas/>
+            
 
             <Change />
             <Up ionContentRef={ionContentRefDo} />
