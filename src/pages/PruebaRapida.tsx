@@ -77,19 +77,7 @@ const PruebaRapida: React.FC = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log('useEffect ejecutado');
-    const fetchData = async () => {
-      try {
-        const data = await methods.getCordenadasById("1");
-        console.log(data);
-        setData(data);
-      } catch (err) {
-        console.error('Error fetching data:', err);
-      }
-    };
-    fetchData();
-  }, []);
+
 
 
 

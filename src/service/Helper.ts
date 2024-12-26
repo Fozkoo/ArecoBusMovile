@@ -9,6 +9,12 @@ const urlPrueba = "http://localhost:8080/api/recorrido"
 
 const dataPuntoSube = "http://localhost:8080/api/puntosSube"
 
+const coordenadas = "http://localhost:8080/api/coordenadas"
+
+
+const createCoordenadass = axios.create({
+    baseURL: coordenadas
+})
 
 const puntoSube = axios.create({
     baseURL: dataPuntoSube
@@ -37,7 +43,14 @@ const getAllPuntosSube = async () => {
     }
 }
 
-
+const createCoordenadas = async (coordenadas:any) => {
+    try {
+        const response = await createCoordenadass.post("/createCoordenadas", coordenadas);
+        return response.data;
+    } catch (err) {
+        console.log(err + " error");
+    }
+}
 
 
 const getCordenadasById = async (idcoordenada:any) => {
@@ -286,7 +299,8 @@ const methods = {
     infoBusesIdDomingo,
     ricarditoVillaLiaInfoSabados,
     getCordenadasById,
-    getAllPuntosSube
+    getAllPuntosSube,
+    createCoordenadas
 }
 
 export default methods;

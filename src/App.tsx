@@ -10,9 +10,12 @@ import Home from './pages/Home';
 import '@fontsource-variable/onest';
 import PuntosSube from './pages/PuntosSube';
 import PageTesting from './pages/PageTesting';
+import Admin from './pages/Admin';
 
 import TestPage from './pages/TestPage';
 import PruebaRapida from './pages/PruebaRapida';
+import PersistentBottomSheet from './components/PersistentBottomSheet';
+import ExampleApp from './pages/testing';
 
 setupIonicReact();
 
@@ -29,6 +32,10 @@ const App: React.FC = () => (
         <Route exact path="/home" component={Home} />
         <Route exact path="/PuntosSube" component={PuntosSube} />
         <Route exact path="/PruebaRapida" component={PruebaRapida} />
+        <Route exact path="/Admin" component={Admin} />
+        <Route exact path="/PersistentBottomSheet" component={PersistentBottomSheet} />
+        <Route exact path="/ExampleApp" component={ExampleApp} />
+        
         <Redirect exact path="/" to="/home" />
       </IonRouterOutlet>
 
