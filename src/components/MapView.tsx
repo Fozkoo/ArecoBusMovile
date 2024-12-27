@@ -22,7 +22,6 @@ const MapView: React.FC = () => {
       try {
         const response = await methods.getAllPuntosSube();
         setData(response);
-        console.log(response);
 
         // Transformamos la respuesta para obtener el formato deseado, incluyendo la imagen, descripción y horarios
         const markersData = response.map((punto: {
@@ -39,8 +38,7 @@ const MapView: React.FC = () => {
           urlimagen: punto.urlimagen,
         }));
 
-        setMarkers(markersData);
-        console.log(markersData); // Verifica que los datos son correctos
+        setMarkers(markersData); // Verifica que los datos son correctos
       } catch (error) {
         console.error('Error:', error);
       }

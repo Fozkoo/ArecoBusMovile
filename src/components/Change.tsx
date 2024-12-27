@@ -11,7 +11,7 @@ const Change = () => {
         <>
             <Link
                 to='#'
-                className="globo fixed top-[83%] left-[75%] w-[45px] h-[45px] bg-blue-500 rounded-full cursor-pointer flex justify-center items-center"
+                className="globo fixed !z-50 top-[83%] left-[75%] w-[45px] h-[45px] bg-blue-500 rounded-full cursor-pointer flex justify-center items-center"
             >
                 <IonIcon icon={swapHorizontalOutline} className="w-[30px] h-[30px] text-white" />
             </Link>

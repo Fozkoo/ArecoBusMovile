@@ -30,6 +30,7 @@ const App: React.FC = () => (
     <IonTabs>
       <IonRouterOutlet id="main-content">
         <Route exact path="/home" component={Home} />
+        {/* */}
         <Route exact path="/PuntosSube" component={PuntosSube} />
         <Route exact path="/PruebaRapida" component={PruebaRapida} />
         <Route exact path="/Admin" component={Admin} />

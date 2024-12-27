@@ -173,7 +173,7 @@ const PruebaRapida: React.FC = () => {
 
             <RecorridosParadas/>
             
-
+            
             <Change />
             <Up ionContentRef={ionContentRefDo} />
           </>

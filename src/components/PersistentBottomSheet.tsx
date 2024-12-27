@@ -7,7 +7,7 @@ import { useSpring, animated } from 'react-spring';
 
 import { ReactNode } from 'react';
 
-const PersistentBottomSheet = ({ children, minHeight = 100, maxHeight = 400 }: { children: ReactNode, minHeight?: number, maxHeight?: number }) => {
+const PersistentBottomSheet = ({ children, minHeight = 260, maxHeight = 400 }: { children: ReactNode, minHeight?: number, maxHeight?: number }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   
   const springProps = useSpring({
@@ -22,18 +22,18 @@ const PersistentBottomSheet = ({ children, minHeight = 100, maxHeight = 400 }: {
     <div className="fixed inset-x-0 bg-red z-50 bottom-0">
       <animated.div 
         style={springProps}
-        className="bg-red-600 rounded-t-xl shadow-lg w-full overflow-hidden"
+        className="bg-white  rounded-t-2xl flex flex-col mx-2 shadow-lg  overflow-hidden"
       >
         {/* Handle bar for dragging */}
         <div 
-          className="w-full bg-red-700 py-4 cursor-pointer"
+          className="w-full  py-4 cursor-pointer"
           onClick={() => setIsExpanded(!isExpanded)}
         >
           <div className="w-12 h-1 bg-gray-300 rounded-full mx-auto" />
         </div>
         
         {/* Content area */}
-        <div className="px-4 bg-red-600 overflow-y-auto">
+        <div className="px-4  overflow-y-auto">
           {children}
         </div>
       </animated.div>
