@@ -103,35 +103,7 @@ function PuntosSube() {
                 <MapView />
               </div>
 
-              <PersistentBottomSheet>
-                <div className="container-title-punto-sube flex justify-center items-center text-center flex-col w-full">
-                  <h2 className="text-2xl font-bold text-black">Puntos SUBE</h2>
-                  <p className="text-base text-black bg-bl font-semibold">
-                    Encontrá tu punto SUBE más cercano
-                  </p>
-                </div>
 
-                <div className="container-cards flex flex-col gap-3 my-3">
-                  {puntosOrdenados.map((punto, index) => {
-                    let distanceLabel =
-                      punto.distance < 1
-                        ? `${(punto.distance * 1000).toFixed(0)} m`
-                        : `${punto.distance.toFixed(2)} km`;
-
-                    return (
-                      <CardPuntoSube
-                        key={index}
-                        nombre={punto.nombre}
-                        descripcion={punto.descripcion}
-                        distance={userLocation ? distanceLabel : "Ubicación no disponible"}
-                        horario={punto.horariosapertura}
-                        urlimagen={punto.urlimagen}
-                        urllogo={punto.urlimagen}
-                      />
-                    );
-                  })}
-                </div>
-              </PersistentBottomSheet>
             </div>
           </div>
         )}
