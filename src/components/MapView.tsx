@@ -5,8 +5,7 @@ import '../theme/variables.css';
 import { customIcon } from '../service/Markers'; 
 import { LatLngTuple, Icon } from 'leaflet';
 import methods from '../service/Helper';
-import { IonCard, IonButton, IonIcon } from '@ionic/react';
-import { locate } from 'ionicons/icons';
+import { IonCard } from '@ionic/react';
 
 const userLocationIcon = new Icon({
   iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
@@ -26,17 +25,20 @@ const MapView: React.FC = () => {
   const [userLocation, setUserLocation] = useState<LatLngTuple | null>(null);
 
   useEffect(() => {
-    // Obtener ubicación inicial
+    let watchId: number;
+
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
+      // Rastrear ubicación continuamente
+      watchId = navigator.geolocation.watchPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setUserLocation([latitude, longitude]);
+          setUserLocation([latitude, longitude]); // Actualiza la ubicación del usuario
         },
         (error) => {
-          console.error("Error al obtener la ubicación del usuario", error);
-          setUserLocation([-34.243774, -59.473800]); // Ubicación por defecto
-        }
+          console.error("Error al rastrear la ubicación del usuario", error);
+          setUserLocation([-34.243774, -59.473800]); // Ubicación por defecto en caso de error
+        },
+        { enableHighAccuracy: true, maximumAge: 0 } // Configuración para alta precisión
       );
     } else {
       console.log("Geolocalización no soportada por este navegador");
@@ -69,24 +71,16 @@ const MapView: React.FC = () => {
     };
 
     fetchData();
+
+    // Limpieza al desmontar el componente
+    return () => {
+      if (navigator.geolocation && watchId) {
+        navigator.geolocation.clearWatch(watchId);
+      }
+    };
   }, []);
 
-  // Reubicar mapa según la ubicación del usuario
-  const recenterMap = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setUserLocation([latitude, longitude]);
-        },
-        (error) => {
-          console.error("Error al obtener la ubicación", error);
-        }
-      );
-    }
-  };
-
-  // Componente para mover el mapa
+  // Componente para mover el mapa según la ubicación
   const FlyToLocation = ({ location }: { location: LatLngTuple | null }) => {
     const map = useMap();
     useEffect(() => {
@@ -144,14 +138,6 @@ const MapView: React.FC = () => {
           </Marker>
         )}
       </MapContainer>
-      {/* Botón para reubicar */}
-      <IonButton
-        className="absolute bottom-5 right-5 z-[1000] bg-blue-500 text-white"
-        onClick={recenterMap}
-      >
-        <IonIcon icon={locate} />
-        Ubicarme
-      </IonButton>
     </div>
   );
 };
