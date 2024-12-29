@@ -32,7 +32,7 @@ const Markers = [
 
 const customIcon = new L.Icon({
     iconUrl: LogoSube,
-    iconSize: [50, 50],
+    iconSize: [35, 35],
     iconAnchor: [25, 16]
   });
 

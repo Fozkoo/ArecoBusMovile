@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import '../theme/variables.css';
-import { customIcon } from '../service/Markers'; // Asegúrate de que customIcon está bien importado
+import { customIcon } from '../service/Markers'; 
 import { LatLngTuple } from 'leaflet';
 import methods from '../service/Helper';
 import { IonCard } from '@ionic/react';
@@ -16,14 +16,31 @@ const MapView: React.FC = () => {
     horariocierre: string;
     urlimagen: string;
   }[]>([]);
+  
+  const [userLocation, setUserLocation] = useState<LatLngTuple | null>(null); 
 
   useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          setUserLocation([latitude, longitude]); 
+        },
+        (error) => {
+          console.error("Error al obtener la ubicación del usuario", error);
+
+          setUserLocation([-34.243774, -59.473800]);
+        }
+      );
+    } else {
+      console.log("Geolocalización no soportada por este navegador");
+      setUserLocation([-34.243774, -59.473800]); 
+    }
+
     const fetchData = async () => {
       try {
         const response = await methods.getAllPuntosSube();
         setData(response);
-
-        // Transformamos la respuesta para obtener el formato deseado, incluyendo la imagen, descripción y horarios
         const markersData = response.map((punto: {
           geocode: LatLngTuple;
           descripcion: string;
@@ -38,7 +55,7 @@ const MapView: React.FC = () => {
           urlimagen: punto.urlimagen,
         }));
 
-        setMarkers(markersData); // Verifica que los datos son correctos
+        setMarkers(markersData); 
       } catch (error) {
         console.error('Error:', error);
       }
@@ -47,9 +64,13 @@ const MapView: React.FC = () => {
     fetchData();
   }, []);
 
+  if (!userLocation) {
+    return <div>Cargando mapa...</div>; 
+  }
+
   return (
     <MapContainer
-      center={[-34.243774, -59.473800] as LatLngTuple}
+      center={userLocation} 
       zoom={14}
       style={{ height: '100%', width: '100%' }}
     >
@@ -64,11 +85,17 @@ const MapView: React.FC = () => {
             position={marker.geocode as LatLngTuple}
             icon={customIcon}
           >
-
-            
             <Popup>
               <IonCard>
-              
+               
+                <h3>{marker.descripcion}</h3>
+                <p><strong>Horario de apertura:</strong> {marker.horariosapertura}</p>
+                <p><strong>Horario de cierre:</strong> {marker.horariocierre}</p>
+                <img
+                  src={marker.urlimagen}
+                  alt={marker.descripcion}
+                  style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
+                />
               </IonCard>
             </Popup>
           </Marker>
@@ -78,18 +105,3 @@ const MapView: React.FC = () => {
 };
 
 export default MapView;
-
-
-
-{/*
-  
-                  <img
-                  src={marker.urlimagen}
-                  alt={marker.descripcion}
-                  style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
-                />
-                <h3>{marker.descripcion}</h3>
-                <p><strong>Horario de apertura:</strong> {marker.horariosapertura}</p>
-                <p><strong>Horario de cierre:</strong> {marker.horariocierre}</p>
-  
-  */}
