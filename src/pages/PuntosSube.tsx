@@ -9,12 +9,15 @@ import "../theme/variables.css";
 import 'react-spring-bottom-sheet/dist/style.css';
 import PersistentBottomSheet from "../components/PersistentBottomSheet";
 import CardPuntoSube from '../components/CardPuntosSube';
+import FunctionsHelper from "..//service/FunctionsHelper";
 
 function PuntosSube() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any[]>([]);
   const [userLocation, setUserLocation] = useState<{ latitude: number, longitude: number } | null>(null);
 
+
+    // revisar 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
@@ -37,45 +40,17 @@ function PuntosSube() {
   }, []);
 
 
-  function obtenerUbicacion() {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function (posicion) {
-        const latitud = posicion.coords.latitude;
-        const longitud = posicion.coords.longitude;
-        setUserLocation({ latitude: latitud, longitude: longitud });
-      }, function (error) {
-        console.error("Error al obtener la ubicación: " + error.message);
-        setUserLocation(null);
-      });
-    } else {
-      console.error("La geolocalización no es soportada por este navegador.");
-      setUserLocation(null); 
-    }
-  }
-
   useEffect(() => {
-    obtenerUbicacion();
+    FunctionsHelper.obtenerUbicacion();
   }, []);
 
   
-  const calcularDistancia = (lat1: number, lon1: number, lat2: number, lon2: number) => {
-    const R = 6371; 
-    const dLat = (lat2 - lat1) * (Math.PI / 180); 
-    const dLon = (lon2 - lon1) * (Math.PI / 180); 
-    const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(lat1 * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180)) *
-      Math.sin(dLon / 2) * Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distancia = R * c; 
-    return distancia;
-  };
 
   const puntosOrdenados = data
     .map((punto) => {
       if (userLocation) {
         const [lat, lon] = punto.geocode;
-        const distance = calcularDistancia(
+        const distance = FunctionsHelper.calcularDistancia(
           userLocation.latitude,
           userLocation.longitude,
           parseFloat(lat),
@@ -98,11 +73,10 @@ function PuntosSube() {
               <Header />
             </div>
 
-            <div className="container-page pt-[35px] flex items-center mt-7 p-0 flex-col h-[87vh]">
+            <div className="container-page pt-[35px] flex items-center mt-7 p-0 flex-col h-[88vh]">
               <div className="container-map z-20 mt-0 flex w-full h-[100vh] shadow-2xl overflow-hidden items-center justify-center">
                 <MapView />
               </div>
-
 
             </div>
           </div>
