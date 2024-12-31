@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-import logoHeader from '..//../public/ArecoBus-logo.png'
+import logoHeader from '../assets/images/ArecoBus-logo.png'
 import { IonHeader } from '@ionic/react'
 
 function  Header() {
