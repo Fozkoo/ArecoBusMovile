@@ -81,15 +81,7 @@ const MapView: React.FC = () => {
   }, []);
 
   // Componente para mover el mapa según la ubicación
-  const FlyToLocation = ({ location }: { location: LatLngTuple | null }) => {
-    const map = useMap();
-    useEffect(() => {
-      if (location) {
-        map.flyTo(location, 14); // Centrar mapa en la ubicación del usuario
-      }
-    }, [location, map]);
-    return null;
-  };
+
 
   if (!userLocation) {
     return <div>Cargando mapa...</div>; 
@@ -107,7 +99,7 @@ const MapView: React.FC = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
-        <FlyToLocation location={userLocation} />
+
         {markers.length > 0 &&
           markers.map((marker, index) => (
             <Marker
