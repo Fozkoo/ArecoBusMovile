@@ -7,7 +7,7 @@ import { useSpring, animated } from 'react-spring';
 
 import { ReactNode } from 'react';
 
-const PersistentBottomSheet = ({ children, minHeight = 260, maxHeight = 400 }: { children: ReactNode, minHeight?: number, maxHeight?: number }) => {
+const PersistentBottomSheet = ({ children, minHeight = 230, maxHeight = 400 }: { children: ReactNode, minHeight?: number, maxHeight?: number }) => {
   const [isExpanded, setIsExpanded] = useState(false);
   
   const springProps = useSpring({

@@ -10,6 +10,7 @@ import 'react-spring-bottom-sheet/dist/style.css';
 import PersistentBottomSheet from "../components/PersistentBottomSheet";
 import CardPuntoSube from '../components/CardPuntosSube';
 import FunctionsHelper from "..//service/FunctionsHelper";
+import { FiSearch } from 'react-icons/fi';
 
 function PuntosSube() {
   const [loading, setLoading] = useState(true);
@@ -17,7 +18,7 @@ function PuntosSube() {
   const [userLocation, setUserLocation] = useState<{ latitude: number, longitude: number } | null>(null);
 
 
-    // revisar 
+  // revisar 
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
@@ -39,7 +40,7 @@ function PuntosSube() {
     fetchData();
   }, []);
 
-  
+
 
 
 
@@ -55,7 +56,7 @@ function PuntosSube() {
       });
     } else {
       console.error("La geolocalización no es soportada por este navegador.");
-      setUserLocation(null); 
+      setUserLocation(null);
     }
   }
 
@@ -63,7 +64,7 @@ function PuntosSube() {
     obtenerUbicacion();
   }, []);
 
-  
+
 
   const puntosOrdenados = data
     .map((punto) => {
@@ -79,7 +80,8 @@ function PuntosSube() {
       }
       return { ...punto, distance: Infinity };
     })
-    .sort((a, b) => a.distance - b.distance); 
+    .sort((a, b) => a.distance - b.distance);
+
 
   return (
     <IonApp>
@@ -87,16 +89,57 @@ function PuntosSube() {
         {loading ? (
           <Loader />
         ) : (
-          <div>
+          <div className=''>
+            {/* 
             <div className="container-header fixed top-0 left-0 w-full bg-white z-50 shadow-sm">
               <Header />
             </div>
+            */}
 
-            <div className="container-page pt-[35px] flex items-center mt-7 p-0 flex-col h-[88vh]">
+            <div className="flex absolute items-center justify-center mt-5 w-full z-50">
+              <div className='flex justify-center items-center w-[95%]  rounded-full shadow-md px-4 py-2 bg-white'>
+                <FiSearch className="text-gray-500 mr-2" size={20} />
+                <input
+                  type="text"
+                  placeholder="Buscar por nombre"
+                  className="w-full outline-none text-gray-700 placeholder-gray-400"
+                />
+              </div>
+            </div>
+
+            <div className="container-page pt-[0px] flex items-center mt-0 p-0 flex-col h-[88vh]">
               <div className="container-map z-20 mt-0 flex w-full h-[100vh] shadow-2xl overflow-hidden items-center justify-center">
                 <MapView />
               </div>
 
+              <PersistentBottomSheet>
+                <div className="container-title-punto-sube flex justify-center items-center text-center flex-col w-full">
+                  <h2 className="text-2xl font-bold text-black">Puntos SUBE</h2>
+                  <p className="text-base text-black bg-bl font-semibold">
+                    Encontrá tu punto SUBE más cercano
+                  </p>
+                </div>
+
+                <div className="container-cards flex flex-col gap-3 my-3">
+                  {puntosOrdenados.map((punto, index) => {
+                    let distanceLabel =
+                      punto.distance < 1
+                        ? `${(punto.distance * 1000).toFixed(0)} m`
+                        : `${punto.distance.toFixed(2)} km`
+                    return (
+                      <CardPuntoSube
+                        key={index}
+                        nombre={punto.nombre}
+                        descripcion={punto.descripcion}
+                        distance={userLocation ? distanceLabel : "Ubicación no disponible"}
+                        horario={punto.horariosapertura}
+                        urlimagen={punto.urlimagen}
+                        urllogo={punto.urlimagen}
+                      />
+                    );
+                  })}
+                </div>
+              </PersistentBottomSheet>
             </div>
           </div>
         )}

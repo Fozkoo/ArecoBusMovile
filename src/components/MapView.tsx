@@ -28,21 +28,21 @@ const MapView: React.FC = () => {
     let watchId: number;
 
     if (navigator.geolocation) {
-      // Rastrear ubicación continuamente
+      
       watchId = navigator.geolocation.watchPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setUserLocation([latitude, longitude]); // Actualiza la ubicación del usuario
+          setUserLocation([latitude, longitude]); 
         },
         (error) => {
           console.error("Error al rastrear la ubicación del usuario", error);
-          setUserLocation([-34.243774, -59.473800]); // Ubicación por defecto en caso de error
+          setUserLocation([-34.243774, -59.473800]); 
         },
-        { enableHighAccuracy: true, maximumAge: 0 } // Configuración para alta precisión
+        { enableHighAccuracy: true, maximumAge: 0 } 
       );
     } else {
       console.log("Geolocalización no soportada por este navegador");
-      setUserLocation([-34.243774, -59.473800]); // Ubicación por defecto
+      setUserLocation([-34.243774, -59.473800]); 
     }
 
     // Obtener datos de puntos SUBE
@@ -72,7 +72,7 @@ const MapView: React.FC = () => {
 
     fetchData();
 
-    // Limpieza al desmontar el componente
+   
     return () => {
       if (navigator.geolocation && watchId) {
         navigator.geolocation.clearWatch(watchId);
@@ -100,6 +100,7 @@ const MapView: React.FC = () => {
       <MapContainer
         center={userLocation}
         zoom={14}
+        zoomControl={false}
         style={{ height: '100%', width: '100%' }}
       >
         <TileLayer
