@@ -39,9 +39,28 @@ function PuntosSube() {
     fetchData();
   }, []);
 
+  
+
+
+
+  function obtenerUbicacion() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (posicion) {
+        const latitud = posicion.coords.latitude;
+        const longitud = posicion.coords.longitude;
+        setUserLocation({ latitude: latitud, longitude: longitud });
+      }, function (error) {
+        console.error("Error al obtener la ubicación: " + error.message);
+        setUserLocation(null);
+      });
+    } else {
+      console.error("La geolocalización no es soportada por este navegador.");
+      setUserLocation(null); 
+    }
+  }
 
   useEffect(() => {
-    FunctionsHelper.obtenerUbicacion();
+    obtenerUbicacion();
   }, []);
 
   
