@@ -107,7 +107,7 @@ function PuntosSube() {
               </div>
             </div>
 
-            <div className="container-page pt-[0px] flex items-center mt-0 p-0 flex-col h-[88vh]">
+            <div className="container-page h-full pt-[0px] flex items-center mt-0 p-0 flex-col">
               <div className="container-map z-20 mt-0 flex w-full h-[100vh] shadow-2xl overflow-hidden items-center justify-center">
                 <MapView />
               </div>

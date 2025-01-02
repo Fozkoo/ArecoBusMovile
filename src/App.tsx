@@ -25,7 +25,7 @@ const App: React.FC = () => (
 
   
 
-<IonApp>
+<IonApp className='h-full'>
   <IonReactRouter>
     <IonTabs>
       <IonRouterOutlet id="main-content">
