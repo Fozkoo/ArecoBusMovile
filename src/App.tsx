@@ -16,6 +16,7 @@ import TestPage from './pages/TestPage';
 import PruebaRapida from './pages/PruebaRapida';
 import PersistentBottomSheet from './components/PersistentBottomSheet';
 import ExampleApp from './pages/testing';
+import SearchLocality from './pages/SearchLocality';
 
 setupIonicReact();
 
@@ -36,6 +37,7 @@ const App: React.FC = () => (
         <Route exact path="/Admin" component={Admin} />
         <Route exact path="/PersistentBottomSheet" component={PersistentBottomSheet} />
         <Route exact path="/ExampleApp" component={ExampleApp} />
+        <Route exact path="/SearchLocality" component={SearchLocality} />
         
         <Redirect exact path="/" to="/home" />
       </IonRouterOutlet>

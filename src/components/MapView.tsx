@@ -80,7 +80,6 @@ const MapView: React.FC = () => {
     };
   }, []);
 
-  // Componente para mover el mapa según la ubicación
 
 
   if (!userLocation) {

@@ -11,6 +11,8 @@ import PersistentBottomSheet from "../components/PersistentBottomSheet";
 import CardPuntoSube from '../components/CardPuntosSube';
 import FunctionsHelper from "..//service/FunctionsHelper";
 import { FiSearch } from 'react-icons/fi';
+import SearchLocality from "..//pages/SearchLocality";
+import { Link } from 'react-router-dom';
 
 function PuntosSube() {
   const [loading, setLoading] = useState(true);
@@ -95,17 +97,18 @@ function PuntosSube() {
               <Header />
             </div>
             */}
-
-            <div className="flex absolute items-center justify-center mt-5 w-full z-50">
-              <div className='flex justify-center items-center w-[95%]  rounded-full shadow-md px-4 py-2 bg-white'>
-                <FiSearch className="text-gray-500 mr-2" size={20} />
-                <input
-                  type="text"
-                  placeholder="Buscar por nombre"
-                  className="w-full outline-none text-gray-700 placeholder-gray-400"
-                />
+            <Link to="/SearchLocality">
+              <div className="flex absolute items-center justify-center mt-5 w-full z-50">
+                <div className='flex justify-center items-center w-[95%]  rounded-full shadow-md px-4 py-2 bg-white'>
+                  <FiSearch className="text-gray-500 mr-2" size={20} />
+                  <input
+                    type="text"
+                    placeholder="Buscar por nombre"
+                    className="w-full outline-none text-gray-700 placeholder-gray-400"
+                  />
+                </div>
               </div>
-            </div>
+            </Link>
 
             <div className="container-page h-full pt-[0px] flex items-center mt-0 p-0 flex-col">
               <div className="container-map z-20 mt-0 flex w-full h-[100vh] shadow-2xl overflow-hidden items-center justify-center">
