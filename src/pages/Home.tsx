@@ -124,6 +124,8 @@ function Home() {
           <Header />
         </div>
         */}
+
+                {/* aca saque el mt-20!!*/}
         <div className="card-container mt-5 justify-center bg-red flex gap-3  flex-wrap">
           {data.map((bus) => (
             <IonCard key={bus.id} className="fixed-card-size bg-gray-50 shadow-xl rounded-3xl w-[300px] h-[100%]">

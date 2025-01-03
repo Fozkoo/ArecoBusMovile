@@ -105,7 +105,7 @@ function PuntosSube() {
                   <FiSearch className="text-gray-500 mr-2" size={20} />
                   <input
                     type="text"
-                    placeholder="Buscar por nombre"
+                    placeholder="Buscar por localidad"
                     className="w-full outline-none text-gray-700 placeholder-gray-400"
                   />
                 </div>
