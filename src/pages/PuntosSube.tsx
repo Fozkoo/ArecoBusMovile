@@ -12,16 +12,13 @@ import CardPuntoSube from '../components/CardPuntosSube';
 import FunctionsHelper from "..//service/FunctionsHelper";
 import { FiSearch } from 'react-icons/fi';
 import SearchLocality from "..//pages/SearchLocality";
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function PuntosSube() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any[]>([]);
   const [userLocation, setUserLocation] = useState<{ latitude: number, longitude: number } | null>(null);
-  const location = useLocation();
-  const state = location.state as { state?: { latitud?: string; longitud?: string } } || {};
-  const latitud = state.state?.latitud || 0; 
-  const longitud = state.state?.longitud || 0; 
+
   
   
 
@@ -29,7 +26,6 @@ function PuntosSube() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-      console.log('CoordenadasSSS:', latitud, longitud);
     }, 1000);
 
     return () => clearTimeout(timer);

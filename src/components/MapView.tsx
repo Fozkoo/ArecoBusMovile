@@ -45,7 +45,6 @@ const MapView: React.FC = () => {
 
     if (!isNaN(parsedLatitud) && !isNaN(parsedLongitud)) {
       setChangeLocation([parsedLatitud, parsedLongitud]);
-      console.log('Coordenadas:', parsedLatitud, parsedLongitud);
     }
   },[]);
 
