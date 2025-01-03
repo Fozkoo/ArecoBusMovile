@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import '../theme/variables.css';
-import { customIcon } from '../service/Markers'; 
+import { customIcon } from '../service/Markers';
 import { LatLngTuple, Icon } from 'leaflet';
 import methods from '../service/Helper';
 import { IonCard } from '@ionic/react';
+import { useLocation } from 'react-router';
+
+
+
+
 
 const userLocationIcon = new Icon({
   iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
@@ -23,32 +28,47 @@ const MapView: React.FC = () => {
     horariocierre: string;
     urlimagen: string;
   }[]>([]);
-  
-
-
   const [userLocation, setUserLocation] = useState<LatLngTuple | null>(null);
+  const location = useLocation();
+  const state = location.state as { state?: { latitud?: string; longitud?: string } } || {};
+  const latitud = state.state?.latitud || "null";
+  const longitud = state.state?.longitud || "null";
 
+
+
+  const [changeLocation, setChangeLocation] = useState<LatLngTuple | null>(null);
+
+  useEffect(() => {
+    
+    const parsedLatitud = parseFloat(latitud);
+    const parsedLongitud = parseFloat(longitud);
+
+    if (!isNaN(parsedLatitud) && !isNaN(parsedLongitud)) {
+      setChangeLocation([parsedLatitud, parsedLongitud]);
+      console.log('Coordenadas:', parsedLatitud, parsedLongitud);
+    }
+  },[]);
 
 
   useEffect(() => {
     let watchId: number;
 
     if (navigator.geolocation) {
-      
+
       watchId = navigator.geolocation.watchPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
-          setUserLocation([latitude, longitude]); 
+          setUserLocation([latitude, longitude]);
         },
         (error) => {
           console.error("Error al rastrear la ubicación del usuario", error);
-          setUserLocation([-34.243774, -59.473800]); 
+          setUserLocation([-34.243774, -59.473800]);
         },
-        { enableHighAccuracy: true, maximumAge: 0 } 
+        { enableHighAccuracy: true, maximumAge: 0 }
       );
     } else {
       console.log("Geolocalización no soportada por este navegador");
-      setUserLocation([-34.243774, -59.473800]); 
+      setUserLocation([-34.243774, -59.473800]);
     }
 
     // Obtener datos de puntos SUBE
@@ -78,7 +98,7 @@ const MapView: React.FC = () => {
 
     fetchData();
 
-   
+
     return () => {
       if (navigator.geolocation && watchId) {
         navigator.geolocation.clearWatch(watchId);
@@ -89,13 +109,13 @@ const MapView: React.FC = () => {
 
 
   if (!userLocation) {
-    return <div>Cargando mapa...</div>; 
+    return <div>Cargando mapa...</div>;
   }
 
   return (
     <div className="relative w-full h-full">
       <MapContainer
-        center={userLocation}
+        center={changeLocation ? changeLocation : userLocation}
         zoom={14}
         zoomControl={false}
         style={{ height: '100%', width: '100%' }}
