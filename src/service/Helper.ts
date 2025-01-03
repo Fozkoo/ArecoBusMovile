@@ -12,6 +12,13 @@ const dataPuntoSube = "http://localhost:8080/api/puntosSube"
 const coordenadas = "http://localhost:8080/api/coordenadas"
 
 
+const localidades = "http://localhost:8080/api/localidad"
+
+
+const createLocalidades = axios.create({
+    baseURL: localidades
+})
+
 const createCoordenadass = axios.create({
     baseURL: coordenadas
 })
@@ -31,6 +38,16 @@ const api = axios.create({
 const apiHorarios = axios.create({
     baseURL: URLHORARIOS
 });
+
+const getAllLocalidades = async () => {
+    try {
+        const response = await createLocalidades.get("/getAllLocalidades");
+        return response.data;
+    } catch (err) {
+        console.log(err + " error");
+        return [];
+    }
+}
 
 
 const getAllPuntosSube = async () => {
@@ -300,7 +317,8 @@ const methods = {
     ricarditoVillaLiaInfoSabados,
     getCordenadasById,
     getAllPuntosSube,
-    createCoordenadas
+    createCoordenadas,
+    getAllLocalidades
 }
 
 export default methods;

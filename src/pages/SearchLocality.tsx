@@ -1,45 +1,43 @@
 import { IonContent } from "@ionic/react";
-import { ArrowLeft } from 'lucide-react';
-import { Search } from 'lucide-react';
-import { History } from 'lucide-react';
+import { ArrowLeft, Search, History } from 'lucide-react';
+import { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import methods from "../service/Helper";
 
 const SearchLocality: React.FC = () => {
-
+    const [data, setData] = useState<Localidad[]>([]);
+    const [searchTerm, setSearchTerm] = useState<string>("");
     const history = useHistory();
 
-    const handlePlaceSelect = (latitude: number, longitude: number) => {
-        history.push('/PuntosSube', { state: { latitude, longitude } });
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await methods.getAllLocalidades();
+                setData(response);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        fetchData();
+    }, []);
+
+    interface Localidad {
+        idlocalidad: number;
+        nombre: string;
+        provincia?: string;
+        latitud: string;
+        longitud: string;
+    }
+
+
+
+    const handlePlaceSelect = (latitud: string, longitud: string) => {
+        history.push('/PuntosSube', { state: { latitud, longitud } });
     };
 
-
-    const places = [
-        {
-            id: 1,
-            name: 'San Antonio de Areco',
-            province: 'Buenos Aires',
-            country: 'Argentina',
-            latitude: -34.2456,
-            longitude: -59.4716,
-        },
-        {
-            id: 2,
-            name: 'San Andes de Giles',
-            province: 'Buenos Aires',
-            country: 'Argentina',
-            latitude: -34.4492,
-            longitude: -59.4473,
-        },
-        {
-            id: 3,
-            name: 'Pilar',
-            province: 'Buenos Aires',
-            country: 'Argentina',
-            latitude: -34.4588,
-            longitude: -58.9148,
-        },
-    ];
-
+    const filteredData = data.filter((item) =>
+        item.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+    );
 
     return (
         <>
@@ -57,6 +55,8 @@ const SearchLocality: React.FC = () => {
                                 type="text"
                                 placeholder="Buscar por localidad"
                                 className="w-full bg-transparent outline-none text-gray-600 placeholder-gray-400"
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
                             />
                         </div>
                     </div>
@@ -70,19 +70,20 @@ const SearchLocality: React.FC = () => {
                         </div>
 
                         <div className="mt-4">
-                            {places.map((place) => (
+                            {filteredData.map((item) => (
                                 <div
-                                    key={place.id}
+                                    key={item.idlocalidad}
                                     className="flex items-center justify-between p-4 rounded-lg shadow-sm cursor-pointer"
-                                    onClick={() => handlePlaceSelect(place.latitude, place.longitude)}
+                                    onClick={() => handlePlaceSelect(item.latitud, item.longitud)}
                                 >
                                     <div className="flex flex-col gap-2">
-                                        <h3 className="text-lg font-medium">{place.name}</h3>
-                                        {place.province && (
-                                            <p className="text-sm text-gray-500">{place.province}, {place.country}</p>
+                                        <h3 className="text-lg font-medium">{item.nombre}</h3>
+                                        {item.provincia && (
+                                            <p className="text-sm text-gray-500">{item.provincia}</p>
                                         )}
                                     </div>
                                 </div>
+                                
                             ))}
                         </div>
                     </div>

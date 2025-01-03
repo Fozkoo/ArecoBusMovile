@@ -12,6 +12,8 @@ const userLocationIcon = new Icon({
   iconSize: [25, 25], // Tamaño del ícono
 });
 
+
+
 const MapView: React.FC = () => {
   const [data, setData] = useState([]);
   const [markers, setMarkers] = useState<{
@@ -22,7 +24,11 @@ const MapView: React.FC = () => {
     urlimagen: string;
   }[]>([]);
   
+
+
   const [userLocation, setUserLocation] = useState<LatLngTuple | null>(null);
+
+
 
   useEffect(() => {
     let watchId: number;
