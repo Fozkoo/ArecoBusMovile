@@ -4,16 +4,11 @@ import Header from '../components/Header';
 import '../theme/variables.css';
 import Loader from '../components/Loader';
 import TestPage from './TestPage';
-import PruebaRapida from './PruebaRapida';
-
 import helper from "../service/Helper";
 import helperExport from "..//service/FunctionsHelper";
 import { Link } from 'react-router-dom';
-
 import "..//theme/variables.css";
 
-import { addCircleOutline } from "ionicons/icons";
-import { notificationsCircleOutline } from "ionicons/icons";
 
 interface Bus {
   id: number;
@@ -124,10 +119,12 @@ function Home() {
   return (
     <IonApp>
       <IonContent>
+        {/*
         <div className="container-header fixed top-0 left-0 w-full bg-white  z-50 shadow-sm">
           <Header />
         </div>
-        <div className="card-container mt-20 justify-center bg-red flex gap-3  flex-wrap">
+        */}
+        <div className="card-container mt-5 justify-center bg-red flex gap-3  flex-wrap">
           {data.map((bus) => (
             <IonCard key={bus.id} className="fixed-card-size bg-gray-50 shadow-xl rounded-3xl w-[300px] h-[100%]">
               {loadedImages.includes(bus.image) && (
