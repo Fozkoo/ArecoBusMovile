@@ -119,7 +119,7 @@ function PuntosSube() {
 
               <PersistentBottomSheet>
                 <div className="container-title-punto-sube flex justify-center items-center text-center flex-col w-full">
-                  <p className="text-base text-white w-80 bg-[#3B82F6]   p-1 rounded-full font-semibold">
+                  <p className="text-base text-white w-[80%] bg-[#3B82F6]   p-1 rounded-full font-semibold">
                     ¡Descubre tu punto SUBE más cercano!
                   </p>
                 </div>
