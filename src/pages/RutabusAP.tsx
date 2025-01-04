@@ -167,9 +167,9 @@ const RutabusAP: React.FC = () => {
               setShowAll={setShowAll}
             />
           )}
-
+        {/* 
           <RecorridosParadas />
-
+        */}
           <Change path="/home" />
           <Up ionContentRef={ionContentRefDo} />
         </>

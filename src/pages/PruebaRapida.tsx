@@ -171,7 +171,9 @@ const PruebaRapida: React.FC = () => {
               />
             )}
 
-            <RecorridosParadas/>
+        {/* 
+          <RecorridosParadas />
+        */}
             
             
             <Change 
