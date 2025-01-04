@@ -19,8 +19,8 @@ function PuntosSube() {
   const [data, setData] = useState<any[]>([]);
   const [userLocation, setUserLocation] = useState<{ latitude: number, longitude: number } | null>(null);
 
-  
-  
+
+
 
   // revisar 
   useEffect(() => {
@@ -119,9 +119,8 @@ function PuntosSube() {
 
               <PersistentBottomSheet>
                 <div className="container-title-punto-sube flex justify-center items-center text-center flex-col w-full">
-                  <h2 className="text-2xl font-bold text-black">Puntos SUBE</h2>
-                  <p className="text-base text-black bg-bl font-semibold">
-                    Encontrá tu punto SUBE más cercano
+                  <p className="text-base text-white w-80 bg-blue-400   p-1 rounded-full font-semibold">
+                    ¡Descubre tu punto SUBE más cercano!
                   </p>
                 </div>
 
@@ -152,5 +151,4 @@ function PuntosSube() {
     </IonApp>
   );
 }
-
 export default PuntosSube;
