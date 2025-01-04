@@ -23,7 +23,7 @@ export default function CardPuntoSube({
     <div className="relative bg-white rounded-xl overflow-hidden shadow-md max-w-sm">
       {/* Discount Badge */}
       {horario && (
-        <div className="absolute top-4 left-4 bg-black text-yellow-400 px-3 py-1 rounded-full text-sm font-semibold z-10 flex items-center gap-1">
+        <div className="absolute top-4 left-4 bg-[#3B82F6] text-white px-3 py-1 rounded-full text-sm font-semibold z-10 flex items-center gap-1">
           <Clock3 size={14} />
           <span>08:00 / 21:00</span>
         </div>

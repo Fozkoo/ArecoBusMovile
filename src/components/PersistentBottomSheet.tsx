@@ -18,6 +18,7 @@ const PersistentBottomSheet = ({ children, minHeight = 230, maxHeight = 400 }: {
     }
   });
 
+  
   return (
     <div className="fixed inset-x-0 bg-red z-50 bottom-0">
       <animated.div 
