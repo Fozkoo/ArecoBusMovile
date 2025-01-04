@@ -81,6 +81,9 @@ const PruebaRapida: React.FC = () => {
 
 
 
+
+  
+
   function isActiveFunction() {
     const now = new Date(); // Obtiene la hora actual
     const hour = now.getHours(); // Obtiene la hora en formato 24 horas
@@ -132,9 +135,6 @@ const PruebaRapida: React.FC = () => {
       <IonContent ref={ionContentRefDo}>
         {masterbusData ? (
           <>
-            <IonHeader className="header-z-index">
-              <Header />
-            </IonHeader>
 
             <Banner
               image={masterbusData.image}

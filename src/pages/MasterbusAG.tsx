@@ -3,7 +3,7 @@ import Helper from '../service/Helper';
 import { IonApp, IonContent, IonHeader } from '@ionic/react';
 import Header from '../components/Header';
 import Loader from '../components/Loader'; 
-import TestPage from '..//pages/TestPage'; 
+import TestPage from './ErrorPage'; 
 //import ContainerTitleAndInfo from '../components/ContainterTittleAndInfo';
 //import ContainerHorarios from '../components/ContainerHorarios';
 ////import PuntoDePartida from '../components/PuntoDePartida';

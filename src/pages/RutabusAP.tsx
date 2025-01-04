@@ -1,143 +1,182 @@
-  import React, { useEffect, useState } from 'react';
-  import Helper from '../service/Helper';
-  import { IonContent, IonHeader } from '@ionic/react';
-  import Header from '../components/Header';
-  import TestPage from './TestPage';
-  import Loader from '../components/Loader'; // Asegúrate de importar tu componente Loader
- // import ContainerTitleAndInfo from '..//components/ContainterTittleAndInfo'
-  //import ContainerHorarios from '..//components/ContainerHorarios'
-  //import PuntoDePartida from '..//components/PuntoDePartida'
+import { useEffect, useRef, useState } from "react";
+import Helper from "../service/Helper";
+import helperExport from "../service/FunctionsHelper";
+import { IonContent } from "@ionic/react";
+import Banner from "../components/Banner";
+import MainInfo from "../components/MainInfo";
+import SchedulesTable from "../components/SchedulesTable";
+import RecorridosParadas from "../components/RecorridosParadas";
+import Change from "../components/Change";
+import Up from "../components/Up";
+import Loader from "../components/Loader";
+
+interface rutabusAPData {
+  image: string;
+  empresaNombre: string;
+  origen: "Areco";
+  destino: string;
+  horarios: string[];
+  puntoPartida: string;
+  proximoHorario?: string;
+}
+
+interface rutabusAPDataLunes {
+  horarios: string[];
+}
+
+const RutabusAP: React.FC = () => {
+  const [rutabusAPData, setRutabusAPData] = useState<rutabusAPData | null>(null);
+  const [showAll, setShowAll] = useState<boolean>(false);
+  const ionContentRefDo = useRef<HTMLIonContentElement>(null);
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const [data, setData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [rutabusAPDataDomingo, setRutabusAPDataDomingo] = useState<rutabusAPData | null>(null);
+  const [rutabusAPDataLunes, setRutabusAPDataLunes] = useState<rutabusAPData | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data1 = await Helper.rutabusInfoHorariosLunes();
+        if (Array.isArray(data1) && data1.length > 0) {
+          data1[0].horarios.sort();
+          setRutabusAPData({
+            ...data1[0],
+            proximoHorario: helperExport.proximoColectivo(data1[0].horarios),
+          });
 
 
-  interface RutabusData {
-    image: string;
-    empresaNombre: string;
-    destino: string;
-    origen: string;
-    horarios: string[];
-    puntoPartida: string;
-  }
-
-
-  function RutabusAP() {
-    const [rutabusInformacion, setRutabusInformacion] = useState<RutabusData | null>(null);
-    const [rutabusData, setRutabusData] = useState<RutabusData | null>(null);
-    const [rutabusDataDomingo, setRutabusDataDomingo] = useState<RutabusData | null>(null);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-      const fetchData = async () => {
-        try {
-          const [data1, data2, data3] = await Promise.all([
-            Helper.rutabusInfo(),
-            Helper.rutabusInfoHorariosLunes(),
-            Helper.rutabusInfoHorariosDomingo(),
-          ]);
-
-          if (data2.length > 0) {
-            data2[0].horarios.sort();  
-          }
-
-          if (data3.length > 0) {
-            data3[0].horarios.sort(); 
-          }
-
-          setRutabusInformacion(data1.length > 0 ? data1[0] : null);
-          setRutabusData(data2.length > 0 ? data2[0] : null);
-          setRutabusDataDomingo(data3.length > 0 ? data3[0] : null);
-        } catch (err) {
-          console.error('Error fetching data:', err);
-        } finally {
-          setLoading(false);
+          setIsActive(isActiveFunction());
+        } else {
+          console.error("Unexpected data format:", data1);
         }
-      };
-      fetchData();
-    }, []);
-    
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      }
+    };
 
-    if (loading) {
-      return <Loader />;
-    }
+    fetchData();
 
-    if (!rutabusData) {
-      return (
-        <div className="h-full">
-          <TestPage />
-        </div>
+
+    const updateNextBusInterval = setInterval(() => {
+      setRutabusAPData((prevData) =>
+        prevData
+          ? {
+            ...prevData,
+            proximoHorario: helperExport.proximoColectivo(prevData.horarios),
+          }
+          : prevData
       );
-    }
+    }, 10000);
+
+    return () => {
+      clearInterval(updateNextBusInterval);
+    };
+  }, []);
 
 
-    // empece a mover todas las boludeces a componentes para poder manejarlos de menjor manera
-    // falta mucho por arreglar pero la idea va encaminada, Cree tres componentes que son los uqe principalmente
-    // se van a repetir en casi todas las pages, PuntoDePartida, ContainterTittleAndInfo
-    // (tengo que arreglarle el nombre) y ContainerHorarios.
-    //el manejo de los datos viaja a traves de props la cual me falta incuir el ORIGEN y
-    // el url del iframe (tengo que a;adir a la bdd eso),
-    // Impremente el IonHeader para probar, supuestamente tiene mejor optimizacion y 
-    // la idea es ir mentiendo componentes directamente de ionic para mejorar rendimientos.
-    // tengo que gestionar el tema de verificar si el usuario tiene internet apenas abre la pagina
-    // en el home digamos, si no tiene, tirarlo directamente al TestPage 
-    //
-    
-    
-   return (
 
-   
-      <>
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [data1, data2, data3] = await Promise.all([
+          Helper.rutabusInfo(),
+          Helper.rutabusInfoHorariosLunes(),
+          Helper.rutabusInfoHorariosDomingo(),
+        ]);
 
+        if (data3.length > 0) {
+          data3[0].horarios.sort();
+        }
 
-        <IonHeader>
-          <Header/>
-        </IonHeader>
-
-
-      
-        <IonContent className='flex justify-center items-center'>
-
-      
-          
-        <div className="container-global flex flex-col ">  {/*aca basicamente empece a pasar todo el codigo a limpio creando componente y pasandole la data por props asi es mas sencillo de manipular */}
-
-          {/* 
-            {rutabusInformacion && (
+        setRutabusAPData(data1.length > 0 ? data1[0] : null);
+        setRutabusAPDataLunes(data2.length > 0 ? data2[0] : null);
+        setRutabusAPDataDomingo(data3.length > 0 ? data3[0] : null);
+      } catch (err) {
+        console.error('Error fetching data:', err);
+        setError('Error al cargar la información');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, [])
 
 
-              <ContainerTitleAndInfo
-                image={rutabusInformacion.image}
-                empresaNombre={rutabusInformacion.empresaNombre}
-                origen={rutabusInformacion.origen}
-                destino={rutabusInformacion.destino}
-              />
-            )}
+  function isActiveFunction() {
+    const now = new Date(); // Obtiene la hora actual
+    const hour = now.getHours(); // Obtiene la hora en formato 24 horas
+    const minute = now.getMinutes(); // Obtiene los minutos actuales
 
-          <h2 className='font-semibold mt-8 text-center text-3xl '>HORARIOS</h2>
+    // Convierte la hora actual a minutos desde la medianoche
+    const currentTime = hour * 60 + minute;
 
+    // Definir el rango de tiempo en minutos
+    const startTime = 6 * 60; // 6:00 AM -> 6 * 60 = 360 minutos
+    const endTime = 23 * 60 + 50; // 23:50 PM -> 23 * 60 + 50 = 1430 minutos
 
-          <div className="container-horarios  flex flex-col pl-[10%] pr-[10%] max-xl:pl-[0%] max-xl:pr-[0%]">
-            <ContainerHorarios title="LUNES A VIERNES" horarios={rutabusData.horarios} />
-              {rutabusDataDomingo && <ContainerHorarios title="SÁBADOS, DOMINGOS Y FERIADOS" horarios={rutabusDataDomingo.horarios} />}
-              
-              {rutabusData && <PuntoDePartida puntoPartida={rutabusData.puntoPartida}/>}
-          </div>
-
-            */}
-            
-        </div>
-        
-        
-
-      
-
-
-        </IonContent>
-
-     
-      </>
-      
-      
-    );
+    // Verifica si la hora actual está dentro del rango
+    return currentTime >= startTime && currentTime <= endTime;
   }
-  
 
-  export default RutabusAP;
+
+
+
+  if (loading) {
+    return <Loader />;
+  }
+
+  return (
+    <IonContent ref={ionContentRefDo}>
+      {rutabusAPData && (
+        <>
+          <Banner
+            image={rutabusAPData.image}
+            empresaNombre={rutabusAPData.empresaNombre}
+            origen="Areco"
+            destino={rutabusAPData.destino}
+            isActive={isActive}
+          />
+
+          <MainInfo
+            proximo={rutabusAPData.proximoHorario || rutabusAPData.horarios[0]}
+            formatHoraAmPm={helperExport.formatHoraAmPm}
+            metodo="EFECTIVO"
+            precio="$1250"
+          />
+
+          {rutabusAPDataLunes && (
+            <SchedulesTable
+              dias="Lunes a Viernes"
+              horarios={rutabusAPDataLunes.horarios}
+              destino={rutabusAPData.destino}
+              formatHoraAmPm={helperExport.formatHoraAmPm}
+              showAll={showAll}
+              setShowAll={setShowAll}
+            />
+          )}
+
+          {rutabusAPDataDomingo && (
+            <SchedulesTable
+              dias="Sabados, Domingos y Feriados"
+              horarios={rutabusAPDataDomingo.horarios}
+              destino={rutabusAPData.destino}
+              formatHoraAmPm={helperExport.formatHoraAmPm}
+              showAll={showAll}
+              setShowAll={setShowAll}
+            />
+          )}
+
+          <RecorridosParadas />
+
+          <Change path="/RutabusPA" />
+          <Up ionContentRef={ionContentRefDo} />
+        </>
+      )}
+    </IonContent>
+
+  );
+}
+
+export default RutabusAP;

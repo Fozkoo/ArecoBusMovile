@@ -18,7 +18,7 @@ function PuntosSube() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any[]>([]);
   const [userLocation, setUserLocation] = useState<{ latitude: number, longitude: number } | null>(null);
-
+  const [error, setError] = useState<string | null>(null);
 
 
 
@@ -152,3 +152,4 @@ function PuntosSube() {
   );
 }
 export default PuntosSube;
+

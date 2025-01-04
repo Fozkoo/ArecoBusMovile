@@ -5,12 +5,16 @@ import { Link } from 'react-router-dom';
 
 
 
-const Change = () => {
+interface ChangeProps {
+    path: string;
+}
+
+const Change: React.FC<ChangeProps> = ({ path }) => {
 
     return (
         <>
             <Link
-                to='#'
+                to={path}
                 className="globo fixed !z-50 top-[83%] left-[75%] w-[45px] h-[45px] bg-blue-500 rounded-full cursor-pointer flex justify-center items-center"
             >
                 <IonIcon icon={swapHorizontalOutline} className="w-[30px] h-[30px] text-white" />

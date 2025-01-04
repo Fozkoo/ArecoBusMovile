@@ -1,48 +1,35 @@
 import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, IonMenu, IonContent, IonHeader, IonToolbar, IonTitle, setupIonicReact, IonList, IonItem } from '@ionic/react';
+import { IonApp, IonRouterOutlet, IonTabs, IonTabBar, IonTabButton, IonIcon, IonLabel, setupIonicReact } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { home, bus, settings } from 'ionicons/icons';
+import { home, bus } from 'ionicons/icons';
 import Home from './pages/Home';
-// import RutabusAP from './pages/RutabusAP';
-//import MasterbusAG from './pages/MasterbusAG';
-//import RicarditoAD from './pages/RicarditoAD';
-//import RicarditoAV from './pages/RicarditoAV';
 import '@fontsource-variable/onest';
 import PuntosSube from './pages/PuntosSube';
-import PageTesting from './pages/PageTesting';
 import Admin from './pages/Admin';
-
-import TestPage from './pages/TestPage';
 import PruebaRapida from './pages/PruebaRapida';
-import PersistentBottomSheet from './components/PersistentBottomSheet';
-import ExampleApp from './pages/testing';
 import SearchLocality from './pages/SearchLocality';
+import ErrorPage from './pages/ErrorPage';
+import RutabusAP from './pages/RutabusAP';
+
 
 setupIonicReact();
 
 
-
 const App: React.FC = () => (
-
-  
-
 <IonApp className='h-full'>
   <IonReactRouter>
     <IonTabs>
       <IonRouterOutlet id="main-content">
         <Route exact path="/home" component={Home} />
-        {/* */}
         <Route exact path="/PuntosSube" component={PuntosSube} />
         <Route exact path="/PruebaRapida" component={PruebaRapida} />
         <Route exact path="/Admin" component={Admin} />
-        <Route exact path="/PersistentBottomSheet" component={PersistentBottomSheet} />
-        <Route exact path="/ExampleApp" component={ExampleApp} />
         <Route exact path="/SearchLocality" component={SearchLocality} />
-        
+        <Route exact path="/ErrorPage" component={ErrorPage} />
+        <Route exact path="/RutabusAP" component={RutabusAP} />
         <Redirect exact path="/" to="/home" />
       </IonRouterOutlet>
-
-      {/* El menú debe estar fuera del IonRouterOutlet */}
+      {/* menu */}
       <IonTabBar slot="bottom" className="h-[65px] relative shadow-sm desktop-hidden">
         <IonTabButton tab="home" href="/home">
           <IonIcon icon={home} style={{ color: '#3B82F6' }} />
@@ -56,7 +43,6 @@ const App: React.FC = () => (
     </IonTabs>
   </IonReactRouter>
 </IonApp>
-
 );
 
 export default App;

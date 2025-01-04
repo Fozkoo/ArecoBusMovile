@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
 import { IonApp, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonIcon } from '@ionic/react';
-import Header from '../components/Header';
 import '../theme/variables.css';
 import Loader from '../components/Loader';
-import TestPage from './TestPage';
+import TestPage from './ErrorPage';
 import helper from "../service/Helper";
 import helperExport from "..//service/FunctionsHelper";
 import { Link } from 'react-router-dom';
@@ -74,7 +73,7 @@ function Home() {
       data.forEach((bus) => {
         const cachedImage = localStorage.getItem(bus.image);
         if (cachedImage) {
-          console.log(`Imagen cargada desde la caché: ${bus.image}`);
+           // console.log(`Imagen cargada desde la caché: ${bus.image}`);
           loadedImagesCount += 1;
           setLoadedImages((prev) => [...prev, bus.image]);
           if (loadedImagesCount === totalImages) {
@@ -84,7 +83,7 @@ function Home() {
           const img = new Image();
           img.src = bus.image;
           img.onload = () => {
-            console.log(`Imagen cargada desde la URL: ${bus.image}`);
+            // console.log(`Imagen cargada desde la URL: ${bus.image}`);
             loadedImagesCount += 1;
             setLoadedImages((prev) => [...prev, bus.image]);
             localStorage.setItem(bus.image, bus.image);
@@ -104,10 +103,6 @@ function Home() {
     }
   }, [loading, data]);
 
-  if (loading || !imagesLoaded) {
-    return <Loader />;
-  }
-
   if (error) {
     return (
       <div className="h-full">
@@ -115,6 +110,13 @@ function Home() {
       </div>
     );
   }
+
+
+  if (loading || !imagesLoaded) {
+    return <Loader />;
+  }
+
+
 
   return (
     <IonApp>
@@ -156,7 +158,7 @@ function Home() {
                     {helperExport.proximoColectivo(bus.horarios)}
                   </p>
                 </div>
-                <Link to="/PruebaRapida" className="flex justify-center items-center mt-3 gap-1">
+                <Link to={bus.path} className="flex justify-center items-center mt-3 gap-1">
                   <IonButton className="w-[75%] h-6 text-center hover:scale-105 transition-transform duration-200">
                     Ver más detalles
                   </IonButton>
