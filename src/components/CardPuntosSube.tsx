@@ -52,7 +52,7 @@ export default function CardPuntoSube({
           <div className="flex-1">
             <h3 className="font-semibold text-lg text-gray-900">{nombre}</h3>
             <div className="flex items-center gap-2 mt-1">
-              <span className="text-orange-500 text-sm">{descripcion}</span>
+              <span className="text-gray-900 text-sm">{descripcion}</span>
               <div className="flex items-center text-gray-600 text-sm">
                 <MapPin size={14} className="mr-1" />
                 <span>{distance}</span>
