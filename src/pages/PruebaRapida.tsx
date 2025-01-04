@@ -174,7 +174,9 @@ const PruebaRapida: React.FC = () => {
             <RecorridosParadas/>
             
             
-            <Change />
+            <Change 
+            path="/home"
+            />
             <Up ionContentRef={ionContentRefDo} />
           </>
         ) : (
