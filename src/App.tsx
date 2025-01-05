@@ -6,7 +6,6 @@ import Home from './pages/Home';
 import '@fontsource-variable/onest';
 import PuntosSube from './pages/PuntosSube';
 import Admin from './pages/Admin';
-import PruebaRapida from './pages/PruebaRapida';
 import SearchLocality from './pages/SearchLocality';
 import ErrorPage from './pages/ErrorPage';
 import RutabusAP from './pages/RutabusAP';
@@ -29,7 +28,6 @@ const App: React.FC = () => {
         <IonRouterOutlet id="main-content">
           <Route exact path="/home" component={Home} />
           <Route exact path="/PuntosSube" component={PuntosSube} />
-          <Route exact path="/PruebaRapida" component={PruebaRapida} />
           <Route exact path="/Admin" component={Admin} />
           <Route exact path="/SearchLocality" component={SearchLocality} />
           <Route exact path="/ErrorPage" component={ErrorPage} />
