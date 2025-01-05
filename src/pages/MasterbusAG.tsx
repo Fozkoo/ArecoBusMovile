@@ -1,30 +1,73 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Helper from '../service/Helper';
-import { IonApp, IonContent, IonHeader } from '@ionic/react';
-import Header from '../components/Header';
-import Loader from '../components/Loader'; 
-import TestPage from './ErrorPage'; 
-//import ContainerTitleAndInfo from '../components/ContainterTittleAndInfo';
-//import ContainerHorarios from '../components/ContainerHorarios';
-////import PuntoDePartida from '../components/PuntoDePartida';
-import Up from '..//components/Up';
-import '../theme/variables.css';
+import React, { useState, useEffect, useRef } from "react";
+import { IonContent, IonHeader } from "@ionic/react";
+import Helper from "../service/Helper";
+import Header from "../components/Header";
+import Up from "../components/Up";
+import Banner from "../components/Banner";
+import SchedulesTable from "../components/SchedulesTable";
+import StartPoint from "../components/StartPoint";
+import Loader from "../components/Loader";
+import MainInfo from "../components/MainInfo";
+import Change from "../components/Change";
+import MapViewDos from "../components/Prueba";
+import helperExport from "../service/FunctionsHelper";
+import methods from "../service/Helper";
+import { MapContainer, TileLayer, useMap } from "react-leaflet";
+import "..//theme/variables.css"
+import RecorridosParadas from "../components/RecorridosParadas";
 
 interface MasterbusData {
   image: string;
   empresaNombre: string;
+  origen: "Areco";
   destino: string;
-  origen: string;
   horarios: string[];
   puntoPartida: string;
+  proximoHorario?: string;
 }
 
-function MasterbusAG() {
+const MasterbusAG: React.FC = () => {
   const [masterbusData, setMasterbusData] = useState<MasterbusData | null>(null);
-  const [masterbusDataDomingo, setMasterbusDataDomingo] = useState<MasterbusData | null>(null);
+  const [showAll, setShowAll] = useState<boolean>(false);
+  const ionContentRefDo = useRef<HTMLIonContentElement>(null);
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const ionContentRef = useRef<HTMLIonContentElement>(null);
+  const [proximo, setProximo] = useState<string | null>(null);
+  const [masterbusDataDomingo, setMasterbusDataDomingo] = useState<MasterbusData | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        let data;
+        if (helperExport.diaHoy >= 1 && helperExport.diaHoy <= 5) {
+          data = await Helper.masterbusInfoHorariosLunes();
+        } else if (helperExport.diaHoy === 6 || helperExport.diaHoy === 7) {
+          data = await Helper.masterbusInfoDomingo();
+        }
+
+        setData(data);
+        const proximoHorario = helperExport.proximoColectivo(data[0].horarios);
+        setProximo(proximoHorario);
+      } catch (err) {
+        setError("Error al cargar los datos.");
+      }
+    };
+
+
+    fetchData();
+
+
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 30000);
+
+
+    return () => clearInterval(intervalId);
+
+  }, []);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,7 +78,7 @@ function MasterbusAG() {
         ]);
 
         if (data3.length > 0) {
-          data3[0].horarios.sort();  
+          data3[0].horarios.sort();
         }
 
         setMasterbusData(data1.length > 0 ? data1[0] : null);
@@ -48,53 +91,66 @@ function MasterbusAG() {
       }
     };
     fetchData();
-  },[])
+  }, [])
 
-  if (loading) {
-    return <Loader />;
-  }
-
-  if (!masterbusData) {
-    return (
-      <div className="h-full">
-        <TestPage />
-      </div>
-    );
-  }
 
   return (
     <>
-      <IonHeader>
-        <Header/>
-      </IonHeader>
+      <IonContent ref={ionContentRefDo}>
+        {masterbusData ? (
+          <>
 
-      {/* Asigna la referencia ionContentRef al IonContent 
-      <IonContent ref={ionContentRef} className='flex justify-center items-center'>
-        <div className="container-global flex flex-col ">
-          {masterbusData && (
-            <ContainerTitleAndInfo
+            <Banner
               image={masterbusData.image}
               empresaNombre={masterbusData.empresaNombre}
-              origen={masterbusData.origen}
+              origen="Areco"
               destino={masterbusData.destino}
+              isActive={isActive}
             />
-          )}
 
-          <h2 className='font-semibold bg-black text-white mr-10 ml-10 rounded-lg mt-8 text-center text-2xl '>¡Conoce los horarios!</h2>
+            <MainInfo
+              proximo={proximo || ""}
+              formatHoraAmPm={helperExport.formatHoraAmPm}
+              metodo="EFECTIVO"
+              precio="$1250"
+            />
 
-          <div className="container-horarios flex flex-col pl-[10%] pr-[10%] max-xl:pl-[0%] max-xl:pr-[0%]">
-            <ContainerHorarios title="Lunes a Viernes" horarios={masterbusData.horarios} />
-            {masterbusDataDomingo && <ContainerHorarios title="Sabados,Domingos y Feriados" horarios={masterbusDataDomingo.horarios} />}
-            {masterbusData && <PuntoDePartida puntoPartida={masterbusData.puntoPartida}/>}
-          </div>
+            <SchedulesTable
+              dias="Lunes a Viernes"
+              horarios={masterbusData.horarios}
+              destino={masterbusData.destino}
+              formatHoraAmPm={helperExport.formatHoraAmPm}
+              showAll={showAll}
+              setShowAll={setShowAll}
+            />
 
-          <Up ionContentRef={ionContentRef} />
-        </div>
+            {masterbusDataDomingo && (
+              <SchedulesTable
+                dias="Sabados, Domingos y Feriados"
+                horarios={masterbusDataDomingo.horarios}
+                destino={masterbusData.destino}
+                formatHoraAmPm={helperExport.formatHoraAmPm}
+                showAll={showAll}
+                setShowAll={setShowAll}
+              />
+            )}
+
+            {/* 
+          <RecorridosParadas />
+        */}
+
+
+            <Change
+              path="/home"
+            />
+            <Up ionContentRef={ionContentRefDo} />
+          </>
+        ) : (
+          <Loader />
+        )}
       </IonContent>
-
-      */}
     </>
   );
-}
+};
 
 export default MasterbusAG;

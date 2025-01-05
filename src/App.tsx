@@ -10,7 +10,9 @@ import PruebaRapida from './pages/PruebaRapida';
 import SearchLocality from './pages/SearchLocality';
 import ErrorPage from './pages/ErrorPage';
 import RutabusAP from './pages/RutabusAP';
-
+import MasterbusAG from './pages/MasterbusAG';
+import RicarditoAD from './pages/RicarditoAD';
+import RicarditoAV from './pages/RicarditoAV';
 
 setupIonicReact();
 
@@ -27,6 +29,9 @@ const App: React.FC = () => (
         <Route exact path="/SearchLocality" component={SearchLocality} />
         <Route exact path="/ErrorPage" component={ErrorPage} />
         <Route exact path="/RutabusAP" component={RutabusAP} />
+        <Route exact path="/MasterbusAG" component={MasterbusAG} />
+        <Route exact path="/RicarditoAD" component={RicarditoAD} />
+        <Route exact path="/RicarditoAV" component={RicarditoAV} />
         <Redirect exact path="/" to="/home" />
       </IonRouterOutlet>
       {/* menu */}

@@ -32,47 +32,39 @@ const RutabusAP: React.FC = () => {
   const [data, setData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [proximo, setProximo] = useState<string | null>(null);
   const [rutabusAPDataDomingo, setRutabusAPDataDomingo] = useState<rutabusAPData | null>(null);
   const [rutabusAPDataLunes, setRutabusAPDataLunes] = useState<rutabusAPData | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data1 = await Helper.rutabusInfoHorariosLunes();
-        if (Array.isArray(data1) && data1.length > 0) {
-          data1[0].horarios.sort();
-          setRutabusAPData({
-            ...data1[0],
-            proximoHorario: helperExport.proximoColectivo(data1[0].horarios),
-          });
+        let data;
+        if (helperExport.diaHoy >= 1 && helperExport.diaHoy <= 5) {
+          data = await Helper.rutabusInfoHorariosLunes();
+        } else if (helperExport.diaHoy === 6 || helperExport.diaHoy === 7) {
+          data = await Helper.rutabusInfoHorariosDomingo();
+        } 
 
-
-          setIsActive(isActiveFunction());
-        } else {
-          console.error("Unexpected data format:", data1);
-        }
+        setData(data);
+        const proximoHorario = helperExport.proximoColectivo(data[0].horarios);
+        setProximo(proximoHorario);
       } catch (err) {
-        console.error("Error fetching data:", err);
+        setError("Error al cargar los datos.");
       }
     };
 
+    
     fetchData();
 
+    
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 30000);
 
-    const updateNextBusInterval = setInterval(() => {
-      setRutabusAPData((prevData) =>
-        prevData
-          ? {
-            ...prevData,
-            proximoHorario: helperExport.proximoColectivo(prevData.horarios),
-          }
-          : prevData
-      );
-    }, 10000);
+    
+    return () => clearInterval(intervalId);
 
-    return () => {
-      clearInterval(updateNextBusInterval);
-    };
   }, []);
 
 
@@ -104,24 +96,6 @@ const RutabusAP: React.FC = () => {
   }, [])
 
 
-  function isActiveFunction() {
-    const now = new Date(); // Obtiene la hora actual
-    const hour = now.getHours(); // Obtiene la hora en formato 24 horas
-    const minute = now.getMinutes(); // Obtiene los minutos actuales
-
-    // Convierte la hora actual a minutos desde la medianoche
-    const currentTime = hour * 60 + minute;
-
-    // Definir el rango de tiempo en minutos
-    const startTime = 6 * 60; // 6:00 AM -> 6 * 60 = 360 minutos
-    const endTime = 23 * 60 + 50; // 23:50 PM -> 23 * 60 + 50 = 1430 minutos
-
-    // Verifica si la hora actual está dentro del rango
-    return currentTime >= startTime && currentTime <= endTime;
-  }
-
-
-
 
   if (loading) {
     return <Loader />;
@@ -140,7 +114,7 @@ const RutabusAP: React.FC = () => {
           />
 
           <MainInfo
-            proximo={rutabusAPData.proximoHorario || rutabusAPData.horarios[0]}
+            proximo={proximo || ''}
             formatHoraAmPm={helperExport.formatHoraAmPm}
             metodo="EFECTIVO"
             precio="$1250"

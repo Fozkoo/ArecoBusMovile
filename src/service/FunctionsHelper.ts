@@ -33,6 +33,22 @@ const calcularDistancia = (lat1: number, lon1: number, lat2: number, lon2: numbe
   return distancia;
 };
 
+function isActiveFunction() {
+  const now = new Date(); // Obtiene la hora actual
+  const hour = now.getHours(); // Obtiene la hora en formato 24 horas
+  const minute = now.getMinutes(); // Obtiene los minutos actuales
+
+  // Convierte la hora actual a minutos desde la medianoche
+  const currentTime = hour * 60 + minute;
+
+  // Definir el rango de tiempo en minutos
+  const startTime = 6 * 60; // 6:00 AM -> 6 * 60 = 360 minutos
+  const endTime = 23 * 60 + 50; // 23:50 PM -> 23 * 60 + 50 = 1430 minutos
+
+  // Verifica si la hora actual está dentro del rango
+  return currentTime >= startTime && currentTime <= endTime;
+}
+
 
 
 const methodsExport = {
@@ -41,7 +57,7 @@ const methodsExport = {
   proximoColectivo,
   formatHoraAmPm,
   calcularDistancia,
-  
+  isActiveFunction,
 }
 
 export default methodsExport;
