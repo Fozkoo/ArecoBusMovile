@@ -17,6 +17,8 @@ interface RicarditoAvData {
   horarios: string[];
   puntoPartida: string;
   proximoHorario?: string;
+  precio: string;
+  metodo: string;
 }
 
 const RicarditoAV: React.FC = () => {
@@ -123,9 +125,8 @@ const RicarditoAV: React.FC = () => {
 
           <MainInfo
             proximo={proximo || ''}
-            formatHoraAmPm={helperExport.formatHoraAmPm}
-            metodo="EFECTIVO"
-            precio="$1250"
+            metodo={ricarditoAvData.metodo || ''}
+            precio={ricarditoAvData.precio || ''}
           />
 
           {ricarditoAvDataLunes && (
@@ -133,7 +134,6 @@ const RicarditoAV: React.FC = () => {
               dias="Lunes a Viernes"
               horarios={ricarditoAvDataLunes.horarios}
               destino={ricarditoAvData.destino}
-              formatHoraAmPm={helperExport.formatHoraAmPm}
               showAll={showAll}
               setShowAll={setShowAll}
             />
@@ -144,7 +144,6 @@ const RicarditoAV: React.FC = () => {
               dias="Sábados"
               horarios={ricarditoAvDataSabados.horarios}
               destino={ricarditoAvData.destino}
-              formatHoraAmPm={helperExport.formatHoraAmPm}
               showAll={showAll}
               setShowAll={setShowAll}
             />
@@ -155,7 +154,6 @@ const RicarditoAV: React.FC = () => {
               dias="Domingos y Feriados"
               horarios={ricarditoAvDataDomingo.horarios}
               destino={ricarditoAvData.destino}
-              formatHoraAmPm={helperExport.formatHoraAmPm}
               showAll={showAll}
               setShowAll={setShowAll}
             />

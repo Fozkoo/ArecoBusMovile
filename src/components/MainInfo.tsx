@@ -4,10 +4,9 @@ interface MainInfoProps {
     proximo: string;
     metodo: string;
     precio: string;
-    formatHoraAmPm: (horario: string) => string;
 }
 
-const MainInfo: React.FC<MainInfoProps> = ({proximo, formatHoraAmPm}) => {
+const MainInfo: React.FC<MainInfoProps> = ({proximo, metodo, precio}) => {
     return (
         <div className="container-info-horarios  p-8 pb-[1px]">
             <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
@@ -35,17 +34,17 @@ const MainInfo: React.FC<MainInfoProps> = ({proximo, formatHoraAmPm}) => {
                                 <tr className="hover:bg-gray-50 transition-colors duration-200 ease-in-out">
                                     <td className="px-6 py-4 text-center whitespace-nowrap">
                                         <div className="flex justify-center items-center">
-                                            <span>{formatHoraAmPm(proximo)}</span>
+                                            <span>{proximo}</span>
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 text-center whitespace-nowrap">
                                         <div className="flex justify-center items-center">
-                                            <span>$1250</span>
+                                            <span>${precio}</span>
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 text-center whitespace-nowrap">
                                         <div className="flex relative right-[8px] text-sm justify-center items-center">
-                                            <span>EFECTIVO</span>
+                                            <span>{metodo}</span>
                                         </div>
                                     </td>
                                 </tr>

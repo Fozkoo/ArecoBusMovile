@@ -24,6 +24,8 @@ interface MasterbusData {
   horarios: string[];
   puntoPartida: string;
   proximoHorario?: string;
+  metodo: string;
+  precio: string;
 }
 
 const MasterbusAG: React.FC = () => {
@@ -110,16 +112,14 @@ const MasterbusAG: React.FC = () => {
 
             <MainInfo
               proximo={proximo || ""}
-              formatHoraAmPm={helperExport.formatHoraAmPm}
-              metodo="EFECTIVO"
-              precio="$1250"
+              metodo={masterbusData.metodo}
+              precio={masterbusData.precio}
             />
 
             <SchedulesTable
               dias="Lunes a Viernes"
               horarios={masterbusData.horarios}
               destino={masterbusData.destino}
-              formatHoraAmPm={helperExport.formatHoraAmPm}
               showAll={showAll}
               setShowAll={setShowAll}
             />
@@ -129,7 +129,6 @@ const MasterbusAG: React.FC = () => {
                 dias="Sabados, Domingos y Feriados"
                 horarios={masterbusDataDomingo.horarios}
                 destino={masterbusData.destino}
-                formatHoraAmPm={helperExport.formatHoraAmPm}
                 showAll={showAll}
                 setShowAll={setShowAll}
               />

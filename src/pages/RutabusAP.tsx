@@ -18,6 +18,8 @@ interface rutabusAPData {
   horarios: string[];
   puntoPartida: string;
   proximoHorario?: string;
+  metodo: string;
+  precio: string;
 }
 
 interface rutabusAPDataLunes {
@@ -115,9 +117,8 @@ const RutabusAP: React.FC = () => {
 
           <MainInfo
             proximo={proximo || ''}
-            formatHoraAmPm={helperExport.formatHoraAmPm}
-            metodo="EFECTIVO"
-            precio="$1250"
+            metodo={rutabusAPData.metodo || ''}
+            precio={rutabusAPData.precio || ''}
           />
 
           {rutabusAPDataLunes && (
@@ -125,7 +126,6 @@ const RutabusAP: React.FC = () => {
               dias="Lunes a Viernes"
               horarios={rutabusAPDataLunes.horarios}
               destino={rutabusAPData.destino}
-              formatHoraAmPm={helperExport.formatHoraAmPm}
               showAll={showAll}
               setShowAll={setShowAll}
             />
@@ -136,7 +136,6 @@ const RutabusAP: React.FC = () => {
               dias="Sabados, Domingos y Feriados"
               horarios={rutabusAPDataDomingo.horarios}
               destino={rutabusAPData.destino}
-              formatHoraAmPm={helperExport.formatHoraAmPm}
               showAll={showAll}
               setShowAll={setShowAll}
             />

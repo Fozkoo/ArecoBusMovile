@@ -5,12 +5,11 @@ interface SchedulesProps {
     horarios: string[];
     destino: string;
     dias: string;
-    formatHoraAmPm: (horario: string) => string;
     showAll: boolean;
     setShowAll: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SchedulesTable: React.FC<SchedulesProps> = ({dias, horarios, destino, formatHoraAmPm, showAll, setShowAll }) => {
+const SchedulesTable: React.FC<SchedulesProps> = ({dias, horarios, destino, showAll, setShowAll }) => {
     // Función para determinar si un horario ha pasado
     const isHorarioPasado = (horario: string): boolean => {
         const [horas, minutos] = horario.split(':').map(Number);
@@ -51,7 +50,7 @@ const SchedulesTable: React.FC<SchedulesProps> = ({dias, horarios, destino, form
                                             <td className="px-6 py-4 whitespace-nowrap">
                                                 <div className="flex items-center">
                                                     <FaClock className={isHorarioPasado(horario) ? "text-red-500 mr-2" : "text-green-500 mr-2"} />
-                                                    <span>{formatHoraAmPm(horario)}</span>
+                                                    <span>{horario.slice(0,5)}</span>
                                                 </div>
                                             </td>
                                         </tr>
