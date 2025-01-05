@@ -7,6 +7,7 @@ import { LatLngTuple, Icon } from 'leaflet';
 import methods from '../service/Helper';
 import { IonCard } from '@ionic/react';
 import { useLocation } from 'react-router';
+import Loader from '..//components/Loader';
 
 
 
@@ -108,7 +109,7 @@ const MapView: React.FC = () => {
 
 
   if (!userLocation) {
-    return <div>Cargando mapa...</div>;
+    return <Loader/>
   }
 
   return (

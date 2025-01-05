@@ -7,6 +7,7 @@ import helper from "../service/Helper";
 import helperExport from "..//service/FunctionsHelper";
 import { Link } from 'react-router-dom';
 import "..//theme/variables.css";
+import { useMenu } from '../context/MenuContextProps';
 
 
 interface Bus {
@@ -26,6 +27,7 @@ function Home() {
   const [data, setData] = useState<Bus[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loadedImages, setLoadedImages] = useState<string[]>([]);
+  const { setMenuVisible } = useMenu();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,6 +46,7 @@ function Home() {
         setError("Error al cargar los datos.");
       } finally {
         setLoading(false);
+        setMenuVisible(true);
       }
     };
 

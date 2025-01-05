@@ -13,41 +13,48 @@ import RutabusAP from './pages/RutabusAP';
 import MasterbusAG from './pages/MasterbusAG';
 import RicarditoAD from './pages/RicarditoAD';
 import RicarditoAV from './pages/RicarditoAV';
+import { useMenu } from './context/MenuContextProps';
 
 setupIonicReact();
 
 
-const App: React.FC = () => (
-<IonApp className='h-full'>
-  <IonReactRouter>
-    <IonTabs>
-      <IonRouterOutlet id="main-content">
-        <Route exact path="/home" component={Home} />
-        <Route exact path="/PuntosSube" component={PuntosSube} />
-        <Route exact path="/PruebaRapida" component={PruebaRapida} />
-        <Route exact path="/Admin" component={Admin} />
-        <Route exact path="/SearchLocality" component={SearchLocality} />
-        <Route exact path="/ErrorPage" component={ErrorPage} />
-        <Route exact path="/RutabusAP" component={RutabusAP} />
-        <Route exact path="/MasterbusAG" component={MasterbusAG} />
-        <Route exact path="/RicarditoAD" component={RicarditoAD} />
-        <Route exact path="/RicarditoAV" component={RicarditoAV} />
-        <Redirect exact path="/" to="/home" />
-      </IonRouterOutlet>
-      {/* menu */}
-      <IonTabBar slot="bottom" className="h-[65px] relative shadow-sm desktop-hidden">
-        <IonTabButton tab="home" href="/home">
-          <IonIcon icon={home} style={{ color: '#3B82F6' }} />
-          <IonLabel style={{ color: '#3B82F6' }} className="text-[14px] font-semibold">Inicio</IonLabel>
-        </IonTabButton>
-        <IonTabButton tab="PuntosSube" href="/PuntosSube">
-          <IonIcon icon={bus} style={{ color: '#3B82F6' }} />
-          <IonLabel style={{ color: '#3B82F6' }} className="text-[14px] font-semibold">Puntos SUBE</IonLabel>
-        </IonTabButton>
-      </IonTabBar>
-    </IonTabs>
-  </IonReactRouter>
-</IonApp>
-);
+const App: React.FC = () => {
+
+  const { isMenuVisible } = useMenu();
+
+  return (
+    <IonApp className='h-full'>
+    <IonReactRouter>
+      <IonTabs>
+        <IonRouterOutlet id="main-content">
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/PuntosSube" component={PuntosSube} />
+          <Route exact path="/PruebaRapida" component={PruebaRapida} />
+          <Route exact path="/Admin" component={Admin} />
+          <Route exact path="/SearchLocality" component={SearchLocality} />
+          <Route exact path="/ErrorPage" component={ErrorPage} />
+          <Route exact path="/RutabusAP" component={RutabusAP} />
+          <Route exact path="/MasterbusAG" component={MasterbusAG} />
+          <Route exact path="/RicarditoAD" component={RicarditoAD} />
+          <Route exact path="/RicarditoAV" component={RicarditoAV} />
+          <Redirect exact path="/" to="/home" />
+        </IonRouterOutlet>
+
+
+        <IonTabBar slot="bottom" className={`h-[65px] ${isMenuVisible ? 'flex' : 'hidden'} relative shadow-sm desktop-hidden`}>
+          <IonTabButton tab="home" href="/home">
+            <IonIcon icon={home} style={{ color: '#3B82F6' }} />
+            <IonLabel style={{ color: '#3B82F6' }} className="text-[14px] font-semibold">Inicio</IonLabel>
+          </IonTabButton>
+          <IonTabButton tab="PuntosSube" href="/PuntosSube">
+            <IonIcon icon={bus} style={{ color: '#3B82F6' }} />
+            <IonLabel style={{ color: '#3B82F6' }} className="text-[14px] font-semibold">Puntos SUBE</IonLabel>
+          </IonTabButton>
+        </IonTabBar>
+      </IonTabs>
+    </IonReactRouter>
+  </IonApp>
+  )
+};
 
 export default App;

@@ -1,6 +1,5 @@
-import { IonApp, IonContent } from '@ionic/react';
-import React, { useState, useEffect } from 'react';
-import Header from '../components/Header';
+import { IonApp, IonContent} from '@ionic/react';
+import { useState, useEffect } from 'react';
 import '../theme/variables.css';
 import MapView from '../components/MapView';
 import Loader from '../components/Loader';
@@ -11,8 +10,8 @@ import PersistentBottomSheet from "../components/PersistentBottomSheet";
 import CardPuntoSube from '../components/CardPuntosSube';
 import FunctionsHelper from "..//service/FunctionsHelper";
 import { FiSearch } from 'react-icons/fi';
-import SearchLocality from "..//pages/SearchLocality";
 import { Link } from 'react-router-dom';
+
 
 function PuntosSube() {
   const [loading, setLoading] = useState(true);
@@ -94,11 +93,6 @@ function PuntosSube() {
           <Loader />
         ) : (
           <div className=''>
-            {/* 
-            <div className="container-header fixed top-0 left-0 w-full bg-white z-50 shadow-sm">
-              <Header />
-            </div>
-            */}
             <Link to="/SearchLocality">
               <div className="flex absolute items-center justify-center mt-5 w-full z-50">
                 <div className='flex justify-center items-center w-[95%]  rounded-full shadow-md px-4 py-2 bg-white'>
@@ -146,6 +140,8 @@ function PuntosSube() {
               </PersistentBottomSheet>
             </div>
           </div>
+
+
         )}
       </IonContent>
     </IonApp>
