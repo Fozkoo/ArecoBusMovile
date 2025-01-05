@@ -106,6 +106,10 @@ function Home() {
     }
   }, [loading, data]);
 
+  function close () {
+    setMenuVisible(false);
+  }
+
   if (error) {
     return (
       <div className="h-full">
@@ -162,7 +166,7 @@ function Home() {
                   </p>
                 </div>
                 <Link to={bus.path} className="flex justify-center items-center mt-3 gap-1">
-                  <IonButton className="w-[75%] h-6 text-center hover:scale-105 transition-transform duration-200">
+                  <IonButton onClick={close} className="w-[75%] h-6 text-center hover:scale-105 transition-transform duration-200">
                     Ver más detalles
                   </IonButton>
                 </Link>
