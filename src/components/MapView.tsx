@@ -8,8 +8,8 @@ import methods from '../service/Helper';
 import { IonCard } from '@ionic/react';
 import { useLocation } from 'react-router';
 import Loader from '..//components/Loader';
-
-
+import CardPuntoSube from './CardPuntosSube';
+import "..//theme/variables.css"
 
 
 
@@ -40,14 +40,14 @@ const MapView: React.FC = () => {
   const [changeLocation, setChangeLocation] = useState<LatLngTuple | null>(null);
 
   useEffect(() => {
-    
+
     const parsedLatitud = parseFloat(latitud);
     const parsedLongitud = parseFloat(longitud);
 
     if (!isNaN(parsedLatitud) && !isNaN(parsedLongitud)) {
       setChangeLocation([parsedLatitud, parsedLongitud]);
     }
-  },[]);
+  }, []);
 
 
   useEffect(() => {
@@ -109,7 +109,7 @@ const MapView: React.FC = () => {
 
 
   if (!userLocation) {
-    return <Loader/>
+    return <Loader />
   }
 
   return (
@@ -132,18 +132,21 @@ const MapView: React.FC = () => {
               position={marker.geocode as LatLngTuple}
               icon={customIcon}
             >
-              <Popup>
-                <IonCard>
-                  <h3>{marker.descripcion}</h3>
-                  <p><strong>Horario de apertura:</strong> {marker.horariosapertura}</p>
-                  <p><strong>Horario de cierre:</strong> {marker.horariocierre}</p>
-                  <img
-                    src={marker.urlimagen}
-                    alt={marker.descripcion}
-                    style={{ width: '100%', height: 'auto', borderRadius: '8px' }}
+              <Popup className="" autoPan={false} closeButton={false}>
+                {/* Contenido del popup */}
+                <IonCard className="flex justify-center bg-white shadow-none items-center w-[200px] h-[280px]">
+                  <CardPuntoSube
+                    nombre="Punto SUBE"
+                    descripcion={marker.descripcion}
+                    distance="100m"
+                    horario={`${marker.horariosapertura} - ${marker.horariocierre}`}
+                    urlimagen={marker.urlimagen}
                   />
                 </IonCard>
+                {/* Botón personalizado */}
               </Popup>
+
+
             </Marker>
           ))}
         {/* Agregar marcador para la ubicación del usuario */}
