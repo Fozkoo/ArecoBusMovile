@@ -40,11 +40,11 @@ const RicarditoAD: React.FC = () => {
       try {
         let data;
         if (helperExport.diaHoy >= 1 && helperExport.diaHoy <= 5) {
-          data = await Helper.ricarditoDugganInfoHorariosLunes();
+          data = await Helper.getHorariosByIdBusIdDia(5,1);
         } else if (helperExport.diaHoy === 6) {
-          data = await Helper.ricarditoDugganInfoSabado();
+          data = await Helper.getHorariosByIdBusIdDia(5,6);
         } else if (helperExport.diaHoy === 7) {
-          data = await Helper.ricarditoDugganInfoDomingo();
+          data = await Helper.getHorariosByIdBusIdDia(5,7);
         }
 
         setData(data);
@@ -72,10 +72,10 @@ const RicarditoAD: React.FC = () => {
     const fetchData = async () => {
       try {
         const [data1, data2, data3, data4] = await Promise.all([
-          Helper.ricarditoDugganInfo(),
-          Helper.ricarditoDugganInfoHorariosLunes(),
-          Helper.ricarditoDugganInfoSabado(),
-          Helper.ricarditoDugganInfoDomingo(),
+          Helper.busInfoById(5),
+          Helper.getHorariosByIdBusIdDia(5,1),
+          Helper.getHorariosByIdBusIdDia(5,6),
+          Helper.getHorariosByIdBusIdDia(5,7),
         ])
 
         if (data2.length > 0) {
@@ -132,7 +132,7 @@ const RicarditoAD: React.FC = () => {
 
           {ricarditoAdDataLunes && (
             <SchedulesTable
-              dias="Lunes a viernes"
+              dias="Lunes a iernes"
               horarios={ricarditoAdDataLunes.horarios}
               destino={ricarditoAdData.destino}
               showAll={showAll}

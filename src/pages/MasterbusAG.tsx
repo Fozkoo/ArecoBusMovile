@@ -44,9 +44,9 @@ const MasterbusAG: React.FC = () => {
       try {
         let data;
         if (helperExport.diaHoy >= 1 && helperExport.diaHoy <= 5) {
-          data = await Helper.masterbusInfoHorariosLunes();
+          data = await Helper.getHorariosByIdBusIdDia(4,1);
         } else if (helperExport.diaHoy === 6 || helperExport.diaHoy === 7) {
-          data = await Helper.masterbusInfoDomingo();
+          data = await Helper.getHorariosByIdBusIdDia(4,7);
         }
 
         setData(data);
@@ -75,8 +75,8 @@ const MasterbusAG: React.FC = () => {
     const fetchData = async () => {
       try {
         const [data1, data3] = await Promise.all([
-          Helper.masterbusInfo(),
-          Helper.masterbusInfoDomingo(),
+          Helper.busInfoById(4),
+          Helper.getHorariosByIdBusIdDia(4,7)
         ]);
 
         if (data3.length > 0) {

@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from "react";
-import MapView from "..//components/MapView";
-import { MapContainer, Marker, Polyline, Popup, TileLayer } from "react-leaflet";
+import { MapContainer, Polyline, TileLayer } from "react-leaflet";
 import { LatLngExpression, LatLngTuple } from "leaflet";
 import methods from "../service/Helper";
+import logo from '..//..//public/posibleIconoEnAzul (1).svg';
+import L from "leaflet";
 
 let coordenadasExternas: LatLngExpression[][] = [];
+
+
 
 const RecorridosParadas: React.FC = () => {
     const [coordenadas, setCoordenadas] = useState<LatLngExpression[]>([]);
 
+    const IconBusStop = new L.Icon({
+        iconUrl: logo,
+        iconSize: [20, 20],
+        iconAnchor: [25, 16]
+    });
+
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await methods.getCordenadasById("1"); 
+                const data = await methods.getCordenadasById("1");
                 setCoordenadas(data);
                 coordenadasExternas = data.coordenadas;
             } catch (err) {
@@ -32,7 +42,7 @@ const RecorridosParadas: React.FC = () => {
                     </div>
 
                     <div className="container-map  py-2 px-2 rounded-2xl flex w-full shadow-2xl overflow-hidden">
-                    <MapContainer
+                        <MapContainer
                             center={[-34.243774, -59.473800] as LatLngTuple}
                             zoom={14}
                             scrollWheelZoom={false}

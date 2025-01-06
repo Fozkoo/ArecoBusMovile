@@ -39,6 +39,7 @@ const apiHorarios = axios.create({
     baseURL: URLHORARIOS
 });
 
+// queda
 const getAllLocalidades = async () => {
     try {
         const response = await createLocalidades.get("/getAllLocalidades");
@@ -49,7 +50,7 @@ const getAllLocalidades = async () => {
     }
 }
 
-
+//queda
 const getAllPuntosSube = async () => {
     try {
         const response = await puntoSube.get("/getAllPuntosSube");
@@ -60,6 +61,7 @@ const getAllPuntosSube = async () => {
     }
 }
 
+//queda
 const createCoordenadas = async (coordenadas:any) => {
     try {
         const response = await createCoordenadass.post("/createCoordenadas", coordenadas);
@@ -69,7 +71,7 @@ const createCoordenadas = async (coordenadas:any) => {
     }
 }
 
-
+//queda
 const getCordenadasById = async (idcoordenada:any) => {
     try {
         const response = await test.get("/getRecorridoById/"+idcoordenada);
@@ -81,7 +83,7 @@ const getCordenadasById = async (idcoordenada:any) => {
 }
 
 
-
+//queda se usa en cada page rutabusAP, etc
 const getBusInfoConIdDia=async(iddia:any)=>{
     try{
         const response = await api.get("/getBusInfoConIdDia/"+iddia);
@@ -94,9 +96,10 @@ const getBusInfoConIdDia=async(iddia:any)=>{
 }
 
 
-const infoBusesIdLunes = async () => {
+// quedaaa se usa en el home 
+const infoBusesById = async (idDia:any) => {
     try {
-        const response = await api.get("/getBusInfoConIdDia/1");
+        const response = await api.get("/getBusInfoConIdDia/" + idDia);
         return response.data;
     }
     catch (err){
@@ -105,33 +108,8 @@ const infoBusesIdLunes = async () => {
     }
 }
 
-
-const infoBusesIdSabados= async () => {
-    try {
-        const response = await api.get("/getBusInfoConIdDia/6");
-        return response.data;
-    }
-    catch (err){
-        console.log(err + " error");
-        return [];
-    }
-}
-
-
-const infoBusesIdDomingo = async () => {
-    try {
-        const response = await api.get("/getBusInfoConIdDia/7");
-        return response.data;
-    }
-    catch (err){
-        console.log(err + " error");
-        return [];
-    }
-}
-
-
-
-const realData = async () => {
+// a chequear
+const getAllDataBuses = async () => {
     try {
         const response = await api.get("/getAllBusesInfo")
         return response.data;
@@ -142,10 +120,11 @@ const realData = async () => {
     }
 }
 
-const rutabusInfo = async () => {
+//queda
+const busInfoById = async (idBus:any) => {
 
     try {
-        const response = await api.get("/getBusInfoById/3");
+        const response = await api.get("/getBusInfoById/" + idBus);
         return response.data;
     }
     catch (err) {
@@ -154,137 +133,9 @@ const rutabusInfo = async () => {
 }
 
 
-const rutabusInfoHorariosLunes = async () => {
+const getHorariosByIdBusIdDia = async (idBus:any, idDia:any) => {
     try {
-        const response = await apiHorarios.get("/bus/3/1");
-        return response.data;
-    } catch (err) {
-        return [];
-    }
-}
-
-const rutabusInfoHorariosDomingo = async () => {
-    try {
-        const response = await apiHorarios.get("/bus/3/7");
-        return response.data;
-    } catch (err) {
-        return [];
-    }
-}
-
-const rutabusInfoHorariosXDia= async (dia:any) => {
-    try {
-        const response = await apiHorarios.get("/bus/3/"+1);
-        return response.data;
-    } catch (err) {
-        return [];
-    }
-}
-
-
-const masterbusInfo = async () => {
-
-    try {
-        const response = await api.get("/getBusInfoById/4")
-        return response.data;
-    }
-    catch (err) {
-        console.log(err + " error");
-        return [];
-    }
-}
-
-const masterbusInfoHorariosLunes = async () => {
-    try {
-        const response = await apiHorarios.get("/bus/4/1");
-        return response.data;
-    } catch (err) {
-        return [];
-    }
-}
-
-const masterbusInfoDomingo = async () => {
-    try {
-        const response = await apiHorarios.get("/bus/4/7");
-        return response.data;
-    } catch (err) {
-        return [];
-    }
-}
-
-
-
-const ricarditoDugganInfo = async () => {
-    try {
-        const response = await api.get("/getBusInfoById/5")
-        return response.data;
-    }
-    catch (err) {
-        console.log(err + " error");
-        return [];
-    }
-}
-
-const ricarditoDugganInfoHorariosLunes = async () => {
-    try {
-        const response = await apiHorarios.get("/bus/5/1");
-        return response.data;
-    } catch (err) {
-        return [];
-    }
-}
-
-const ricarditoDugganInfoSabado = async () => {
-    try {
-        const response = await apiHorarios.get("/bus/5/6");
-        return response.data;
-    } catch (err) {
-        return [];
-    }
-}
-
-const ricarditoDugganInfoDomingo = async () => {
-    try {
-        const response = await apiHorarios.get("/bus/5/7");
-        return response.data;
-    } catch (err) {
-        return [];
-    }
-}
-
-
-const ricarditoVillaLiaInfo = async () => {
-    try {
-        const response = await api.get("/getBusInfoById/6")
-        return response.data;
-    }
-    catch (err) {
-        console.log(err + " error");
-        return [];
-    }
-}
-
-const ricarditoVillaLiaInfoHorariosLunes = async () => {
-    try {
-        const response = await apiHorarios.get("/bus/6/1");
-        return response.data;
-    } catch (err) {
-        return [];
-    }
-}
-
-const ricarditoVillaLiaInfoDomingo = async () => {
-    try {
-        const response = await apiHorarios.get("/bus/6/7");
-        return response.data;
-    } catch (err) {
-        return [];
-    }
-}
-
-const ricarditoVillaLiaInfoSabados = async () => {
-    try {
-        const response = await apiHorarios.get("/bus/6/6");
+        const response = await apiHorarios.get("/bus/" + idBus + "/" + idDia);
         return response.data;
     } catch (err) {
         return [];
@@ -295,30 +146,16 @@ const ricarditoVillaLiaInfoSabados = async () => {
 
 
 const methods = {
-    realData,
-    rutabusInfo,
-    masterbusInfo,
-    ricarditoDugganInfo,
-    ricarditoVillaLiaInfo,
-    rutabusInfoHorariosDomingo,
-    masterbusInfoDomingo,
-    ricarditoDugganInfoDomingo,
-    ricarditoVillaLiaInfoDomingo,
-    rutabusInfoHorariosLunes,
-    masterbusInfoHorariosLunes,
-    ricarditoDugganInfoHorariosLunes,
-    ricarditoVillaLiaInfoHorariosLunes,
-    ricarditoDugganInfoSabado,
-    rutabusInfoHorariosXDia,
+    getAllDataBuses,
+    busInfoById,
+    infoBusesById,
+    getHorariosByIdBusIdDia,
     getBusInfoConIdDia,
-    infoBusesIdLunes,
-    infoBusesIdSabados,
-    infoBusesIdDomingo,
-    ricarditoVillaLiaInfoSabados,
     getCordenadasById,
     getAllPuntosSube,
     createCoordenadas,
-    getAllLocalidades
+    getAllLocalidades,
+    api
 }
 
 export default methods;

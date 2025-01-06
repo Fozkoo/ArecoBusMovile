@@ -34,11 +34,11 @@ function Home() {
       try {
         let data;
         if (helperExport.diaHoy >= 1 && helperExport.diaHoy <= 5) {
-          data = await helper.infoBusesIdLunes();
+          data = await helper.infoBusesById(1);
         } else if (helperExport.diaHoy === 6) {
-          data = await helper.infoBusesIdSabados();
+          data = await helper.infoBusesById(6);
         } else if (helperExport.diaHoy === 7) {
-          data = await helper.infoBusesIdDomingo();
+          data = await helper.infoBusesById(7);
         }
 
         setData(data);

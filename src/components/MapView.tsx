@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import '../theme/variables.css';
-import { customIcon } from '../service/Markers';
 import { LatLngTuple, Icon } from 'leaflet';
 import methods from '../service/Helper';
 import { IonCard } from '@ionic/react';
@@ -10,6 +9,8 @@ import { useLocation } from 'react-router';
 import Loader from '..//components/Loader';
 import CardPuntoSube from './CardPuntosSube';
 import "..//theme/variables.css"
+import L from "leaflet";
+import LogoSube from '../images/pin_punto_sube.svg';
 
 
 
@@ -34,10 +35,15 @@ const MapView: React.FC = () => {
   const state = location.state as { state?: { latitud?: string; longitud?: string } } || {};
   const latitud = state.state?.latitud || "null";
   const longitud = state.state?.longitud || "null";
-
-
-
   const [changeLocation, setChangeLocation] = useState<LatLngTuple | null>(null);
+
+  const customIcon = new L.Icon({
+    iconUrl: LogoSube,
+    iconSize: [35, 35],
+    iconAnchor: [25, 16]
+  });
+
+
 
   useEffect(() => {
 
@@ -144,6 +150,7 @@ const MapView: React.FC = () => {
                   />
                 </IonCard>
                 {/* Botón personalizado */}
+
               </Popup>
 
 

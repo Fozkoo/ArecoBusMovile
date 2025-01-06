@@ -39,11 +39,11 @@ const RicarditoAV: React.FC = () => {
       try {
         let data;
         if (helperExport.diaHoy >= 1 && helperExport.diaHoy <= 5) {
-          data = await Helper.ricarditoVillaLiaInfoHorariosLunes();
+          data = await Helper.getHorariosByIdBusIdDia(6,1);
         } else if (helperExport.diaHoy === 6) {
-          data = await Helper.ricarditoVillaLiaInfoSabados();
+          data = await Helper.getHorariosByIdBusIdDia(6,6);
         } else if (helperExport.diaHoy === 7) {
-          data = await Helper.ricarditoVillaLiaInfoDomingo();
+          data = await Helper.getHorariosByIdBusIdDia(6,7);
         }
 
         setData(data);
@@ -71,10 +71,10 @@ const RicarditoAV: React.FC = () => {
     const fetchData = async () => {
       try {
         const [data1, data2, data3, data4] = await Promise.all([
-          Helper.ricarditoVillaLiaInfo(),
-          Helper.ricarditoVillaLiaInfoHorariosLunes(),
-          Helper.ricarditoVillaLiaInfoSabados(),
-          Helper.ricarditoVillaLiaInfoDomingo(),
+          Helper.busInfoById(6),
+          Helper.getHorariosByIdBusIdDia(6,1),
+          Helper.getHorariosByIdBusIdDia(6,6),
+          Helper.getHorariosByIdBusIdDia(6,7),
         ])
 
         if (data2.length > 0) {

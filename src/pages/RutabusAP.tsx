@@ -44,9 +44,9 @@ const RutabusAP: React.FC = () => {
       try {
         let data;
         if (helperExport.diaHoy >= 1 && helperExport.diaHoy <= 5) {
-          data = await Helper.rutabusInfoHorariosLunes();
+          data = await Helper.getHorariosByIdBusIdDia(3,1);
         } else if (helperExport.diaHoy === 6 || helperExport.diaHoy === 7) {
-          data = await Helper.rutabusInfoHorariosDomingo();
+          data = await Helper.getHorariosByIdBusIdDia(3,7);
         }
 
         setData(data);
@@ -76,9 +76,9 @@ const RutabusAP: React.FC = () => {
     const fetchData = async () => {
       try {
         const [data1, data2, data3] = await Promise.all([
-          Helper.rutabusInfo(),
-          Helper.rutabusInfoHorariosLunes(),
-          Helper.rutabusInfoHorariosDomingo(),
+          Helper.busInfoById(3),
+          Helper.getHorariosByIdBusIdDia(3,1),
+          Helper.getHorariosByIdBusIdDia(3,7),
         ]);
 
         if (data3.length > 0) {
