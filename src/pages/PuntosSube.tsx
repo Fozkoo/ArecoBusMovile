@@ -21,23 +21,16 @@ function PuntosSube() {
 
 
 
-  // revisar 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await methods.getAllPuntosSube();
         setData(response);
+        setLoading(false);
         console.log(response);
       } catch (error) {
         console.error(error);
+        setError("Error al cargar los datos." + error);
       }
     };
     fetchData();

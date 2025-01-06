@@ -26,7 +26,7 @@ const App: React.FC = () => {
     <IonReactRouter>
       <IonTabs>
         <IonRouterOutlet id="main-content">
-          <Route exact path="/home" component={Home} />
+          <Route exact path="/Home" component={Home} />
           <Route exact path="/PuntosSube" component={PuntosSube} />
           <Route exact path="/Admin" component={Admin} />
           <Route exact path="/SearchLocality" component={SearchLocality} />
@@ -35,7 +35,7 @@ const App: React.FC = () => {
           <Route exact path="/MasterbusAG" component={MasterbusAG} />
           <Route exact path="/RicarditoAD" component={RicarditoAD} />
           <Route exact path="/RicarditoAV" component={RicarditoAV} />
-          <Redirect exact path="/" to="/home" />
+          <Redirect exact path="/" to="/Home" />
         </IonRouterOutlet>
 
 

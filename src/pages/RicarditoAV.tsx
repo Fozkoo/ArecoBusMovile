@@ -49,8 +49,8 @@ const RicarditoAV: React.FC = () => {
         setData(data);
         const proximoHorario = helperExport.proximoColectivo(data[0].horarios);
         setProximo(proximoHorario);
-      } catch (err) {
-        setError("Error al cargar los datos.");
+      } catch (error) {
+        setError("Error al cargar los datos." + error);
       }
     };
 
@@ -94,8 +94,8 @@ const RicarditoAV: React.FC = () => {
         setRicarditoAvDataDomingo(data4.length > 0 ? data4[0] : null);
 
 
-      } catch (err) {
-        console.error("Error fetching data:", err);
+      } catch (error) {
+        console.error("Error fetching data:", error);
         setError("Error al cargar los datos");
       } finally {
         setLoading(false);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IonApp, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonIcon } from '@ionic/react';
+import { IonApp, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent } from '@ionic/react';
 import '../theme/variables.css';
 import Loader from '../components/Loader';
 import ErrorPage from './ErrorPage';
@@ -121,8 +121,6 @@ function Home() {
     return <Loader />;
   }
 
-
-
   return (
     <IonApp>
       <IonContent>
@@ -169,5 +167,4 @@ function Home() {
     </IonApp>
   );
 }
-
 export default Home;

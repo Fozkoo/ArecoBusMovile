@@ -51,6 +51,8 @@ function isActiveFunction() {
 
 
 
+
+
 const methodsExport = {
   horaActual,
   diaHoy,

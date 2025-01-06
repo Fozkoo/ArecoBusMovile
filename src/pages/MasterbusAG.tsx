@@ -1,18 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { IonContent, IonHeader } from "@ionic/react";
+import { IonContent } from "@ionic/react";
 import Helper from "../service/Helper";
-import Header from "../components/Header";
 import Up from "../components/Up";
 import Banner from "../components/Banner";
 import SchedulesTable from "../components/SchedulesTable";
-import StartPoint from "../components/StartPoint";
 import Loader from "../components/Loader";
 import MainInfo from "../components/MainInfo";
 import Change from "../components/Change";
-import MapViewDos from "../components/Prueba";
 import helperExport from "../service/FunctionsHelper";
-import methods from "../service/Helper";
-import { MapContainer, TileLayer, useMap } from "react-leaflet";
 import "..//theme/variables.css"
 import RecorridosParadas from "../components/RecorridosParadas";
 
