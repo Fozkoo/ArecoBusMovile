@@ -117,7 +117,7 @@ const MasterbusAG: React.FC = () => {
             />
 
             <SchedulesTable
-              dias="Lunes a Viernes"
+              dias="Lunes a viernes"
               horarios={masterbusData.horarios}
               destino={masterbusData.destino}
               showAll={showAll}
@@ -126,7 +126,7 @@ const MasterbusAG: React.FC = () => {
 
             {masterbusDataDomingo && (
               <SchedulesTable
-                dias="Sabados, Domingos y Feriados"
+                dias="Sábados, domingos y feriados."
                 horarios={masterbusDataDomingo.horarios}
                 destino={masterbusData.destino}
                 showAll={showAll}

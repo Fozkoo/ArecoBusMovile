@@ -131,7 +131,7 @@ const RicarditoAV: React.FC = () => {
 
           {ricarditoAvDataLunes && (
             <SchedulesTable
-              dias="Lunes a Viernes"
+              dias="Lunes a viernes"
               horarios={ricarditoAvDataLunes.horarios}
               destino={ricarditoAvData.destino}
               showAll={showAll}
@@ -151,7 +151,7 @@ const RicarditoAV: React.FC = () => {
 
           {ricarditoAvDataDomingo && (
             <SchedulesTable
-              dias="Domingos y Feriados"
+              dias="Domingos y feriados"
               horarios={ricarditoAvDataDomingo.horarios}
               destino={ricarditoAvData.destino}
               showAll={showAll}

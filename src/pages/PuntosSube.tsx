@@ -11,7 +11,7 @@ import CardPuntoSube from '../components/CardPuntosSube';
 import FunctionsHelper from "..//service/FunctionsHelper";
 import { FiSearch } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-
+import "..//theme/variables.css";
 
 function PuntosSube() {
   const [loading, setLoading] = useState(true);
@@ -113,7 +113,7 @@ function PuntosSube() {
 
               <PersistentBottomSheet>
                 <div className="container-title-punto-sube flex justify-center items-center text-center flex-col w-full">
-                  <p className="text-base text-white w-11/12 bg-[#3B82F6]   p-1 rounded-full font-semibold">
+                  <p className="persistentbottomtitle text-base text-white w-11/12 bg-[#3B82F6]   p-1 rounded-full font-semibold ">
                     ¡Descubre tu punto SUBE más cercano!
                   </p>
                 </div>

@@ -6,7 +6,7 @@ interface MainInfoProps {
     precio: string;
 }
 
-const MainInfo: React.FC<MainInfoProps> = ({proximo, metodo, precio}) => {
+const MainInfo: React.FC<MainInfoProps> = ({ proximo, metodo, precio }) => {
     return (
         <div className="container-info-horarios  p-8 pb-[1px]">
             <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
@@ -20,38 +20,30 @@ const MainInfo: React.FC<MainInfoProps> = ({proximo, metodo, precio}) => {
 
 
                     <div className="overflow-x-auto">
-
                         <table className="w-full">
                             <thead>
-                                <tr className="bg-gray-50  text-left text-xs font-semibold text-gray-600 uppercase ">
-                                    <th className="px-6 py-3">próximo</th>
-                                    <th className="px-6 py-3">Precio</th>
-                                    <th className="px-6 py-3">Método</th>
+                                <tr className="bg-gray-50 text-xs font-semibold text-gray-600 uppercase">
+                                    <th className="px-6 py-3 text-center">Próximo</th>
+                                    <th className="px-6 py-3 text-center">Precio</th>
+                                    <th className="px-6 py-3 text-center">Método</th>
                                 </tr>
                             </thead>
-
                             <tbody className="bg-white divide-y divide-gray-200">
                                 <tr className="hover:bg-gray-50 transition-colors duration-200 ease-in-out">
                                     <td className="px-6 py-4 text-center whitespace-nowrap">
-                                        <div className="flex justify-center items-center">
-                                            <span>{proximo}</span>
-                                        </div>
+                                        <span>{proximo}</span>
                                     </td>
                                     <td className="px-6 py-4 text-center whitespace-nowrap">
-                                        <div className="flex justify-center items-center">
-                                            <span>${precio}</span>
-                                        </div>
+                                        <span>${precio}</span>
                                     </td>
                                     <td className="px-6 py-4 text-center whitespace-nowrap">
-                                        <div className="flex relative right-[8px] text-sm justify-center items-center">
-                                            <span>{metodo}</span>
-                                        </div>
+                                        <span>{metodo}</span>
                                     </td>
                                 </tr>
                             </tbody>
-
                         </table>
                     </div>
+
 
                 </div>
             </div>

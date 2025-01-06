@@ -12,11 +12,11 @@ const Banner: React.FC<BannerProps> = ({ image, empresaNombre, origen, destino, 
     return (
         <>
             <div className="container-card-principal flex flex-col mx-8 mt-5   rounded-lg shadow-xl overflow-hidden">
-                <div className="h-20 relative">
+                <div className="h-[110px] relative">
                     <img src={image} className="absolute inset-0 w-full h-full object-cover " alt="Background" />
                     <div className="absolute inset-0 bg-gray-700 bg-opacity-70 "></div>
                 </div>
-                <div className="flex justify-center -mt-12  relative">
+                <div className="flex justify-center -mt-[70px]  relative">
                     <img
                         className="w-24 h-24 rounded-full   object-cover transform ease-in-out"
                         src={image}

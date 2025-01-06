@@ -47,7 +47,7 @@ const RutabusAP: React.FC = () => {
           data = await Helper.rutabusInfoHorariosLunes();
         } else if (helperExport.diaHoy === 6 || helperExport.diaHoy === 7) {
           data = await Helper.rutabusInfoHorariosDomingo();
-        } 
+        }
 
         setData(data);
         const proximoHorario = helperExport.proximoColectivo(data[0].horarios);
@@ -57,15 +57,15 @@ const RutabusAP: React.FC = () => {
       }
     };
 
-    
+
     fetchData();
 
-    
+
     const intervalId = setInterval(() => {
       fetchData();
     }, 30000);
 
-    
+
     return () => clearInterval(intervalId);
 
   }, []);
@@ -124,7 +124,7 @@ const RutabusAP: React.FC = () => {
 
           {rutabusAPDataLunes && (
             <SchedulesTable
-              dias="Lunes a Viernes"
+              dias="Lunes a viernes"
               horarios={rutabusAPDataLunes.horarios}
               destino={rutabusAPData.destino}
               showAll={showAll}
@@ -134,7 +134,7 @@ const RutabusAP: React.FC = () => {
 
           {rutabusAPDataDomingo && (
             <SchedulesTable
-              dias="Sabados, Domingos y Feriados"
+              dias="Sábados, domingos y feriados."
               horarios={rutabusAPDataDomingo.horarios}
               destino={rutabusAPData.destino}
               showAll={showAll}
@@ -143,14 +143,12 @@ const RutabusAP: React.FC = () => {
           )}
 
 
-       
-{/*<RecorridosParadas />*/}
+
+          {/*<RecorridosParadas />*/}
 
 
-
-
-          <Change path="/home" />
-          <Up ionContentRef={ionContentRefDo} />
+            <Change path="/home" />
+            <Up ionContentRef={ionContentRefDo} />
         </>
       )}
     </IonContent>

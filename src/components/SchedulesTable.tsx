@@ -9,7 +9,7 @@ interface SchedulesProps {
     setShowAll: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const SchedulesTable: React.FC<SchedulesProps> = ({dias, horarios, destino, showAll, setShowAll }) => {
+const SchedulesTable: React.FC<SchedulesProps> = ({ dias, horarios, destino, showAll, setShowAll }) => {
     // Función para determinar si un horario ha pasado
     const isHorarioPasado = (horario: string): boolean => {
         const [horas, minutos] = horario.split(':').map(Number);
@@ -32,25 +32,25 @@ const SchedulesTable: React.FC<SchedulesProps> = ({dias, horarios, destino, show
                     <div className="overflow-x-auto">
                         <table className="w-full">
                             <thead>
-                                <tr className="bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    <th className="px-6 py-3">Destino</th>
-                                    <th className="px-6 py-3">Horario</th>
+                                <tr className="bg-gray-50 text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                                    <th className="px-6 py-3 text-center">Destino</th>
+                                    <th className="px-6 py-3 text-center">Horario</th>
                                 </tr>
                             </thead>
                             <tbody className="bg-white divide-y divide-gray-200">
                                 {horarios.length > 0 ? (
                                     horarios.slice(0, showAll ? horarios.length : 5).map((horario, index) => (
                                         <tr key={index} className="hover:bg-gray-50 transition-colors duration-200 ease-in-out">
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="flex items-center">
+                                            <td className="px-6 py-4 text-center whitespace-nowrap">
+                                                <div className="flex justify-center items-center">
                                                     <FaBus className="text-blue-500 mr-2" />
                                                     <span>{destino}</span>
                                                 </div>
                                             </td>
-                                            <td className="px-6 py-4 whitespace-nowrap">
-                                                <div className="flex items-center">
+                                            <td className="px-6 py-4 text-center whitespace-nowrap">
+                                                <div className="flex justify-center items-center">
                                                     <FaClock className={isHorarioPasado(horario) ? "text-red-500 mr-2" : "text-green-500 mr-2"} />
-                                                    <span>{horario.slice(0,5)}</span>
+                                                    <span>{horario.slice(0, 5)}</span>
                                                 </div>
                                             </td>
                                         </tr>
@@ -65,6 +65,7 @@ const SchedulesTable: React.FC<SchedulesProps> = ({dias, horarios, destino, show
                             </tbody>
                         </table>
                     </div>
+
                     {horarios.length > 5 && (
                         <div className="text-center mt-4">
                             <button

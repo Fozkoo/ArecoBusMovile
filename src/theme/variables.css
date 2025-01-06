@@ -8,19 +8,22 @@
 
 
 body {
-    font-family: 'Onest Variable', sans-serif;
-    background-color: white;
-  }
+  font-family: 'Onest Variable', sans-serif;
+  background-color: white;
+}
 
 
 
 
 @keyframes breathing {
-  0%, 100% {
-      transform: scale(1);
+
+  0%,
+  100% {
+    transform: scale(1);
   }
+
   50% {
-      transform: scale(1.05);
+    transform: scale(1.05);
   }
 }
 
@@ -30,7 +33,7 @@ body {
 
 
 .breathing {
-    animation: breathing 2s ease-in-out infinite;
+  animation: breathing 2s ease-in-out infinite;
 }
 
 
@@ -40,8 +43,17 @@ body {
 @media (min-width: 768px) {
 
 
-  .container-cards{
+  .container-cards {
     justify-content: center;
+  }
+}
+
+@media (max-width: 380px) {
+
+  .persistentbottomtitle {
+
+    font-size: 14px;
+      /* 16px */
   }
 }
 
@@ -65,8 +77,13 @@ body {
 
 /* Animación de giro lenta */
 @keyframes spin-slow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .animate-spin-slow {
@@ -75,9 +92,17 @@ body {
 
 /* Animación de pulso */
 @keyframes pulse {
-  0% { opacity: 1; }
-  50% { opacity: 0.5; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 .animate-pulse {
@@ -107,7 +132,7 @@ ion-button {
 
 
 @media (max-width: 365px) {
-  .fixed-card-size{
+  .fixed-card-size {
     width: 280px;
   }
 }
@@ -163,7 +188,7 @@ ion-button {
   cursor: pointer;
 }
 
-  
+
 /* Añade esto a tu archivo CSS global o componente */
 
 
@@ -193,4 +218,3 @@ ion-button {
   box-shadow: none;
   background-color: transparent;
 }
-
