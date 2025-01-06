@@ -144,7 +144,7 @@ const RutabusAP: React.FC = () => {
 
 
        
-<RecorridosParadas />
+{/*<RecorridosParadas />*/}
 
 
 
