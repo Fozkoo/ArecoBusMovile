@@ -9,7 +9,6 @@ import RecorridosParadas from "../components/RecorridosParadas";
 import Change from "../components/Change";
 import Up from "../components/Up";
 import Loader from "../components/Loader";
-import { useMenu } from "../context/MenuContextProps";
 
 interface rutabusAPData {
   image: string;
@@ -38,7 +37,7 @@ const RutabusAP: React.FC = () => {
   const [proximo, setProximo] = useState<string | null>(null);
   const [rutabusAPDataDomingo, setRutabusAPDataDomingo] = useState<rutabusAPData | null>(null);
   const [rutabusAPDataLunes, setRutabusAPDataLunes] = useState<rutabusAPData | null>(null);
-  const { setMenuVisible } = useMenu();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -94,7 +93,6 @@ const RutabusAP: React.FC = () => {
         setError('Error al cargar la información');
       } finally {
         setLoading(false);
-        setMenuVisible(true);
       }
     };
     fetchData();
@@ -143,9 +141,14 @@ const RutabusAP: React.FC = () => {
               setShowAll={setShowAll}
             />
           )}
-        {/* 
-          <RecorridosParadas />
-        */}
+
+
+       
+<RecorridosParadas />
+
+
+
+
           <Change path="/home" />
           <Up ionContentRef={ionContentRefDo} />
         </>

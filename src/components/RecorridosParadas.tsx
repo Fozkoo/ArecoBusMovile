@@ -32,7 +32,7 @@ const RecorridosParadas: React.FC = () => {
                     </div>
 
                     <div className="container-map  py-2 px-2 rounded-2xl flex w-full shadow-2xl overflow-hidden">
-                        <MapContainer
+                    <MapContainer
                             center={[-34.243774, -59.473800] as LatLngTuple}
                             zoom={14}
                             scrollWheelZoom={false}

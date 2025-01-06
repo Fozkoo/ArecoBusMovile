@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { IonApp, IonButton, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonContent, IonIcon } from '@ionic/react';
 import '../theme/variables.css';
 import Loader from '../components/Loader';
-import TestPage from './ErrorPage';
+import ErrorPage from './ErrorPage';
 import helper from "../service/Helper";
 import helperExport from "..//service/FunctionsHelper";
 import { Link } from 'react-router-dom';
@@ -106,14 +106,12 @@ function Home() {
     }
   }, [loading, data]);
 
-  function close () {
-    setMenuVisible(false);
-  }
+
 
   if (error) {
     return (
       <div className="h-full">
-        <TestPage />
+        <ErrorPage />
       </div>
     );
   }
@@ -128,14 +126,7 @@ function Home() {
   return (
     <IonApp>
       <IonContent>
-        {/*
-        <div className="container-header fixed top-0 left-0 w-full bg-white  z-50 shadow-sm">
-          <Header />
-        </div>
-        */}
-
-                {/* aca saque el mt-20!!*/}
-        <div className="card-container mt-5 justify-center bg-red flex gap-3  flex-wrap">
+        <div className="card-container mt-5 justify-center flex gap-3  flex-wrap">
           {data.map((bus) => (
             <IonCard key={bus.id} className="fixed-card-size bg-gray-50 shadow-xl rounded-3xl w-[300px] h-[100%]">
               {loadedImages.includes(bus.image) && (
@@ -166,7 +157,7 @@ function Home() {
                   </p>
                 </div>
                 <Link to={bus.path} className="flex justify-center items-center mt-3 gap-1">
-                  <IonButton onClick={close} className="w-[75%] h-6 text-center hover:scale-105 transition-transform duration-200">
+                  <IonButton className="w-[75%] h-6 text-center hover:scale-105 transition-transform duration-200">
                     Ver más detalles
                   </IonButton>
                 </Link>
