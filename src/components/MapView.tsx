@@ -139,7 +139,6 @@ const MapView: React.FC = () => {
               icon={customIcon}
             >
               <Popup className="" autoPan={false} closeButton={false}>
-                {/* Contenido del popup */}
                 <IonCard className="flex justify-center bg-white shadow-none items-center w-[200px] h-[280px]">
                   <CardPuntoSube
                     nombre="Punto SUBE"

@@ -5,14 +5,14 @@ const URLHORARIOS = 'https://api.arecobus.cfl401areco.edu.ar/api/horario'
 // http://localhost:8080/api/buses  o https://api.arecobus.cfl401areco.edu.ar/api/buses
 
 
-const urlPrueba = "http://localhost:8080/api/recorrido"
+const urlPrueba = "https://api.arecobus.cfl401areco.edu.ar/api/recorrido"
 
-const dataPuntoSube = "http://localhost:8080/api/puntosSube"
+const dataPuntoSube = "https://api.arecobus.cfl401areco.edu.ar/api/puntosSube"
 
-const coordenadas = "http://localhost:8080/api/coordenadas"
+const coordenadas = "https://api.arecobus.cfl401areco.edu.ar/api/coordenadas"
 
 
-const localidades = "http://localhost:8080/api/localidad"
+const localidades = "https://api.arecobus.cfl401areco.edu.ar/api/localidad"
 
 
 const createLocalidades = axios.create({
