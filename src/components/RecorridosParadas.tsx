@@ -4,7 +4,7 @@ import { LatLngExpression, LatLngTuple } from "leaflet";
 import methods from "../service/Helper";
 import logo from '..//..//public/posibleIconoEnAzul (1).svg';
 import L, { Icon } from "leaflet";
-
+import Loader from "..//components/Loader"
 let coordenadasExternas: LatLngExpression[][] = [];
 
 const userLocationIcon = new Icon({
@@ -15,7 +15,7 @@ const userLocationIcon = new Icon({
 const RecorridosParadas: React.FC = () => {
   const [coordenadas, setCoordenadas] = useState<LatLngExpression[]>([]);
   const [userLocation, setUserLocation] = useState<LatLngTuple | null>(null);
-
+  const [loading, setLoading] = useState(true);
   const IconBusStop = new L.Icon({
     iconUrl: logo,
     iconSize: [20, 20],
@@ -30,6 +30,7 @@ const RecorridosParadas: React.FC = () => {
       try {
         const data = await methods.getCordenadasById("1");
         setCoordenadas(data);
+        setLoading(false);
         coordenadasExternas = data.coordenadas;
       } catch (err) {
         console.error("Error fetching data:", err);
@@ -65,6 +66,10 @@ const RecorridosParadas: React.FC = () => {
     };
   }, []);
 
+  if (loading) {
+    return <Loader />;
+  }
+
   return (
     <>
       <div className="container-table-horarios p-8 ">
@@ -79,7 +84,7 @@ const RecorridosParadas: React.FC = () => {
               center={[-34.243774, -59.473800] as LatLngTuple}
               zoom={14}
               zoomControl={false}
-              style={{ height: "400px", width: "100%"}} // Establece un tamaño adecuado
+              style={{ height: "400px", width: "100%", borderRadius: "10px", zIndex: 20 }} // Establece un tamaño adecuado
             >
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
