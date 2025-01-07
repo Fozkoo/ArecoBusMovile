@@ -144,9 +144,8 @@ const RutabusAP: React.FC = () => {
 
 
 
-          <RecorridosParadas />
-
-
+          <RecorridosParadas recorridoId="1"/>
+          
           <Change path="/home" />
           <Up ionContentRef={ionContentRefDo} />
         </>

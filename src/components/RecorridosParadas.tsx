@@ -12,7 +12,13 @@ const userLocationIcon = new Icon({
   iconSize: [25, 25], // Tamaño del ícono
 });
 
-const RecorridosParadas: React.FC = () => {
+
+interface RecorridosParadasProps {
+  recorridoId: string;
+}
+
+
+const RecorridosParadas: React.FC<RecorridosParadasProps> = ({recorridoId}) => {
   const [coordenadas, setCoordenadas] = useState<LatLngExpression[]>([]);
   const [userLocation, setUserLocation] = useState<LatLngTuple | null>(null);
   const [loading, setLoading] = useState(true);
@@ -28,7 +34,7 @@ const RecorridosParadas: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await methods.getCordenadasById("1");
+        const data = await methods.getCordenadasById(recorridoId);
         setCoordenadas(data);
         setLoading(false);
         coordenadasExternas = data.coordenadas;

@@ -129,9 +129,9 @@ const MasterbusAG: React.FC = () => {
               />
             )}
 
-            {/* 
-          <RecorridosParadas />
-        */}
+            
+          <RecorridosParadas recorridoId="2" />
+        
 
 
             <Change
