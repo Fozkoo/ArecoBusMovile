@@ -11,14 +11,11 @@ import CardPuntoSube from './CardPuntosSube';
 import '../theme/variables.css';
 import L from 'leaflet';
 import LogoSube from '../images/pin_punto_sube.svg';
-
-// Icono para la ubicación del usuario
 const userLocationIcon = new Icon({
   iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
   iconSize: [25, 25],
 });
 
-// Icono personalizado para los puntos SUBE
 const customIcon = new L.Icon({
   iconUrl: LogoSube,
   iconSize: [35, 35],
@@ -50,6 +47,7 @@ const MapView: React.FC = () => {
   const [data, setData] = useState([]);
   const [markers, setMarkers] = useState<{
     geocode: LatLngTuple;
+    nombre: string;
     descripcion: string;
     horariosapertura: string;
     horariocierre: string;
@@ -151,7 +149,7 @@ const MapView: React.FC = () => {
             <Popup autoPan={false} closeButton={false}>
               <IonCard className="flex justify-center bg-white shadow-none items-center w-[200px] h-[280px]">
                 <CardPuntoSube
-                  nombre="Punto SUBE"
+                  nombre={marker.nombre}
                   descripcion={marker.descripcion}
                   distance={marker.distance || ''}
                   horario={`${marker.horariosapertura} - ${marker.horariocierre}`}
