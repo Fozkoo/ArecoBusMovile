@@ -12,13 +12,15 @@ import FunctionsHelper from "..//service/FunctionsHelper";
 import { FiSearch } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import "..//theme/variables.css";
+import { useMenu } from '../context/MenuContextProps';
+
 
 function PuntosSube() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any[]>([]);
   const [userLocation, setUserLocation] = useState<{ latitude: number, longitude: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
-
+  const { setMenuVisible } = useMenu();
 
 
   useEffect(() => {
@@ -26,11 +28,12 @@ function PuntosSube() {
       try {
         const response = await methods.getAllPuntosSube();
         setData(response);
-        setLoading(false);
-        console.log(response);
       } catch (error) {
         console.error(error);
         setError("Error al cargar los datos." + error);
+      } finally {
+        setLoading(false);
+        setMenuVisible(true);
       }
     };
     fetchData();

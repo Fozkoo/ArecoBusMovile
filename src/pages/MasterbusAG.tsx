@@ -10,11 +10,12 @@ import Change from "../components/Change";
 import helperExport from "../service/FunctionsHelper";
 import "..//theme/variables.css"
 import RecorridosParadas from "../components/RecorridosParadas";
+import { useMenu } from '../context/MenuContextProps';
 
 interface MasterbusData {
   image: string;
   empresaNombre: string;
-  origen: "Areco";
+  origen: string;
   destino: string;
   horarios: string[];
   puntoPartida: string;
@@ -33,6 +34,7 @@ const MasterbusAG: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [proximo, setProximo] = useState<string | null>(null);
   const [masterbusDataDomingo, setMasterbusDataDomingo] = useState<MasterbusData | null>(null);
+  const { setMenuVisible } = useMenu();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -85,6 +87,7 @@ const MasterbusAG: React.FC = () => {
         setError('Error al cargar la información');
       } finally {
         setLoading(false);
+        setMenuVisible(true);
       }
     };
     fetchData();
@@ -100,7 +103,7 @@ const MasterbusAG: React.FC = () => {
             <Banner
               image={masterbusData.image}
               empresaNombre={masterbusData.empresaNombre}
-              origen="Areco"
+              origen={masterbusData.origen}
               destino={masterbusData.destino}
               isActive={isActive}
             />
@@ -130,7 +133,7 @@ const MasterbusAG: React.FC = () => {
             )}
 
             
-          <RecorridosParadas recorridoId="2" />
+            <RecorridosParadas recorridoId="2" />
         
 
 

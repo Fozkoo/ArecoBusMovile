@@ -8,12 +8,13 @@ import Up from '../components/Up';
 import SchedulesTable from '../components/SchedulesTable';
 import MainInfo from '../components/MainInfo';
 import Banner from '../components/Banner';
+import { useMenu } from '../context/MenuContextProps';
 
 
 interface RicarditoAdData {
   image: string;
   empresaNombre: string;
-  origen: "Areco";
+  origen: string;
   destino: string;
   horarios: string[];
   puntoPartida: string;
@@ -34,6 +35,7 @@ const RicarditoAD: React.FC = () => {
   const [ricarditoAdDataDomingo, setRicarditoAdDataDomingo] = useState<RicarditoAdData | null>(null);
   const [ricarditoAdDataSabado, setRicarditoAdDataSabado] = useState<RicarditoAdData | null>(null);
   const [data, setData] = useState<any>(null);  
+  const { setMenuVisible } = useMenu();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -100,6 +102,7 @@ const RicarditoAD: React.FC = () => {
         setError("Error al cargar los datos" + error);
       } finally {
         setLoading(false);
+        setMenuVisible(true);
       }
 
     }
@@ -119,7 +122,7 @@ const RicarditoAD: React.FC = () => {
           <Banner
             image={ricarditoAdData.image}
             empresaNombre={ricarditoAdData.empresaNombre}
-            origen="Areco"
+            origen={ricarditoAdData.origen}
             destino={ricarditoAdData.destino}
             isActive={isActive}
           />

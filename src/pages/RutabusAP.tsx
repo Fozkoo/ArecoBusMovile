@@ -9,11 +9,12 @@ import RecorridosParadas from "../components/RecorridosParadas";
 import Change from "../components/Change";
 import Up from "../components/Up";
 import Loader from "../components/Loader";
+import { useMenu } from '../context/MenuContextProps';
 
 interface rutabusAPData {
   image: string;
   empresaNombre: string;
-  origen: "Areco";
+  origen: string;
   destino: string;
   horarios: string[];
   puntoPartida: string;
@@ -37,7 +38,7 @@ const RutabusAP: React.FC = () => {
   const [proximo, setProximo] = useState<string | null>(null);
   const [rutabusAPDataDomingo, setRutabusAPDataDomingo] = useState<rutabusAPData | null>(null);
   const [rutabusAPDataLunes, setRutabusAPDataLunes] = useState<rutabusAPData | null>(null);
-
+  const { setMenuVisible } = useMenu();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,15 +85,16 @@ const RutabusAP: React.FC = () => {
         if (data3.length > 0) {
           data3[0].horarios.sort();
         }
-
         setRutabusAPData(data1.length > 0 ? data1[0] : null);
         setRutabusAPDataLunes(data2.length > 0 ? data2[0] : null);
         setRutabusAPDataDomingo(data3.length > 0 ? data3[0] : null);
+
       } catch (err) {
         console.error('Error fetching data:', err);
         setError('Error al cargar la información');
       } finally {
         setLoading(false);
+        setMenuVisible(true);
       }
     };
     fetchData();
@@ -111,7 +113,7 @@ const RutabusAP: React.FC = () => {
           <Banner
             image={rutabusAPData.image}
             empresaNombre={rutabusAPData.empresaNombre}
-            origen="Areco"
+            origen={rutabusAPData.origen}
             destino={rutabusAPData.destino}
             isActive={isActive}
           />
