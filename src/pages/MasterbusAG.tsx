@@ -133,7 +133,7 @@ const MasterbusAG: React.FC = () => {
             )}
 
             
-            <RecorridosParadas recorridoId="2" />
+            <RecorridosParadas recorridoId="2" center={[-34.244991, -59.472629]} />
         
 
 

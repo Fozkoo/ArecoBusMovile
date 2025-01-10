@@ -124,7 +124,7 @@ const PilarExpressPI: React.FC = () => {
 
           {pilarExpressPIDataLunes && (
             <SchedulesTable
-              dias="Lunes a viernes"
+              dias="Lunes a Sábados."
               horarios={pilarExpressPIDataLunes.horarios}
               destino={pilarExpressPIData.destino}
               showAll={showAll}
@@ -134,7 +134,7 @@ const PilarExpressPI: React.FC = () => {
 
           {pilarExpressPIDataDomingo && (
             <SchedulesTable
-              dias="Sábados, domingos y feriados."
+              dias="Domingos y feriados."
               horarios={pilarExpressPIDataDomingo.horarios}
               destino={pilarExpressPIData.destino}
               showAll={showAll}
@@ -144,8 +144,9 @@ const PilarExpressPI: React.FC = () => {
 
 
 
-          <RecorridosParadas recorridoId="1"/>
-          
+          <RecorridosParadas recorridoId="5" center={[-34.456313, -58.911891]} />
+
+
           <Change path="/home" />
           <Up ionContentRef={ionContentRefDo} />
         </>

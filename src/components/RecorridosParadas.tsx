@@ -15,10 +15,12 @@ const userLocationIcon = new Icon({
 
 interface RecorridosParadasProps {
   recorridoId: string;
+  center: LatLngTuple; // Añadido para recibir las coordenadas
 }
 
 
-const RecorridosParadas: React.FC<RecorridosParadasProps> = ({recorridoId}) => {
+
+const RecorridosParadas: React.FC<RecorridosParadasProps> = ({recorridoId, center}) => {
   const [coordenadas, setCoordenadas] = useState<LatLngExpression[]>([]);
   const [userLocation, setUserLocation] = useState<LatLngTuple | null>(null);
   const [loading, setLoading] = useState(true);
@@ -87,7 +89,7 @@ const RecorridosParadas: React.FC<RecorridosParadasProps> = ({recorridoId}) => {
 
           <div className="container-map relative  py-2 px-2 rounded-2xl w-full h-full shadow-2xl">
             <MapContainer
-              center={[-34.243774, -59.473800] as LatLngTuple}
+              center={center}
               zoom={14}
               zoomControl={false}
               style={{ height: "400px", width: "100%", borderRadius: "10px", zIndex: 20 }} // Establece un tamaño adecuado
