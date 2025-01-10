@@ -14,7 +14,7 @@ import RicarditoAD from './pages/RicarditoAD';
 import RicarditoAV from './pages/RicarditoAV';
 import { useMenu } from './context/MenuContextProps';
 import ChevallierAR from './pages/ChevallierAR';
-import { PilarExpressPI } from './pages/PilarExpressPI';
+import PilarExpressPI from './pages/PilarExpressPI';
 
 setupIonicReact();
 

@@ -42,6 +42,7 @@ function Home() {
         }
 
         setData(data);
+        console.log(data)
       } catch (err) {
         setError("Error al cargar los datos.");
       } finally {
