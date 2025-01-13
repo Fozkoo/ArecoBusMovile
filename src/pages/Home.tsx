@@ -146,10 +146,10 @@ function Home() {
 
   return (
     <IonApp>
-      <IonContent>
-        <div className="card-container mt-5 justify-center flex gap-3  flex-wrap">
+      <IonContent className='h-[100vh]'>
+        <div className="card-container justify-center items-center h-[1000px] flex gap-3 px-10 py-5  flex-wrap mx-10 mb-16  max-xl:h-[2800px] max-xl:px-0 max-xl:mx-2">
           {data.map((bus) => (
-            <IonCard key={bus.id} className="fixed-card-size bg-gray-50 shadow-xl rounded-3xl w-[300px] h-[100%]">
+            <IonCard key={bus.id} className="fixed-card-size items-center justify-center bg-red-200 shadow-xl rounded-3xl w-[300px] h-[430px]">
               {loadedImages.includes(bus.image) && (
                 <img
                   alt={bus.empresaNombre}
