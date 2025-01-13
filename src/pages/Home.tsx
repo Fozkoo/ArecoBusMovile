@@ -27,6 +27,7 @@ function Home() {
   const [data, setData] = useState<Bus[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loadedImages, setLoadedImages] = useState<string[]>([]);
+  const [userLocation, setUserLocation] = useState<{ latitude: number, longitude: number } | null>(null);
   const { setMenuVisible } = useMenu();
 
   useEffect(() => {
@@ -106,6 +107,27 @@ function Home() {
       });
     }
   }, [loading, data]);
+
+  function obtenerUbicacion() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function (posicion) {
+        const latitud = posicion.coords.latitude;
+        const longitud = posicion.coords.longitude;
+        setUserLocation({ latitude: latitud, longitude: longitud });
+        console.log(latitud, longitud);
+      }, function (error) {
+        console.error("Error al obtener la ubicación: " + error.message);
+        setUserLocation(null);
+      });
+    } else {
+      console.error("La geolocalización no es soportada por este navegador.");
+      setUserLocation(null);
+    }
+  }
+
+  useEffect(() => {
+    obtenerUbicacion();
+  }, []);
 
 
 
