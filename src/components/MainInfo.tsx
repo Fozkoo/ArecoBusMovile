@@ -10,8 +10,8 @@ const MainInfo: React.FC<MainInfoProps> = ({ proximo, metodo, precio }) => {
     return (
         <div className="container-info-horarios  p-8 pb-[1px]">
             <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="p-4 pb-[3px] bg-blue-600 text-white">
-                    <h2 className="text-3xl font-bold mb-2">Información principal</h2>
+                <div className="p-4 pb-[3px] flex bg-blue-600 text-white">
+                    <h2 className="text-3xl  font-bold mb-2">Información principal</h2>
                 </div>
 
 
