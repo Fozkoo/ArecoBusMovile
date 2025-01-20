@@ -192,6 +192,18 @@ ion-button {
 }
 
 
+@media (max-width: 1536px){
+  .globo{
+    left: 85%;
+
+  }
+
+  .up {
+    top: 92% !important;
+  }
+}
+
+
 @media (min-width: 768px) {
 
 
