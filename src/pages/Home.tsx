@@ -78,7 +78,7 @@ function Home() {
       data.forEach((bus) => {
         const cachedImage = localStorage.getItem(bus.image);
         if (cachedImage) {
-           // console.log(`Imagen cargada desde la caché: ${bus.image}`);
+          // console.log(`Imagen cargada desde la caché: ${bus.image}`);
           loadedImagesCount += 1;
           setLoadedImages((prev) => [...prev, bus.image]);
           if (loadedImagesCount === totalImages) {
@@ -147,47 +147,58 @@ function Home() {
   return (
     <IonApp>
       <IonContent>
-        <div className="card-container mt-5 justify-center flex gap-3  flex-wrap">
-          {data.map((bus) => (
-            <IonCard key={bus.id} className="fixed-card-size items-center justify-center bg-gray-50 shadow-xl rounded-3xl w-[300px] h-[430px]">
-              {loadedImages.includes(bus.image) && (
-                <img
-                  alt={bus.empresaNombre}
-                  src={bus.image}
-                  className="card-image p-2 !rounded-3xl w-[100%] h-[200px] object-cover"
-                />
-              )}
-              <IonCardHeader>
-                <IonCardTitle className="font-semibold">{bus.empresaNombre}</IonCardTitle>
-                <IonCardSubtitle>
+        <div className="min-h-screen flex items-center justify-center ">
+          <div className="card-container grid gap-x-10 gap-y-4 lg:mx-16 lg:grid-cols-3">
+            {data.map((bus) => (
+              <IonCard
+                key={bus.id}
+                className="fixed-card-size items-center justify-center bg-gray-50 shadow-xl rounded-3xl w-[300px] h-[430px]"
+              >
+                {loadedImages.includes(bus.image) && (
+                  <img
+                    alt={bus.empresaNombre}
+                    src={bus.image}
+                    className="card-image p-2 !rounded-3xl w-[100%] h-[200px] object-cover"
+                  />
+                )}
+                <IonCardHeader>
+                  <IonCardTitle className="font-semibold">{bus.empresaNombre}</IonCardTitle>
+                  <IonCardSubtitle>
+                    <div className="flex gap-1">
+                      <p className="font-normal text-gray-500">Destino:</p>
+                      <p className="font-semibold text-black">{bus.destino}</p>
+                    </div>
+                  </IonCardSubtitle>
+                </IonCardHeader>
+                <IonCardContent>
                   <div className="flex gap-1">
-                    <p className="font-normal text-gray-500">Destino:</p>
-                    <p className="font-semibold text-black">{bus.destino}</p>
+                    <p className="font-medium text-gray-500">Precio: </p>
+                    <p className="text-black !font-semibold">${bus.precio}</p>
                   </div>
-                </IonCardSubtitle>
-              </IonCardHeader>
-              <IonCardContent>
-                <div className="flex gap-1">
-                  <p className="font-medium text-gray-500">Precio: </p>
-                  <p className="text-black !font-semibold">${bus.precio}</p>
-                </div>
-                <div className="flex gap-1 items-center">
-                  <p className="font-medium text-gray-500">Próximo Viaje:</p>
-                  <p className="text-black text-center !font-semibold">
-                    {helperExport.proximoColectivo(bus.horarios)}
-                  </p>
-                </div>
-                <Link to={bus.path} className="flex justify-center items-center mt-3 gap-1">
-                  <IonButton className="w-[75%] h-6 text-center hover:scale-105 transition-transform duration-200">
-                    Ver más detalles
-                  </IonButton>
-                </Link>
-              </IonCardContent>
-            </IonCard>
-          ))}
+                  <div className="flex gap-1 items-center">
+                    <p className="font-medium text-gray-500">Próximo Viaje:</p>
+                    <p className="text-black text-center !font-semibold">
+                      {helperExport.proximoColectivo(bus.horarios)}
+                    </p>
+                  </div>
+                  <Link to={bus.path} className="flex justify-center items-center mt-3 gap-1">
+                    <IonButton className="w-[75%] h-6 text-center hover:scale-105 transition-transform duration-200">
+                      Ver más detalles
+                    </IonButton>
+                  </Link>
+                </IonCardContent>
+              </IonCard>
+            ))}
+          </div>
         </div>
       </IonContent>
     </IonApp>
+
   );
 }
+
+
+
+
+
 export default Home;
