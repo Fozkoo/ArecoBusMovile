@@ -11,6 +11,7 @@ import CardPuntoSube from './CardPuntosSube';
 import '../theme/variables.css';
 import L from 'leaflet';
 import LogoSube from '../images/pin_punto_sube.svg';
+
 const userLocationIcon = new Icon({
   iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
   iconSize: [25, 25],
@@ -81,7 +82,7 @@ const MapView: React.FC = () => {
         },
         (error) => {
           console.error('Error al rastrear la ubicación del usuario', error);
-          setUserLocation([-34.243774, -59.4738]); // Ubicación predeterminada
+          setUserLocation([-34.243774, -59.4738]);
         },
         { enableHighAccuracy: true, maximumAge: 0 }
       );

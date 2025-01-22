@@ -20,6 +20,7 @@ function PuntosSube() {
   const [data, setData] = useState<any[]>([]);
   const [userLocation, setUserLocation] = useState<{ latitude: number, longitude: number } | null>(null);
   const [error, setError] = useState<string | null>(null);
+
   const { setMenuVisible } = useMenu();
 
 

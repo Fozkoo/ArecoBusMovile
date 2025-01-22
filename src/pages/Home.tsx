@@ -152,7 +152,7 @@ function Home() {
             {data.map((bus) => (
               <IonCard
                 key={bus.id}
-                className="fixed-card-size items-center justify-center bg-gray-50 shadow-xl rounded-3xl w-[300px] h-[430px]"
+                className="fixed-card-size items-center justify-center bg-gray-50 shadow-xl rounded-3xl w-[300px] h-[410px]"
               >
                 {loadedImages.includes(bus.image) && (
                   <img
