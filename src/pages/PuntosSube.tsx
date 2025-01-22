@@ -1,4 +1,4 @@
-import { IonApp, IonContent} from '@ionic/react';
+import { IonApp, IonContent } from '@ionic/react';
 import { useState, useEffect } from 'react';
 import '../theme/variables.css';
 import MapView from '../components/MapView';
@@ -38,8 +38,6 @@ function PuntosSube() {
     };
     fetchData();
   }, []);
-
-
 
 
 
@@ -84,14 +82,14 @@ function PuntosSube() {
 
   return (
     <IonApp>
-      <IonContent className="relative !z-50">
+      <IonContent className="relative !z-50 h-[100dvh]">
         {loading ? (
           <Loader />
         ) : (
           <div className=''>
             <Link to="/SearchLocality">
               <div className="flex absolute items-center justify-center mt-5 w-full z-50">
-                <div className='flex justify-center items-center w-[95%]  rounded-full shadow-md px-4 py-2 bg-white'>
+                <div className='flex justify-center items-center w-[95%]  rounded-full shadow-md px-4 py-2 lg:px-6 lg:py-4 bg-white lg:w-[75%]'>
                   <FiSearch className="text-gray-500 mr-2" size={20} />
                   <input
                     type="text"
@@ -107,14 +105,15 @@ function PuntosSube() {
                 <MapView />
               </div>
 
+
               <PersistentBottomSheet>
-                <div className="container-title-punto-sube flex justify-center items-center text-center flex-col w-full">
-                  <p className="persistentbottomtitle text-base text-white w-11/12 bg-[#3B82F6]   p-1 rounded-full font-semibold ">
+                <div className="container-title-punto-sube flex justify-center items-center  text-center flex-col w-full">
+                  <p className="persistentbottomtitle text-base text-white w-full bg-[#3B82F6] p-1 rounded-full lg:text-lg font-semibold lg:w-[80%]">
                     ¡Descubre tu punto SUBE más cercano!
                   </p>
                 </div>
 
-                <div className="container-cards flex flex-col gap-3 my-3">
+                <div className="container-cards flex flex-col gap-3 my-3 lg:justify-center lg:items-center lg:flex-row lg:p-4 lg:w-[85%] lg:mx-auto lg:grid lg:grid-cols-3 lg:gap-5">
                   {puntosOrdenados.map((punto, index) => {
                     let distanceLabel =
                       punto.distance < 1
@@ -125,7 +124,7 @@ function PuntosSube() {
                         key={index}
                         nombre={punto.nombre}
                         descripcion={punto.descripcion}
-                        distance={userLocation ? distanceLabel : "Ubicación no disponible"}
+                        distance={userLocation ? distanceLabel : ""}
                         horario={punto.horariosapertura}
                         urlimagen={punto.urlimagen}
                         urllogo={punto.urlimagen}
@@ -133,6 +132,7 @@ function PuntosSube() {
                     );
                   })}
                 </div>
+
               </PersistentBottomSheet>
             </div>
           </div>

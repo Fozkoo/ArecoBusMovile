@@ -26,3 +26,4 @@ const Up: React.FC<UpProps> = ({ ionContentRef }) => {
 };
 
 export default Up;
+  

@@ -15,10 +15,10 @@ const PersistentBottomSheet = ({ children, minHeight = 200, maxHeight = 400 }: {
 
   
   return (
-    <div className="fixed inset-x-0 bg-red z-50 bottom-0">
+    <div className="fixed inset-x-0 bg-red z-50 bottom-0  lg:w-[75%] xl:w-[75%] lg:mx-auto">
       <animated.div 
         style={springProps}
-        className="bg-white  rounded-t-2xl flex flex-col mx-2 shadow-lg  overflow-hidden"
+        className="bg-white  rounded-t-2xl flex flex-col mx-1 lg:mx-0 shadow-lg  overflow-hidden"
       >
         {/* Handle bar for dragging */}
         <div 
