@@ -148,7 +148,7 @@ function Home() {
     <IonApp>
       <IonContent>
         <div className="min-h-screen flex items-center justify-center ">
-          <div className="card-container grid gap-x-10 gap-y-4 lg:mx-16 lg:grid-cols-3">
+          <div className="card-container grid gap-x-10 gap-y-4 md:grid-cols-2 lg:grid-cols-3">
             {data.map((bus) => (
               <IonCard
                 key={bus.id}
@@ -193,7 +193,6 @@ function Home() {
         </div>
       </IonContent>
     </IonApp>
-
   );
 }
 
