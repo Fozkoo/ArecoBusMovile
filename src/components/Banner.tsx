@@ -5,9 +5,10 @@ interface BannerProps {
     empresaNombre: string;
     origen: string
     destino: string
+    isActive: boolean
 }
 
-const Banner: React.FC<BannerProps> = ({ image, empresaNombre, origen, destino }) => {
+const Banner: React.FC<BannerProps> = ({ image, empresaNombre, origen, destino, isActive }) => {
     return (
         <>
             <div className="container-card-principal flex flex-col mx-8 mt-5 rounded-lg shadow-xl overflow-hidden lg:max-w-4xl lg:mx-auto">
