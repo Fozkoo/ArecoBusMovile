@@ -15,6 +15,7 @@ import RicarditoAV from './pages/RicarditoAV';
 import { useMenu } from './context/MenuContextProps';
 import ChevallierAR from './pages/ChevallierAR';
 import PilarExpressPI from './pages/PilarExpressPI';
+import RutabusPA from './pages/RutabusPA';
 
 setupIonicReact();
 
@@ -34,6 +35,7 @@ const App: React.FC = () => {
           <Route exact path="/SearchLocality" component={SearchLocality} />
           <Route exact path="/ErrorPage" component={ErrorPage} />
           <Route exact path="/RutabusAP" component={RutabusAP} />
+          <Route exact path="/RutabusPA" component={RutabusPA} />
           <Route exact path="/MasterbusAG" component={MasterbusAG} />
           <Route exact path="/RicarditoAD" component={RicarditoAD} />
           <Route exact path="/RicarditoAV" component={RicarditoAV} />

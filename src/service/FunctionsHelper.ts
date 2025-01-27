@@ -8,7 +8,7 @@ const proximoColectivo = (horarios: any[]) => {
   const horaActual = moment(); 
   const proximo = horarios.find(horario => moment(horario, 'HH:mm:ss').isAfter(horaActual));
   
-  return proximo ? moment(proximo, 'HH:mm:ss').format('HH:mm') : "No hay más viajes por hoy";
+  return proximo ? moment(proximo, 'HH:mm:ss').format('HH:mm') : "No hay más viajes hoy";
 };
 
 
