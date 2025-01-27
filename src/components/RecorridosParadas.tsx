@@ -16,22 +16,23 @@ const userLocationIcon = new Icon({
 
 interface RecorridosParadasProps {
   recorridoId: string;
-  center: LatLngTuple; 
+  center: LatLngTuple;
 }
 
-const RecorridosParadas: React.FC<RecorridosParadasProps> = ({recorridoId, center}) => {
+const RecorridosParadas: React.FC<RecorridosParadasProps> = ({ recorridoId, center }) => {
   const [coordenadas, setCoordenadas] = useState<LatLngExpression[]>([]);
   const [userLocation, setUserLocation] = useState<LatLngTuple | null>(null);
   const [loading, setLoading] = useState(true);
   const [paradas, setParadas] = useState<any[]>([]);
 
-    const [markers, setMarkers] = useState<{
-      geocode: LatLngTuple;
-      nombre: string;
-      descripcion: string;
-      url: string;
-      idRecorrido: string;
-    }[]>([]);
+  const [markers, setMarkers] = useState<{
+    logitud: string,
+    latitud: string,
+    descripcion: string;
+    url: string;
+    idRecorrido: string;
+    geocode: LatLngTuple;
+  }[]>([]);
 
 
 
@@ -39,7 +40,7 @@ const RecorridosParadas: React.FC<RecorridosParadasProps> = ({recorridoId, cente
   const IconBusStop = new L.Icon({
     iconUrl: logo,
     iconSize: [20, 20],
-    iconAnchor: [10, 10], 
+    iconAnchor: [10, 10],
   });
 
   useEffect(() => {
@@ -87,31 +88,39 @@ const RecorridosParadas: React.FC<RecorridosParadasProps> = ({recorridoId, cente
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await methods.getParadasByIdRecorrido(recorridoId);    
+        const response = await methods.getParadasByIdRecorrido(recorridoId);
         setParadas(response);
-        
+
         const markersData = response.map((punto: {
-          geocode: LatLngTuple;
-          nombre: string;
+          logitud: string;
+          latitud: string;
           descripcion: string;
           url: string;
           idRecorrido: string;
         }) => {
+          const geocode: [number, number] = [
+            parseFloat(punto.logitud),
+            parseFloat(punto.latitud)
+          ];
+          console.log(geocode);
+
           return {
             ...punto,
+            geocode
+            
           };
         });
+
         setMarkers(markersData);
         console.log(markersData);
       } catch (err) {
         console.error("Error fetching data:", err);
       }
     };
-  
+
     fetchData();
   }, []);
-  
-  
+
 
   if (loading) {
     return <Loader />;
@@ -140,7 +149,8 @@ const RecorridosParadas: React.FC<RecorridosParadasProps> = ({recorridoId, cente
 
               {markers.map((marker, index) => (
                 <Marker key={index} position={marker.geocode} icon={IconBusStop}>
-                  <Popup autoPan={false} closeButton={false}></Popup>
+                  <Popup autoPan={false} closeButton={false}>
+                  </Popup>
                 </Marker>
               ))}
 

@@ -14,7 +14,7 @@ const coordenadas = "https://api.arecobus.cfl401areco.edu.ar/api/coordenadas"
 
 const localidades = "https://api.arecobus.cfl401areco.edu.ar/api/localidad"
 
-const paradas = "http://localhost:8080/api/paradas"
+const paradas = "https://api.arecobus.cfl401areco.edu.ar/api/paradas"
 
 
 const createLocalidades = axios.create({
