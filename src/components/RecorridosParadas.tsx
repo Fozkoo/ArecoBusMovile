@@ -83,8 +83,6 @@ const RecorridosParadas: React.FC<RecorridosParadasProps> = ({ recorridoId, cent
     };
   }, []);
 
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -110,9 +108,7 @@ const RecorridosParadas: React.FC<RecorridosParadasProps> = ({ recorridoId, cent
             
           };
         });
-
-        setMarkers(markersData);
-        console.log(markersData);
+        setMarkers(markersData)
       } catch (err) {
         console.error("Error fetching data:", err);
       }
