@@ -14,9 +14,15 @@ const coordenadas = "https://api.arecobus.cfl401areco.edu.ar/api/coordenadas"
 
 const localidades = "https://api.arecobus.cfl401areco.edu.ar/api/localidad"
 
+const paradas = "http://localhost:8080/api/paradas"
+
 
 const createLocalidades = axios.create({
     baseURL: localidades
+})
+
+const createParadas = axios.create({
+    baseURL: paradas
 })
 
 const createCoordenadass = axios.create({
@@ -143,6 +149,16 @@ const getHorariosByIdBusIdDia = async (idBus:any, idDia:any) => {
 }
 
 
+const getParadasByIdRecorrido = async (idRecorrido:any) => {
+    try {
+        const response = await createParadas.get("/getParadasByRecorrido/" + idRecorrido);
+        return response.data;
+    }
+    catch (err) {
+        return [];
+    }
+}
+
 
 
 const methods = {
@@ -155,7 +171,8 @@ const methods = {
     getAllPuntosSube,
     createCoordenadas,
     getAllLocalidades,
-    api
+    api,
+    getParadasByIdRecorrido
 }
 
 export default methods;

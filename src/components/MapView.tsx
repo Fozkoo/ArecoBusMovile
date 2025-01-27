@@ -55,6 +55,7 @@ const MapView: React.FC = () => {
     urlimagen: string;
     distance: string;
   }[]>([]);
+  
   const [userLocation, setUserLocation] = useState<LatLngTuple | null>(null);
   const location = useLocation();
   const state = location.state as { state?: { latitud?: string; longitud?: string } } || {};

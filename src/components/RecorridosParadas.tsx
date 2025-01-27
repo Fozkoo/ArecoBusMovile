@@ -1,57 +1,65 @@
 import React, { useEffect, useState } from "react";
-import { MapContainer, Marker, Polyline, TileLayer } from "react-leaflet";
+import { MapContainer, Marker, Polyline, Popup, TileLayer } from "react-leaflet";
 import { LatLngExpression, LatLngTuple } from "leaflet";
 import methods from "../service/Helper";
 import logo from '..//..//public/posibleIconoEnAzul (1).svg';
 import L, { Icon } from "leaflet";
-import Loader from "..//components/Loader"
+import Loader from "..//components/Loader";
+
 let coordenadasExternas: LatLngExpression[][] = [];
+let coordenadasParadas: LatLngExpression[][] = [];
 
 const userLocationIcon = new Icon({
   iconUrl: 'https://cdn-icons-png.flaticon.com/512/684/684908.png',
-  iconSize: [25, 25], // Tamaño del ícono
+  iconSize: [25, 25],
 });
-
 
 interface RecorridosParadasProps {
   recorridoId: string;
-  center: LatLngTuple; // Añadido para recibir las coordenadas
+  center: LatLngTuple; 
 }
-
-
 
 const RecorridosParadas: React.FC<RecorridosParadasProps> = ({recorridoId, center}) => {
   const [coordenadas, setCoordenadas] = useState<LatLngExpression[]>([]);
   const [userLocation, setUserLocation] = useState<LatLngTuple | null>(null);
   const [loading, setLoading] = useState(true);
+  const [paradas, setParadas] = useState<any[]>([]);
+
+    const [markers, setMarkers] = useState<{
+      geocode: LatLngTuple;
+      nombre: string;
+      descripcion: string;
+      url: string;
+      idRecorrido: string;
+    }[]>([]);
+
+
+
+
   const IconBusStop = new L.Icon({
     iconUrl: logo,
     iconSize: [20, 20],
-    iconAnchor: [25, 16]
+    iconAnchor: [10, 10], 
   });
-
-
-
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const data = await methods.getCordenadasById(recorridoId);
         setCoordenadas(data);
-        setLoading(false);
         coordenadasExternas = data.coordenadas;
+        setLoading(false);
       } catch (err) {
         console.error("Error fetching data:", err);
       }
     };
     fetchData();
-  }, []);
+  }, [recorridoId]);
 
   useEffect(() => {
     let watchId: number;
 
     if (navigator.geolocation) {
-
       watchId = navigator.geolocation.watchPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
@@ -74,6 +82,37 @@ const RecorridosParadas: React.FC<RecorridosParadasProps> = ({recorridoId, cente
     };
   }, []);
 
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await methods.getParadasByIdRecorrido(recorridoId);    
+        setParadas(response);
+        
+        const markersData = response.map((punto: {
+          geocode: LatLngTuple;
+          nombre: string;
+          descripcion: string;
+          url: string;
+          idRecorrido: string;
+        }) => {
+          return {
+            ...punto,
+          };
+        });
+        setMarkers(markersData);
+        console.log(markersData);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      }
+    };
+  
+    fetchData();
+  }, []);
+  
+  
+
   if (loading) {
     return <Loader />;
   }
@@ -92,12 +131,18 @@ const RecorridosParadas: React.FC<RecorridosParadasProps> = ({recorridoId, cente
               center={center}
               zoom={14}
               zoomControl={false}
-              style={{ height: "400px", width: "100%", borderRadius: "10px", zIndex: 20 }} // Establece un tamaño adecuado
+              style={{ height: "400px", width: "100%", borderRadius: "10px", zIndex: 20 }}
             >
               <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               />
+
+              {markers.map((marker, index) => (
+                <Marker key={index} position={marker.geocode} icon={IconBusStop}>
+                  <Popup autoPan={false} closeButton={false}></Popup>
+                </Marker>
+              ))}
 
               <Polyline positions={coordenadasExternas} />
 
@@ -108,7 +153,6 @@ const RecorridosParadas: React.FC<RecorridosParadasProps> = ({recorridoId, cente
                 />
               )}
             </MapContainer>
-
           </div>
         </div>
       </div>

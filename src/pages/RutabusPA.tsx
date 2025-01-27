@@ -39,6 +39,7 @@ const RutabusPA: React.FC = () => {
   const [rutabusPADataDomingo, setRutabusPADataDomingo] = useState<rutabusPAData | null>(null);
   const [rutabusPADataLunes, setRutabusPADataLunes] = useState<rutabusPAData | null>(null);
   const { setMenuVisible } = useMenu();
+  const [paradas, setParadas] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,8 +72,6 @@ const RutabusPA: React.FC = () => {
 
   }, []);
 
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -99,8 +98,6 @@ const RutabusPA: React.FC = () => {
     };
     fetchData();
   }, [])
-
-
 
   if (loading) {
     return <Loader />;
