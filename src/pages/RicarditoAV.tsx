@@ -9,6 +9,7 @@ import SchedulesTable from '../components/SchedulesTable';
 import MainInfo from '../components/MainInfo';
 import Banner from '../components/Banner';
 import { useMenu } from '../context/MenuContextProps';
+import RecorridosParadas from '../components/RecorridosParadas';
 
 interface RicarditoAvData {
   image: string;
@@ -41,11 +42,11 @@ const RicarditoAV: React.FC = () => {
       try {
         let data;
         if (helperExport.diaHoy >= 1 && helperExport.diaHoy <= 5) {
-          data = await Helper.getHorariosByIdBusIdDia(6,1);
+          data = await Helper.getHorariosByIdBusIdDia(6, 1);
         } else if (helperExport.diaHoy === 6) {
-          data = await Helper.getHorariosByIdBusIdDia(6,6);
+          data = await Helper.getHorariosByIdBusIdDia(6, 6);
         } else if (helperExport.diaHoy === 7) {
-          data = await Helper.getHorariosByIdBusIdDia(6,7);
+          data = await Helper.getHorariosByIdBusIdDia(6, 7);
         }
 
         setData(data);
@@ -56,14 +57,14 @@ const RicarditoAV: React.FC = () => {
       }
     };
 
-    
+
     fetchData();
- 
+
     const intervalId = setInterval(() => {
       fetchData();
     }, 30000);
 
-    
+
     return () => clearInterval(intervalId);
 
   }, []);
@@ -74,9 +75,9 @@ const RicarditoAV: React.FC = () => {
       try {
         const [data1, data2, data3, data4] = await Promise.all([
           Helper.busInfoById(6),
-          Helper.getHorariosByIdBusIdDia(6,1),
-          Helper.getHorariosByIdBusIdDia(6,6),
-          Helper.getHorariosByIdBusIdDia(6,7),
+          Helper.getHorariosByIdBusIdDia(6, 1),
+          Helper.getHorariosByIdBusIdDia(6, 6),
+          Helper.getHorariosByIdBusIdDia(6, 7),
         ])
 
         if (data2.length > 0) {
@@ -161,9 +162,10 @@ const RicarditoAV: React.FC = () => {
               setShowAll={setShowAll}
             />
           )}
-          {/* 
-          <RecorridosParadas />
-        */}
+
+          <RecorridosParadas recorridoId="4" center={[-34.244991, -59.472629]} />
+
+
           <Change path="/home" />
           <Up ionContentRef={ionContentRefDo} />
         </>
