@@ -92,11 +92,21 @@ const MapView: React.FC = () => {
       setUserLocation([-34.243774, -59.4738]);
     }
 
+    return () => {
+      if (navigator.geolocation && watchId) {
+        navigator.geolocation.clearWatch(watchId);
+      }
+    };
+  }, [userLocation]);
+
+
+
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await methods.getAllPuntosSube();
         setData(response);
-
+  
         const markersData = response.map((punto: {
           geocode: LatLngTuple;
           descripcion: string;
@@ -107,27 +117,25 @@ const MapView: React.FC = () => {
           const distance = userLocation
             ? calcularDistancia(userLocation, punto.geocode)
             : 'Calculando...';
-
+  
           return {
             ...punto,
             distance,
           };
         });
-
+  
         setMarkers(markersData);
       } catch (error) {
         console.error('Error:', error);
       }
     };
-
+  
     fetchData();
+  },[]);
 
-    return () => {
-      if (navigator.geolocation && watchId) {
-        navigator.geolocation.clearWatch(watchId);
-      }
-    };
-  }, [userLocation]);
+
+  
+
 
   if (!userLocation) {
     return <Loader />;
