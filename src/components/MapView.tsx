@@ -73,33 +73,23 @@ const MapView: React.FC = () => {
   }, [latitud, longitud]);
 
   useEffect(() => {
-    let watchId: number;
-
     if (navigator.geolocation) {
-      watchId = navigator.geolocation.watchPosition(
+      navigator.geolocation.getCurrentPosition(
         (position) => {
           const { latitude, longitude } = position.coords;
           setUserLocation([latitude, longitude]);
         },
         (error) => {
-          console.error('Error al rastrear la ubicación del usuario', error);
+          console.error('Error al obtener la ubicación:', error);
           setUserLocation([-34.243774, -59.4738]);
         },
-        { enableHighAccuracy: true, maximumAge: 0 }
+        { enableHighAccuracy: true, maximumAge: 30000, timeout: 270000 }
       );
     } else {
       console.error('Geolocalización no soportada por este navegador');
       setUserLocation([-34.243774, -59.4738]);
     }
-
-    return () => {
-      if (navigator.geolocation && watchId) {
-        navigator.geolocation.clearWatch(watchId);
-      }
-    };
-  }, [userLocation]);
-
-
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -117,7 +107,6 @@ const MapView: React.FC = () => {
           const distance = userLocation
             ? calcularDistancia(userLocation, punto.geocode)
             : 'Calculando...';
-  
           return {
             ...punto,
             distance,
@@ -129,13 +118,11 @@ const MapView: React.FC = () => {
         console.error('Error:', error);
       }
     };
-  
-    fetchData();
-  },[]);
 
-
-  
-
+    if (userLocation) {
+      fetchData();  
+    }
+  }, [userLocation]);
 
   if (!userLocation) {
     return <Loader />;
