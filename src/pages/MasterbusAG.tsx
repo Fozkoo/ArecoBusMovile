@@ -40,10 +40,10 @@ const MasterbusAG: React.FC = () => {
     const fetchData = async () => {
       try {
         let data;
-        if (helperExport.diaHoy >= 1 && helperExport.diaHoy <= 5) {
-          data = await Helper.getHorariosByIdBusIdDia(4,1);
-        } else if (helperExport.diaHoy === 6 || helperExport.diaHoy === 7) {
-          data = await Helper.getHorariosByIdBusIdDia(4,7);
+        if (helperExport.diaHoy >= 1 && helperExport.diaHoy <= 6) {
+          data = await Helper.getHorariosByIdBusIdDia(4, 1);
+        } else if (helperExport.diaHoy === 7) {
+          data = await Helper.getHorariosByIdBusIdDia(4, 7);
         }
 
         setData(data);
@@ -73,7 +73,7 @@ const MasterbusAG: React.FC = () => {
       try {
         const [data1, data3] = await Promise.all([
           Helper.busInfoById(4),
-          Helper.getHorariosByIdBusIdDia(4,7)
+          Helper.getHorariosByIdBusIdDia(4, 7)
         ]);
 
         if (data3.length > 0) {
@@ -108,23 +108,28 @@ const MasterbusAG: React.FC = () => {
               isActive={isActive}
             />
 
-            <MainInfo
-              proximo={proximo || ""}
-              metodo={masterbusData.metodo}
-              precio={masterbusData.precio}
-            />
+            {masterbusData && (
+              <MainInfo
+                proximo={proximo || ""}
+                metodo={masterbusData.metodo}
+                precio={masterbusData.precio}
+              />
+            )}
 
-            <SchedulesTable
-              dias="Lunes a viernes"
-              horarios={masterbusData.horarios}
-              destino={masterbusData.destino}
-              showAll={showAll}
-              setShowAll={setShowAll}
-            />
+
+            {masterbusData && (
+              <SchedulesTable
+                dias="Lunes a Sábados."
+                horarios={masterbusData.horarios}
+                destino={masterbusData.destino}
+                showAll={showAll}
+                setShowAll={setShowAll}
+              />
+            )}
 
             {masterbusDataDomingo && (
               <SchedulesTable
-                dias="Sábados, domingos y feriados."
+                dias="Domingos y feriados."
                 horarios={masterbusDataDomingo.horarios}
                 destino={masterbusData.destino}
                 showAll={showAll}
@@ -132,9 +137,9 @@ const MasterbusAG: React.FC = () => {
               />
             )}
 
-            
+
             <RecorridosParadas recorridoId="2" center={[-34.244991, -59.472629]} />
-        
+
 
 
             <Change

@@ -124,10 +124,7 @@ const ChevallierAR: React.FC = () => {
                                 setShowAll={setShowAll}
                             />
                         )}
-
-
-                        <RecorridosParadas recorridoId="2" center={[-34.244991, -59.472629]} />
-
+           
                         <Change
                             path="/MasterbusAG"
                         />
