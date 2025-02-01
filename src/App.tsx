@@ -17,6 +17,7 @@ import ChevallierAR from './pages/ChevallierAR';
 import PilarExpressPI from './pages/PilarExpressPI';
 import RutabusPA from './pages/RutabusPA';
 import MasterbusGA from './pages/MasterbusGA';
+import ChevallierRA from './pages/ChevallierRA';
 
 setupIonicReact();
 
@@ -43,6 +44,7 @@ const App: React.FC = () => {
           <Route exact path="/ChevallierAR" component={ChevallierAR} />
           <Route exact path="/PilarExpressPI" component={PilarExpressPI} />
           <Route exact path="/MasterbusGA" component={MasterbusGA} />
+          <Route exact path="/ChevallierRA" component={ChevallierRA} />
           <Redirect exact path="/" to="/Home" />
         </IonRouterOutlet>
 
