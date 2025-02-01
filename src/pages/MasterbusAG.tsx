@@ -138,7 +138,7 @@ const MasterbusAG: React.FC = () => {
 
 
             <Change
-              path="/home"
+              path="/MasterbusGA"
             />
             <Up ionContentRef={ionContentRefDo} />
           </>
