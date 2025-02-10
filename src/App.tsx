@@ -39,7 +39,6 @@ const App: React.FC = () => {
           <Route exact path="/RutabusAP" component={RutabusAP} />
           <Route exact path="/RutabusPA" component={RutabusPA} />
           <Route exact path="/MasterbusAG" component={MasterbusAG} />
-          <Route exact path="/RicarditoAD" component={RicarditoAD} />
           <Route exact path="/RicarditoAV" component={RicarditoAV} />
           <Route exact path="/ChevallierAR" component={ChevallierAR} />
           <Route exact path="/PilarExpressPI" component={PilarExpressPI} />

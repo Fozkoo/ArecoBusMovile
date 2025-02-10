@@ -78,7 +78,6 @@ function Home() {
       data.forEach((bus) => {
         const cachedImage = localStorage.getItem(bus.image);
         if (cachedImage) {
-          // console.log(`Imagen cargada desde la caché: ${bus.image}`);
           loadedImagesCount += 1;
           setLoadedImages((prev) => [...prev, bus.image]);
           if (loadedImagesCount === totalImages) {
@@ -88,7 +87,6 @@ function Home() {
           const img = new Image();
           img.src = bus.image;
           img.onload = () => {
-            // console.log(`Imagen cargada desde la URL: ${bus.image}`);
             loadedImagesCount += 1;
             setLoadedImages((prev) => [...prev, bus.image]);
             localStorage.setItem(bus.image, bus.image);
